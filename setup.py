@@ -9,7 +9,7 @@ with codecs_open('README.rst', encoding='utf-8') as f:
 
 setup(name='cognito',
       version='0.0.1',
-      description=u"Auto ML Dataset Maker",
+      description=u"Auto ML Dataset Transformer",
       long_description=long_description,
       classifiers=[],
       keywords='',
