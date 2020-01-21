@@ -1,7 +1,6 @@
 # Skeleton of a CLI
 
 import click
-
 import cognito
 
 
