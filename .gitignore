@@ -1,39 +1,26 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
-<<<<<<< HEAD
-=======
+
 *$py.class
->>>>>>> ab900354926eee739a6a2e1059343653843e2923
 
 # C extensions
 *.so
 
 # Distribution / packaging
 .Python
-<<<<<<< HEAD
 env/
-=======
->>>>>>> ab900354926eee739a6a2e1059343653843e2923
 build/
 develop-eggs/
 dist/
 downloads/
 eggs/
-<<<<<<< HEAD
-=======
-.eggs/
->>>>>>> ab900354926eee739a6a2e1059343653843e2923
 lib/
 lib64/
 parts/
 sdist/
 var/
-<<<<<<< HEAD
-*.egg-info/
-.installed.cfg
-*.egg
-=======
+
 wheels/
 pip-wheel-metadata/
 share/python-wheels/
@@ -41,7 +28,6 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
->>>>>>> ab900354926eee739a6a2e1059343653843e2923
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -56,12 +42,6 @@ pip-delete-this-directory.txt
 # Unit test / coverage reports
 htmlcov/
 .tox/
-<<<<<<< HEAD
-.coverage
-.cache
-nosetests.xml
-coverage.xml
-=======
 .nox/
 .coverage
 .coverage.*
@@ -72,7 +52,6 @@ coverage.xml
 *.py,cover
 .hypothesis/
 .pytest_cache/
->>>>>>> ab900354926eee739a6a2e1059343653843e2923
 
 # Translations
 *.mo
@@ -80,8 +59,7 @@ coverage.xml
 
 # Django stuff:
 *.log
-<<<<<<< HEAD
-=======
+<
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
@@ -92,7 +70,6 @@ instance/
 
 # Scrapy stuff:
 .scrapy
->>>>>>> ab900354926eee739a6a2e1059343653843e2923
 
 # Sphinx documentation
 docs/_build/
@@ -100,10 +77,8 @@ docs/_build/
 # PyBuilder
 target/
 
-<<<<<<< HEAD
 # OS X
 .DS_Store
-=======
 # Jupyter Notebook
 .ipynb_checkpoints
 
@@ -157,4 +132,3 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
->>>>>>> ab900354926eee739a6a2e1059343653843e2923
