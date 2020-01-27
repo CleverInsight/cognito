@@ -23,7 +23,6 @@ class Check(object):
     def is_working(column="Cognito!"):
         """
         Determines whether the specified command is working.
-        
         :param      column:  The column
         :type       column:  string
         """
