@@ -21,7 +21,7 @@ setup(name='cognito',
       include_package_data=True,
       zip_safe=False,
       install_requires=[
-          'click'
+          'click', 'pandas'
       ],
       extras_require={
           'test': ['pytest'],
