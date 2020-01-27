@@ -16,14 +16,11 @@ class Check(object):
     def __ini__(self):
         pass
 
-    def __ini__(self):
-        pass
 
     @staticmethod
     def is_working(column="Cognito!"):
         """
         Determines whether the specified command is working.
-        
         :param      column:  The column
         :type       column:  string
         """
@@ -119,4 +116,3 @@ class Check(object):
             >> Check.is_missing(data['Price'])
             >> False
         """
-
