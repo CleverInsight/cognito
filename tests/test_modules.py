@@ -29,3 +29,23 @@ def test_is_categorical():
 def test_load_table():
     table = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     print(table.columns())
+
+def test_is_not_categorical():
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    check = Check()
+    assert check.is_categorical(df['crime']) == False
+
+def test_is_not_categorical_1():
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    check = Check()
+    assert check.is_categorical(df['density']) == False
+
+
+def test_sum_one():
+    assert Check.sum(10, 20) == 30
+
+def test_sum_two():
+    assert Check.sum(100, 200) != 30
+
+def test_sum_three():
+    assert Check.sum(100, 100) == 200
