@@ -11,7 +11,3 @@ script:
 after_success:
   - coveralls
 sudo: false
-
-before_install:
-  - "pip install -U pip"
-  - "python setup.py install"

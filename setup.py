@@ -7,6 +7,13 @@ with codecs_open('README.rst', encoding='utf-8') as f:
     long_description = f.read()
 
 
+install_requires = [
+  'numpy == 1.18.1',  # REQ: vector algebra operations
+  'click',            # REQ: command line interfacing
+  'pandas',           # REQ: (conda) sparx.data.filter()
+
+]
+
 setup(name='cognito',
       version='0.0.1',
       description=u"Auto ML Dataset Transformer",
@@ -20,9 +27,7 @@ setup(name='cognito',
       packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
       include_package_data=True,
       zip_safe=False,
-      install_requires=[
-          'click', 'pandas', 'numpy'
-      ],
+      install_requires=install_requires,
       extras_require={
           'test': ['pytest'],
       },
