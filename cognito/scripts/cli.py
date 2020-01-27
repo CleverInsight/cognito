@@ -9,4 +9,4 @@ import cognito
 def cli(count):
     """Echo a value `N` number of times"""
     for i in range(count):
-        click.echo(cognito.has_legs)
+        click.echo(count)
