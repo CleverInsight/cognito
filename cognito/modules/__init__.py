@@ -8,7 +8,7 @@ import pandas as pd
 import numpy as np
 
 
-class Check(object):
+class Check():
     """
     Check class helps us to identify the types of
     variables categorical | Continuous | Discrete
@@ -43,7 +43,7 @@ class Check(object):
             >> True
         """
         try:
-            return True if column.dtypes == 'object' else False
+            return bool(True) if column.dtypes == 'object' else bool(False)
 
         except AttributeError:
 
@@ -64,7 +64,6 @@ class Check(object):
             >> Check.is_continuous(data['Age'])
             >> False
         """
-        pass
 
 
     @staticmethod
@@ -81,7 +80,6 @@ class Check(object):
             >> Check.is_discrete(data['Age'])
             >> True
         """
-        pass
 
 
     @staticmethod
@@ -99,7 +97,6 @@ class Check(object):
             >> True
 
         """
-        pass
 
 
     @staticmethod
@@ -116,3 +113,9 @@ class Check(object):
             >> Check.is_missing(data['Price'])
             >> False
         """
+        try:
+            return bool(True) if column.isnull().values.any() == bool(True) else bool(False)
+
+        except AttributeError:
+
+            print("Method only supported pandas.cores.series")
