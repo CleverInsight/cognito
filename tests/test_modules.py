@@ -40,6 +40,21 @@ def test_is_not_categorical_1():
     check = Check()
     assert check.is_categorical(df['density']) == False
 
+def test_is_not_continuous():
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    check = Check()
+    assert check.is_continuous(df['nonwhite']) == True
+
+def test_is_not_continuous_1():
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    check = Check()
+    assert check.is_continuous(df['density']) == False
+
+def test_is_not_continuous_2():
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    check = Check()
+    assert check.is_continuous(df['population']) == False
+
 
 def test_sum_one():
     assert Check.sum(10, 20) == 30
