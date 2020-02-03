@@ -11,8 +11,6 @@ def test_is_working():
     check = Check()
     print(check.is_working())
 
-
-
 def test_is_categorical():
     """
     Check if the given dataset given a columns
@@ -49,3 +47,19 @@ def test_sum_two():
 
 def test_sum_three():
     assert Check.sum(100, 100) == 200
+
+def test_is_not_discrete_one():
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    check = Check()
+    assert check.is_discrete(df['crime']) == True
+
+def test_is_not_discrete_two():
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    check = Check()
+    assert check.is_discrete(df['nonwhite']) != True
+
+def test_is_not_discrete_three():
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    check = Check()
+    assert check.is_discrete(df['Location']) == False
+
