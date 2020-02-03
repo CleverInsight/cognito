@@ -26,7 +26,6 @@ class Check():
         return "Hello, %s! How are you %s?"%(column, column)
 
 
-
     @staticmethod
     def is_categorical(column):
         """
@@ -116,3 +115,22 @@ class Check():
             >> Check.is_missing(data['Price'])
             >> False
         """
+<<<<<<< HEAD
+=======
+
+    @staticmethod
+    def sum(a, b):
+        """
+        Takes two numerical values and gives their sum as output.
+
+        :param     integer: a
+        :param     integer: b
+        :return    integer: a+b
+
+        Usage:
+        ======
+            >> Check.sum(10, 20)
+            >> 30
+        """
+        return a+b
+>>>>>>> e56911df4dcc87d3b36e641d2376f33306a18246
