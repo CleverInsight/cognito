@@ -8,14 +8,11 @@ import pandas as pd
 import numpy as np
 
 
-class Check(object):
+class Check():
     """
     Check class helps us to identify the types of
     variables categorical | Continuous | Discrete
     """
-    def __ini__(self):
-        pass
-
     def __ini__(self):
         pass
 
@@ -45,7 +42,7 @@ class Check(object):
             >> True
         """
         try:
-            return True if column.dtypes == 'object' else False
+            return bool(True) if column.dtypes == 'object' else bool(False)
 
         except AttributeError:
 
@@ -66,7 +63,7 @@ class Check(object):
             >> Check.is_continuous(data['Age'])
             >> False
         """
-        pass
+        return bool(True) if column.dtypes == 'float' else bool(False)
 
 
     @staticmethod
@@ -83,7 +80,8 @@ class Check(object):
             >> Check.is_discrete(data['Age'])
             >> True
         """
-        pass
+        return bool(True) if column.dtypes == 'int' else bool(False)
+
 
 
     @staticmethod
@@ -101,7 +99,7 @@ class Check(object):
             >> True
 
         """
-        pass
+        return  bool(True) if column.nunique() == column.shape[0] else bool(False)
 
 
     @staticmethod
@@ -118,4 +116,3 @@ class Check(object):
             >> Check.is_missing(data['Price'])
             >> False
         """
-

@@ -23,9 +23,26 @@ def test_is_categorical():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     check = Check()
     assert check.is_categorical(df['Location']) == True
-
-
-
 def test_load_table():
     table = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     print(table.columns())
+def test_is_not_catogorial():
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    check=Check()
+    assert check.is_categorical(df['density']) == False
+def test_is_not_identifier():
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    check=Check()
+    assert check.is_identifier(df['Location']) == True
+def test_is_not_identifier():
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    check=Check()
+    assert check.is_identifier(df['density']) == False
+def test_is_not_identifier():
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    check=Check()
+    assert check.is_identifier(df['crime']) == False
+def test_is_not_identifier():
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    check=Check()
+    assert check.is_identifier(df['nonwhite']) == False
