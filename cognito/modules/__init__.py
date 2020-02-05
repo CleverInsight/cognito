@@ -6,9 +6,7 @@ import os
 import sys
 import pandas as pd
 import numpy as np
-
-
-class Check(object):
+class Check():
     """
     Check class helps us to identify the types of
     variables categorical | Continuous | Discrete
@@ -25,7 +23,6 @@ class Check(object):
         """
         return "Hello, %s! How are you %s?"%(column, column)
 
-
     @staticmethod
     def is_categorical(column):
         """
@@ -40,13 +37,6 @@ class Check(object):
             >> Check.is_categorical(data['Age'])
             >> True
         """
-        try:
-            return True if column.dtypes == 'object' else False
-
-        except AttributeError:
-
-            print("Method only supported pandas.cores.series")
-
 
     @staticmethod
     def is_continuous(column):
@@ -62,8 +52,6 @@ class Check(object):
             >> Check.is_continuous(data['Age'])
             >> False
         """
-        pass
-
 
     @staticmethod
     def is_discrete(column):
@@ -79,8 +67,6 @@ class Check(object):
             >> Check.is_discrete(data['Age'])
             >> True
         """
-        pass
-
 
     @staticmethod
     def is_identifier(column):
@@ -97,7 +83,6 @@ class Check(object):
             >> True
 
         """
-        pass
 
 
     @staticmethod
@@ -114,19 +99,26 @@ class Check(object):
             >> Check.is_missing(data['Price'])
             >> False
         """
-
     @staticmethod
-    def sum(a, b):
+    def is_outlier(column, threshold=3):
         """
-        Takes two numerical values and gives their sum as output.
+        Returns all the outliers in the column.
 
-        :param     integer: a
-        :param     integer: b
-        :return    integer: a+b
+        :param      column:   The column
+        :type       column:   {pandas.series | list | tuple}
+        :return     list:     List of all the ouliers in the column
 
         Usage:
-        ======
-            >> Check.sum(10, 20)
-            >> 30
+        =====
+           >> Check.is_outlier(data['population'])
+           >> [6815.0, 6860.0, 11551.0]
         """
-        return a+b
+        column = pd.Series(column)
+        outliers = []
+        mean = np.mean(column)
+        std_dev = np.std(column)
+        for value in column:
+            z_score = (value - mean) / std_dev
+            if np.abs(z_score) > threshold:
+                outliers.append(value)
+        return outliers
