@@ -16,10 +16,7 @@ class Check():
     def __ini__(self):
         pass
 
-<<<<<<< HEAD
 
-=======
->>>>>>> e56911df4dcc87d3b36e641d2376f33306a18246
     @staticmethod
     def is_working(column="Cognito!"):
         """
@@ -119,23 +116,4 @@ class Check():
             return bool(True) if column.isnull().values.any() == bool(True) else bool(False)
 
         except AttributeError:
-
-<<<<<<< HEAD
             print("Method only supported pandas.cores.series")
-=======
-    @staticmethod
-    def sum(a, b):
-        """
-        Takes two numerical values and gives their sum as output.
-
-        :param     integer: a
-        :param     integer: b
-        :return    integer: a+b
-
-        Usage:
-        ======
-            >> Check.sum(10, 20)
-            >> 30
-        """
-        return a+b
->>>>>>> e56911df4dcc87d3b36e641d2376f33306a18246
