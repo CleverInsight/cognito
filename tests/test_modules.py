@@ -23,30 +23,48 @@ def test_is_categorical():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     check = Check()
     assert check.is_categorical(df['Location']) == True
+
 def test_load_table():
     table = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     print(table.columns())
+
 def test_is_not_catogorial():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     check=Check()
     assert check.is_categorical(df['density']) == False
-def test_is_not_identifier():
+
+def test_is_not_identifier_1():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     check=Check()
     assert check.is_identifier(df['Location']) == True
-def test_is_not_identifier():
+
+def test_is_not_identifier_2():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     check=Check()
     assert check.is_identifier(df['density']) == False
-def test_is_not_identifier():
+
+def test_is_not_identifier_3():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     check=Check()
     assert check.is_identifier(df['crime']) == False
-def test_is_not_identifier():
+
+def test_is_not_identifier_4():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     check=Check()
     assert check.is_identifier(df['nonwhite']) == False
-def test_ignore_identifier():
+
+def test_ignore_identifier_1():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     check=Check()
-    check.ignore_identifier(df)
+    print(check.ignore_identifier(df))
+
+def test_ignore_identifier_2():
+    df=pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'vgsales.csv'))
+    check=Check()
+    print(check.ignore_identifier(df))
+
+def test_ignore_identifier_3():
+    df=pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
+    check=Check()
+    print(check.ignore_identifier(df))
+
