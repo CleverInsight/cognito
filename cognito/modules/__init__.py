@@ -117,3 +117,26 @@ class Check():
 
         except AttributeError:
             print("Method only supported pandas.cores.series")
+
+
+    @staticmethod
+    def perc_missing(dataframe):
+        """
+        Calculates the percentage of missing value in each column of dataframe.
+
+        :param       column:  The dataframe
+        :type        column:  { pandas.dataframe }
+        :return      dictionary:  Dictionary of column name with percentage of missing values
+
+        Usage:
+        ======
+        >> Check.perc_missing(data)
+        >> {Price:0.00, Age:10.00}
+        """
+        missing = dataframe.isnull().sum()
+        row_size = len(dataframe.index)
+        missing_dic = {}
+        for i in list(dataframe.columns):
+            perc = round(missing[i] / row_size * 100.0, 2)
+            missing_dic.update({i:perc})
+        return missing_dic
