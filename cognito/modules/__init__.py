@@ -98,7 +98,7 @@ class Check():
             >> True
 
         """
-        return  bool(True) if column.nunique() == column.shape[0] else bool(False)
+        return bool(True) if column.nunique() == column.shape[0] else bool(False)
 
 
     @staticmethod
@@ -115,22 +115,22 @@ class Check():
             >> Check.is_missing(data['Price'])
             >> False
         """
-<<<<<<< HEAD
-=======
-
     @staticmethod
-    def sum(a, b):
+    def ignore_identifier(dataframe):
         """
-        Takes two numerical values and gives their sum as output.
+        Drops the table if the column is an identifier.
 
-        :param     integer: a
-        :param     integer: b
-        :return    integer: a+b
+        :param      column:  The column
+        :type       column:  { pandas.series | list | tuple }
+        :return     DataFrame:Updated DataFrame
 
         Usage:
         ======
-            >> Check.sum(10, 20)
-            >> 30
+            >> Check.ignore_identifier(data)
+            >> Updated Dataframe
         """
-        return a+b
->>>>>>> e56911df4dcc87d3b36e641d2376f33306a18246
+        col = list(dataframe)
+        for i in col:
+            if Check.is_identifier(dataframe[i]):
+                dataframe.drop([i], axis=1, inplace=True)
+        return dataframe
