@@ -63,3 +63,17 @@ def test_is_not_discrete_three():
     check = Check()
     assert check.is_discrete(df['Location']) == False
 
+def test_encoding_column_one():
+    check = Check()
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'cereal.csv'))
+    print( check.encoding_categorical(df['mfr']))
+
+def test_encoding_column_two():
+    check = Check()
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'student.csv'), sep=";")
+    print( check.encoding_categorical(df['sex']))
+
+def test_encoding_column_three():
+    check = Check()
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'student.csv'), sep=";")
+    print( check.encoding_categorical(df['Mjob']))

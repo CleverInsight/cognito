@@ -129,3 +129,21 @@ class Check():
             >> 30
         """
         return num1+num2
+
+    @staticmethod
+    def encoding_categorical(column):
+        """
+        Gives the encoding of a categorical column.
+
+        :param      col:  column name
+        :type       col:  { pandas.series | list | tuple }
+        :return     Updated column
+
+        Usage:
+        ======
+            >> Check.encoding_categorical(data['Age'])
+            >> False
+        """
+        encoded_col = column.astype('category').cat.codes
+        describe_encoding = pd.Series(column, index=encoded_col).to_dict()
+        return encoded_col, describe_encoding
