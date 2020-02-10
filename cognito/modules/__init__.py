@@ -16,6 +16,7 @@ class Check():
     def __ini__(self):
         pass
 
+
     @staticmethod
     def is_working(column="Cognito!"):
         """
@@ -62,13 +63,13 @@ class Check():
             >> Check.is_continuous(data['Age'])
             >> False
         """
+
         try:
             return bool(True) if column.dtypes == 'float64' else bool(False)
 
         except AttributeError:
 
             print("Method only supported pandas.cores.series")
-
 
     @staticmethod
     def is_discrete(column):
@@ -84,7 +85,6 @@ class Check():
             >> Check.is_discrete(data['Age'])
             >> True
         """
-
 
 
     @staticmethod
@@ -104,7 +104,6 @@ class Check():
         """
 
 
-
     @staticmethod
     def is_missing(column):
         """
@@ -119,19 +118,31 @@ class Check():
             >> Check.is_missing(data['Price'])
             >> False
         """
+        try:
+            return bool(True) if column.isnull().values.any() == bool(True) else bool(False)
+
+        except AttributeError:
+            print("Method only supported pandas.cores.series")
+
 
     @staticmethod
-    def sum(num1, num2):
+    def percentage_missing(dataframe):
         """
-        Takes two numerical values and gives their sum as output.
+        Calculates the percentage of missing value in each column of dataframe.
 
-        :param     integer: a
-        :param     integer: b
-        :return    integer: a+b
+        :param       column:  The dataframe
+        :type        column:  { pandas.dataframe }
+        :return      dictionary:  Dictionary of column name with percentage of missing values
 
         Usage:
         ======
-            >> Check.sum(10, 20)
-            >> 30
+        >> Check.perc_missing(data)
+        >> {Price:0.00, Age:10.00}
         """
-        return num1+num2
+        missing = dataframe.isnull().sum()
+        row_size = len(dataframe.index)
+        missing_dict = {}
+        for i in list(dataframe.columns):
+            perc = round(missing[i] / row_size * 100.0, 2)
+            missing_dic.update({i:perc})
+        return missing_dict
