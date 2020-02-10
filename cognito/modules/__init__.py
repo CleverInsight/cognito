@@ -4,8 +4,10 @@ Data checking module
 from __future__ import print_function
 import os
 import sys
+import math
 import pandas as pd
 import numpy as np
+
 
 
 class Check():
@@ -134,5 +136,4 @@ class Check():
             if Check.is_identifier(dataframe[i]):
                 dataframe.drop([i], axis=1, inplace=True)
         return dataframe
-df=pd.read_csv('C:/Users/HP/Desktop/cognito/tests/data/msleep_ggplot.csv')
-print(Check.ignore_identifier(df))
+        
