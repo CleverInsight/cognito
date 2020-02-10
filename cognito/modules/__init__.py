@@ -7,10 +7,6 @@ import sys
 import pandas as pd
 import numpy as np
 
-<<<<<<< HEAD
-=======
-
->>>>>>> b3e15ece856a5ac304b612658776a08ec5ba7ce1
 class Check():
     """
     Check class helps us to identify the types of
@@ -29,7 +25,6 @@ class Check():
         """
         return "Hello, %s! How are you %s?"%(column, column)
 
-      
     @staticmethod
     def is_categorical(column):
         """
@@ -66,15 +61,12 @@ class Check():
             >> Check.is_continuous(data['Age'])
             >> False
         """
-<<<<<<< HEAD
-=======
         try:
             return bool(True) if column.dtypes == 'float64' else bool(False)
 
         except AttributeError:
 
             print("Method only supported pandas.cores.series")
->>>>>>> b3e15ece856a5ac304b612658776a08ec5ba7ce1
 
     @staticmethod
     def is_discrete(column):
@@ -90,11 +82,8 @@ class Check():
             >> Check.is_discrete(data['Age'])
             >> True
         """
-<<<<<<< HEAD
         try:
             return bool(True) if column.dtypes == 'int64' else bool(False)
-=======
->>>>>>> b3e15ece856a5ac304b612658776a08ec5ba7ce1
 
         except AttributeError:
 
@@ -115,10 +104,6 @@ class Check():
             >> True
 
         """
-<<<<<<< HEAD
-=======
-
->>>>>>> b3e15ece856a5ac304b612658776a08ec5ba7ce1
 
     @staticmethod
     def is_missing(column):
@@ -134,8 +119,6 @@ class Check():
             >> Check.is_missing(data['Price'])
             >> False
         """
-
-    
     @staticmethod
     def is_outlier(column, threshold=3):
         """
@@ -162,11 +145,7 @@ class Check():
 
 
     @staticmethod
-<<<<<<< HEAD
-    def sum(num1, num2):
-=======
     def percentage_missing(dataframe):
->>>>>>> b3e15ece856a5ac304b612658776a08ec5ba7ce1
         """
         Calculates the percentage of missing value in each column of dataframe.
 
@@ -179,8 +158,13 @@ class Check():
         >> Check.perc_missing(data)
         >> {Price:0.00, Age:10.00}
         """
-<<<<<<< HEAD
-        return num1+num2
+        missing = dataframe.isnull().sum()
+        row_size = len(dataframe.index)
+        missing_dict = {}
+        for i in list(dataframe.columns):
+            perc = round(missing[i] / row_size * 100.0, 2)
+            missing_dict.update({i:perc})
+        return missing_dict
 
     @staticmethod
     def encoding_categorical(column):
@@ -199,12 +183,3 @@ class Check():
         encoded_col = list(encoded)
         describe_encoding = pd.Series(column, index=encoded_col).to_dict()
         return encoded_col, describe_encoding
-=======
-        missing = dataframe.isnull().sum()
-        row_size = len(dataframe.index)
-        missing_dict = {}
-        for i in list(dataframe.columns):
-            perc = round(missing[i] / row_size * 100.0, 2)
-            missing_dict.update({i:perc})
-        return missing_dict
->>>>>>> b3e15ece856a5ac304b612658776a08ec5ba7ce1
