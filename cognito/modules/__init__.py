@@ -27,64 +27,6 @@ class Check():
         """
         return "Hello, %s! How are you %s?"%(column, column)
 
-
-    @staticmethod
-    def is_categorical(column):
-        """
-        Determines whether the specified col is categorical.
-
-        :param      col:  column name
-        :type       col:  { pandas.series | list | tuple }
-        :return     boolean: True | False
-
-        Usage:
-        ======
-            >> Check.is_categorical(data['Age'])
-            >> True
-        """
-        try:
-            return bool(True) if column.dtypes == 'object' else bool(False)
-
-        except AttributeError:
-
-            print("Method only supported pandas.cores.series")
-
-
-    @staticmethod
-    def is_continuous(column):
-        """
-        Determines whether the specified col is continuous.
-
-        :param      col:  column name
-        :type       col:  { pandas.series | list | tuple }
-        :return     boolean: True | False
-
-        Usage:
-        ======
-            >> Check.is_continuous(data['Age'])
-            >> False
-        """
-        return bool(True) if column.dtypes == 'float' else bool(False)
-
-
-    @staticmethod
-    def is_discrete(column):
-        """
-        Determines whether the specified column is discrete.
-
-        :param      column:  column name
-        :type       column:  { pandas.series | list | tuple }
-        :return     boolean: True | False
-
-        Usage:
-        ======
-            >> Check.is_discrete(data['Age'])
-            >> True
-        """
-        return bool(True) if column.dtypes == 'int' else bool(False)
-
-
-
     @staticmethod
     def is_identifier(column):
         """
@@ -102,21 +44,6 @@ class Check():
         """
         return bool(True) if column.nunique() == column.shape[0] else bool(False)
 
-
-    @staticmethod
-    def is_missing(column):
-        """
-        Determines whether the specified column is having missing.
-
-        :param      column:  The column
-        :type       column:  { pandas.series | list | tuple }
-        :return     boolean: True | False
-
-        Usage:
-        ======
-            >> Check.is_missing(data['Price'])
-            >> False
-        """
     @staticmethod
     def ignore_identifier(dataframe):
         """
@@ -136,4 +63,3 @@ class Check():
             if Check.is_identifier(dataframe[i]):
                 dataframe.drop([i], axis=1, inplace=True)
         return dataframe
-        
