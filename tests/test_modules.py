@@ -63,17 +63,17 @@ def test_is_not_discrete_three():
     check = Check()
     assert check.is_discrete(df['Location']) == False
 
-def test_encoding_column_one():
+def test_encoding_categorical_one():
     check = Check()
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'cereal.csv'))
-    print( check.encoding_categorical(df['mfr']))
+    assert check.encoding_categorical(df['mfr']) == ([1, 2, 0, 0, 3, 1], {1: 'Q', 2: 'K', 0: 'N', 3: 'K'})
 
-def test_encoding_column_two():
+def test_encoding_categorical_two():
     check = Check()
-    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'student.csv'), sep=";")
-    print( check.encoding_categorical(df['sex']))
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'student.csv'))
+    assert check.encoding_categorical(df['sex']) == ([0, 0, 0, 0, 0, 1, 1, 0], {0: 'F', 1: 'F'})
 
-def test_encoding_column_three():
+def test_encoding_categorical_three():
     check = Check()
-    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'student.csv'), sep=";")
-    print( check.encoding_categorical(df['Mjob']))
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'student.csv'))
+    assert check.encoding_categorical(df['Mjob']) == ([0, 0, 0, 1, 2, 3, 2, 2], {0: 'at_home', 1: 'at_home', 2: 'at_home', 3: 'health'})

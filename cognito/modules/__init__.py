@@ -137,13 +137,13 @@ class Check():
 
         :param      col:  column name
         :type       col:  { pandas.series | list | tuple }
-        :return     Updated column
-
+        :return     list: List of updated column and dict: dictionary of encoded values
         Usage:
         ======
             >> Check.encoding_categorical(data['Age'])
             >> False
         """
-        encoded_col = column.astype('category').cat.codes
+        encoded = column.astype('category').cat.codes
+        encoded_col = list(encoded)
         describe_encoding = pd.Series(column, index=encoded_col).to_dict()
         return encoded_col, describe_encoding
