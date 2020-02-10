@@ -64,6 +64,12 @@ class Check():
             >> False
         """
 
+        try:
+            return bool(True) if column.dtypes == 'float64' else bool(False)
+
+        except AttributeError:
+
+            print("Method only supported pandas.cores.series")
 
     @staticmethod
     def is_discrete(column):
@@ -120,7 +126,7 @@ class Check():
 
 
     @staticmethod
-    def perc_missing(dataframe):
+    def percentage_missing(dataframe):
         """
         Calculates the percentage of missing value in each column of dataframe.
 
@@ -135,8 +141,8 @@ class Check():
         """
         missing = dataframe.isnull().sum()
         row_size = len(dataframe.index)
-        missing_dic = {}
+        missing_dict = {}
         for i in list(dataframe.columns):
             perc = round(missing[i] / row_size * 100.0, 2)
             missing_dic.update({i:perc})
-        return missing_dic
+        return missing_dict

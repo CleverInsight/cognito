@@ -45,6 +45,21 @@ def test_is_missing_2():
     assert check.is_missing(df['population']) == True
 
 
+def test_is_not_continuous():
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    check = Check()
+    assert check.is_continuous(df['nonwhite']) == True
+
+def test_is_not_continuous_1():
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    check = Check()
+    assert check.is_continuous(df['density']) == False
+
+def test_is_not_continuous_2():
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    check = Check()
+    assert check.is_continuous(df['population']) == False
+
 
 def test_is_missing_3():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
