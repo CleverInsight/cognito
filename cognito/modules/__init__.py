@@ -63,3 +63,4 @@ class Check():
             if Check.is_identifier(dataframe[i]):
                 dataframe.drop([i], axis=1, inplace=True)
         return dataframe
+        
