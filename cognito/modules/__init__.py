@@ -16,6 +16,7 @@ class Check():
     def __ini__(self):
         pass
 
+
     @staticmethod
     def is_working(column="Cognito!"):
         """
@@ -61,7 +62,12 @@ class Check():
             >> Check.is_continuous(data['Age'])
             >> False
         """
+        try:
+            return bool(True) if column.dtypes == 'float64' else bool(False)
 
+        except AttributeError:
+
+            print("Method only supported pandas.cores.series")
 
     @staticmethod
     def is_discrete(column):
@@ -115,7 +121,33 @@ class Check():
             return bool(True) if column.isnull().values.any() == bool(True) else bool(False)
 
         except AttributeError:
+
             print("Method only supported pandas.cores.series")
+
+
+    @staticmethod
+    def is_outlier(column, threshold=3):
+        """
+        Returns all the outliers in the column.
+
+        :param      column:   The column
+        :type       column:   {pandas.series | list | tuple}
+        :return     list:     List of all the ouliers in the column
+
+        Usage:
+        =====
+           >> Check.is_outlier(data['population'])
+           >> [6815.0, 6860.0, 11551.0]
+        """
+        column = pd.Series(column)
+        outliers = []
+        mean = np.mean(column)
+        std_dev = np.std(column)
+        for value in column:
+            z_score = (value - mean) / std_dev
+            if np.abs(z_score) > threshold:
+                outliers.append(value)
+        return outliers
 
 
     @staticmethod
@@ -141,6 +173,7 @@ class Check():
             missing_dict.update({i:perc})
         return missing_dict
 
+
     @staticmethod
     def remove_columns(dataframe):
         """
@@ -161,6 +194,7 @@ class Check():
             if missing_dict[column] >= 60.00:
                 dataframe.drop([column], axis=1, inplace=True)
         return dataframe
+
 
     @staticmethod
     def remove_records(dataframe):
