@@ -26,7 +26,7 @@ class Check():
         """
         return "Hello, %s! How are you %s?"%(column, column)
 
-
+      
     @staticmethod
     def is_categorical(column):
         """
@@ -63,7 +63,6 @@ class Check():
             >> Check.is_continuous(data['Age'])
             >> False
         """
-
         try:
             return bool(True) if column.dtypes == 'float64' else bool(False)
 
@@ -118,11 +117,31 @@ class Check():
             >> Check.is_missing(data['Price'])
             >> False
         """
-        try:
-            return bool(True) if column.isnull().values.any() == bool(True) else bool(False)
 
-        except AttributeError:
-            print("Method only supported pandas.cores.series")
+    
+    @staticmethod
+    def is_outlier(column, threshold=3):
+        """
+        Returns all the outliers in the column.
+
+        :param      column:   The column
+        :type       column:   {pandas.series | list | tuple}
+        :return     list:     List of all the ouliers in the column
+
+        Usage:
+        =====
+           >> Check.is_outlier(data['population'])
+           >> [6815.0, 6860.0, 11551.0]
+        """
+        column = pd.Series(column)
+        outliers = []
+        mean = np.mean(column)
+        std_dev = np.std(column)
+        for value in column:
+            z_score = (value - mean) / std_dev
+            if np.abs(z_score) > threshold:
+                outliers.append(value)
+        return outliers
 
 
     @staticmethod
@@ -144,5 +163,5 @@ class Check():
         missing_dict = {}
         for i in list(dataframe.columns):
             perc = round(missing[i] / row_size * 100.0, 2)
-            missing_dic.update({i:perc})
+            missing_dict.update({i:perc})
         return missing_dict
