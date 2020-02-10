@@ -6,6 +6,8 @@ import os
 import sys
 import pandas as pd
 import numpy as np
+
+
 class Check():
     """
     Check class helps us to identify the types of
@@ -13,6 +15,7 @@ class Check():
     """
     def __ini__(self):
         pass
+
 
     @staticmethod
     def is_working(column="Cognito!"):
@@ -23,6 +26,7 @@ class Check():
         """
         return "Hello, %s! How are you %s?"%(column, column)
 
+      
     @staticmethod
     def is_categorical(column):
         """
@@ -37,6 +41,13 @@ class Check():
             >> Check.is_categorical(data['Age'])
             >> True
         """
+        try:
+            return bool(True) if column.dtypes == 'object' else bool(False)
+
+        except AttributeError:
+
+            print("Method only supported pandas.cores.series")
+
 
     @staticmethod
     def is_continuous(column):
@@ -52,6 +63,12 @@ class Check():
             >> Check.is_continuous(data['Age'])
             >> False
         """
+        try:
+            return bool(True) if column.dtypes == 'float64' else bool(False)
+
+        except AttributeError:
+
+            print("Method only supported pandas.cores.series")
 
     @staticmethod
     def is_discrete(column):
@@ -67,6 +84,7 @@ class Check():
             >> Check.is_discrete(data['Age'])
             >> True
         """
+
 
     @staticmethod
     def is_identifier(column):
@@ -99,6 +117,8 @@ class Check():
             >> Check.is_missing(data['Price'])
             >> False
         """
+
+    
     @staticmethod
     def is_outlier(column, threshold=3):
         """
@@ -122,3 +142,26 @@ class Check():
             if np.abs(z_score) > threshold:
                 outliers.append(value)
         return outliers
+
+
+    @staticmethod
+    def percentage_missing(dataframe):
+        """
+        Calculates the percentage of missing value in each column of dataframe.
+
+        :param       column:  The dataframe
+        :type        column:  { pandas.dataframe }
+        :return      dictionary:  Dictionary of column name with percentage of missing values
+
+        Usage:
+        ======
+        >> Check.perc_missing(data)
+        >> {Price:0.00, Age:10.00}
+        """
+        missing = dataframe.isnull().sum()
+        row_size = len(dataframe.index)
+        missing_dict = {}
+        for i in list(dataframe.columns):
+            perc = round(missing[i] / row_size * 100.0, 2)
+            missing_dict.update({i:perc})
+        return missing_dict
