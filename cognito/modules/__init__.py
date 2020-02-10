@@ -16,7 +16,6 @@ class Check():
     def __ini__(self):
         pass
 
-
     @staticmethod
     def is_working(column="Cognito!"):
         """
@@ -45,7 +44,6 @@ class Check():
             return bool(True) if column.dtypes == 'object' else bool(False)
 
         except AttributeError:
-
             print("Method only supported pandas.cores.series")
 
 
@@ -111,6 +109,7 @@ class Check():
         ======
             >> Check.is_missing(data['Price'])
             >> False
+
         """
         try:
             return bool(True) if column.isnull().values.any() == bool(True) else bool(False)
@@ -120,23 +119,66 @@ class Check():
 
 
     @staticmethod
-    def perc_missing(dataframe):
+    def percentage_missing(dataframe):
         """
         Calculates the percentage of missing value in each column of dataframe.
 
-        :param       column:  The dataframe
-        :type        column:  { pandas.dataframe }
+        :param       dataframe:  The dataframe
+        :type        dataframe:  { pandas.dataframe }
         :return      dictionary:  Dictionary of column name with percentage of missing values
 
         Usage:
         ======
         >> Check.perc_missing(data)
         >> {Price:0.00, Age:10.00}
+
         """
         missing = dataframe.isnull().sum()
         row_size = len(dataframe.index)
-        missing_dic = {}
+        missing_dict = {}
         for i in list(dataframe.columns):
             perc = round(missing[i] / row_size * 100.0, 2)
-            missing_dic.update({i:perc})
-        return missing_dic
+            missing_dict.update({i:perc})
+        return missing_dict
+
+    @staticmethod
+    def remove_columns(dataframe):
+        """
+        Removes the column containing 60% or more missing data.
+
+        :param      dataframe:  The dataframe
+        :type       dataframe:  { pandas.dataframe }
+        :return     dataframe:  Dataframe with the columns dropped
+
+        Usage:
+        ======
+        >>Check.remove_col(data)
+        >>dataframe
+
+        """
+        missing_dict = Check.percentage_missing(dataframe)
+        for column in missing_dict:
+            if missing_dict[column] >= 60.00:
+                dataframe.drop([column], axis=1, inplace=True)
+        return dataframe
+
+    @staticmethod
+    def remove_records(dataframe):
+        """
+        Removes the rows where if a column has 20 % to 30 % of missing data.
+
+        :param      dataframe:  The dataframe
+        :type       dataframe:  { pandas.dataframe }
+        :return     dataframe:  Dataframe with the rows dropped
+
+        Usage:
+        ======
+        >>Check.remove_col(data)
+        >>dataframe
+
+        """
+        missing_dict = Check.percentage_missing(dataframe)
+        for column in missing_dict:
+            if missing_dict[column] >= 20.00 and missing_dict[column] < 30.00:
+                dataframe = dataframe[dataframe[column].isnull() != bool(True)]
+        return dataframe
