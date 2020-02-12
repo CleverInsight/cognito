@@ -238,4 +238,40 @@ class Check():
         encoded_col = list(encoded)
         describe_encoding = pd.Series(column, index=encoded_col).to_dict()
         return encoded_col, describe_encoding
-      
+
+
+    @staticmethod
+    def is_date(x):
+        """
+        Determines whether the specified `x` is date.
+        
+        :param      x:    string of date type 
+        :type       x:    string
+        :returns    True | False
+
+        Usage:
+        ======
+            >> Check.is_date("20-20-2020")
+            >> True
+        """
+        pass
+
+
+    @staticmethod
+    def is_datetime(x):
+        """
+        Determines whether the specified `x` is datetime.
+        
+        :param      x:    { parameter_description }
+        :type       x:    { type_description }
+        :returns    True | False
+        
+        Usage:
+        ======
+            >> Check.is_datetime("2020-02-20 00:00:00")
+            >> True
+            >> Check.is_datetime("2020-02-01")
+            >> False 
+
+        """
+        pass

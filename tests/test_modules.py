@@ -65,13 +65,8 @@ def test__no_outlier3():
 def test_is_not_continuous():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     check = Check()
-    assert check.is_missing(df['Location']) != True
+    assert check.is_continuous(df['Location']) != True
 
-
-def test_is_missing_2():
-    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
-    check = Check()
-    assert check.is_missing(df['population']) != True
 
 def test_is_identifier_2():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
@@ -102,11 +97,6 @@ def test_is_not_discrete_one():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     check = Check()
     assert check.is_discrete(df['crime']) == True
-
-def test_is_missing_4():
-    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
-    check = Check()
-    assert check.is_missing(df['density']) != True
 
 def test_is_not_discrete_two():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
