@@ -26,9 +26,7 @@ def test_load_table():
     table = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     print(table.columns())
 
-
 def test_is_outlier():
-
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     check = Check()
     print(check.is_outlier(df['crime']))
@@ -65,13 +63,33 @@ def test__no_outlier3():
 
 def test_is_not_continuous():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
-    check = Check()
-    assert check.is_continuous(df['nonwhite']) == True
+    check=Check()
+    assert check.is_identifier(df['Location']) == True
 
-def test_is_not_continuous_1():
+def test_is_identifier_2():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
-    check = Check()
-    assert check.is_continuous(df['density']) == False
+    check=Check()
+    assert check.is_identifier(df['density']) == False
+
+def test_is_identifier_3():
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    check=Check()
+    assert check.is_identifier(df['crime']) == False
+
+def test_is_identifier_4():
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    check=Check()
+    assert check.is_identifier(df['nonwhite']) == False
+
+def test_ignore_identifier_1():
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    check=Check()
+    print(check.ignore_identifier(df))
+
+def test_ignore_identifier_2():
+    df=pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'vgsales.csv'))
+    check=Check()
+    print(check.ignore_identifier(df))
 
 def test_is_not_discrete_one():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
@@ -108,7 +126,8 @@ def test_is_not_continuous_2():
     check = Check()
     assert check.is_continuous(df['population']) == False
 
-def test_perc_missing():
-    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
-    check = Check()
-    check.percentage_missing(df)
+def test_ignore_identifier_3():
+    df=pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
+    check=Check()
+    print(check.ignore_identifier(df))
+ 

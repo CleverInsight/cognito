@@ -4,8 +4,10 @@ Data checking module
 from __future__ import print_function
 import os
 import sys
+import math
 import pandas as pd
 import numpy as np
+
 
 class Check():
     """
@@ -15,7 +17,6 @@ class Check():
     def __ini__(self):
         pass
 
-
     @staticmethod
     def is_working(column="Cognito!"):
         """
@@ -24,6 +25,7 @@ class Check():
         :type       column:  string
         """
         return "Hello, %s! How are you %s?"%(column, column)
+
 
     @staticmethod
     def is_categorical(column):
@@ -104,21 +106,30 @@ class Check():
             >> True
 
         """
+        return bool(True) if column.nunique() == column.shape[0] else bool(False)
+
 
     @staticmethod
-    def is_missing(column):
+    def ignore_identifier(dataframe):
         """
-        Determines whether the specified column is having missing.
+        Drops the table if the column is an identifier.
 
         :param      column:  The column
         :type       column:  { pandas.series | list | tuple }
-        :return     boolean: True | False
+        :return     DataFrame:Updated DataFrame
 
         Usage:
         ======
-            >> Check.is_missing(data['Price'])
-            >> False
+            >> Check.ignore_identifier(data)
+            >> Updated Dataframe
         """
+        col = list(dataframe)
+        for i in col:
+            if Check.is_identifier(dataframe[i]):
+                dataframe.drop([i], axis=1, inplace=True)
+        return dataframe
+        
+
     @staticmethod
     def is_outlier(column, threshold=3):
         """
@@ -183,3 +194,4 @@ class Check():
         encoded_col = list(encoded)
         describe_encoding = pd.Series(column, index=encoded_col).to_dict()
         return encoded_col, describe_encoding
+      
