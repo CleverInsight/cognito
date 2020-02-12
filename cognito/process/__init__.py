@@ -24,6 +24,7 @@ class Transform:
 		pass
 
 
+	@staticmethod
 	def split_dates(x):
 		"""
 		Splits dates given as `pandas.core.series` into multple
