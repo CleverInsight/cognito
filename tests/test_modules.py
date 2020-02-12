@@ -7,7 +7,6 @@ import pandas as pd
 import numpy as np
 
 
-
 def test_is_working():
     check = Check()
     print(check.is_working())
@@ -20,7 +19,9 @@ def test_is_categorical():
     
     :raises     AssertionError:  { exception_description }
     """
-
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    check = Check()
+    assert check.is_categorical(df['Location']) == True
 
 def test_load_table():
     table = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
@@ -63,8 +64,14 @@ def test__no_outlier3():
 
 def test_is_not_continuous():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
-    check=Check()
-    assert check.is_identifier(df['Location']) == True
+    check = Check()
+    assert check.is_missing(df['Location']) != True
+
+
+def test_is_missing_2():
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    check = Check()
+    assert check.is_missing(df['population']) != True
 
 def test_is_identifier_2():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
@@ -96,6 +103,11 @@ def test_is_not_discrete_one():
     check = Check()
     assert check.is_discrete(df['crime']) == True
 
+def test_is_missing_4():
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    check = Check()
+    assert check.is_missing(df['density']) != True
+
 def test_is_not_discrete_two():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     check = Check()
@@ -121,6 +133,11 @@ def test_encoding_categorical_three():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'student.csv'))
     assert check.encoding_categorical(df['Mjob']) == ([0, 0, 0, 1, 2, 3, 2, 2], {0: 'at_home', 1: 'at_home', 2: 'at_home', 3: 'health'})
 
+def test_percentage_missing():
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    check = Check()
+    assert check.percentage_missing(df) == {'Location': 0.0, 'population': 0.0, 'nonwhite': 0.0, 'density': 0.0, 'crime': 0.0}
+
 def test_is_not_continuous_2():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     check = Check()
@@ -130,4 +147,4 @@ def test_ignore_identifier_3():
     df=pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
     check=Check()
     print(check.ignore_identifier(df))
- 
+    
