@@ -6,8 +6,7 @@ class Transform:
 	def __init__(self):
 		pass
 
-	@staticmethod
-	def split_date(x):
+	def __split_date(x):
 		"""
 		Split the given string `x` into `day,month,year`
 		
@@ -17,7 +16,8 @@ class Transform:
 		
 		Usage:
 		======
-			>> Transform.split_date('2020-10-18')
+			>> T = Transform()
+			>> T.__split_date('2020-10-18')
 			>> {'day': 18, 'month': 10, 'year': 2020 }
 
 		"""
@@ -28,7 +28,8 @@ class Transform:
 	def split_dates(x):
 		"""
 		Splits dates given as `pandas.core.series` into multple
-		columns consist of `day, month, year`
+		columns consist of `day, month, year` using the above
+		`__split_date` private method.
 		
 		:param      x:    { parameter_description }
 		:type       x:    { type_description }
@@ -42,5 +43,28 @@ class Transform:
 			    01     10   2019
 			    11     11   2020
 
+		"""
+		pass
+
+
+
+	def numerical(column):
+		"""
+		Given a `pandas.core.series` consist of categorical data
+		encode it into numerical mapping.
+		
+		:param      column:  list of categorical values
+		:type       column:  pandas.core.series
+		:return     list of dictionary consisting of key: value
+
+		Usage:
+		======
+			>> T = Transform()
+			>> T.numerical(['cat', 'rat', 'mice', 'mice', 'rat'])
+			>> [
+				'cat':  0,
+				'rat':  1,
+				'mice': 3
+			]
 		"""
 		pass
