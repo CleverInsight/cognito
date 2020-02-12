@@ -7,7 +7,6 @@ import sys
 import pandas as pd
 import numpy as np
 
-
 class Check():
     """
     Check class helps us to identify the types of
@@ -26,7 +25,6 @@ class Check():
         """
         return "Hello, %s! How are you %s?"%(column, column)
 
-      
     @staticmethod
     def is_categorical(column):
         """
@@ -84,7 +82,12 @@ class Check():
             >> Check.is_discrete(data['Age'])
             >> True
         """
+        try:
+            return bool(True) if column.dtypes == 'int64' else bool(False)
 
+        except AttributeError:
+
+            print("Method only supported pandas.cores.series")
 
     @staticmethod
     def is_identifier(column):
@@ -102,7 +105,6 @@ class Check():
 
         """
 
-
     @staticmethod
     def is_missing(column):
         """
@@ -117,8 +119,6 @@ class Check():
             >> Check.is_missing(data['Price'])
             >> False
         """
-
-    
     @staticmethod
     def is_outlier(column, threshold=3):
         """
@@ -165,3 +165,21 @@ class Check():
             perc = round(missing[i] / row_size * 100.0, 2)
             missing_dict.update({i:perc})
         return missing_dict
+
+    @staticmethod
+    def encoding_categorical(column):
+        """
+        Gives the encoding of a categorical column.
+
+        :param      col:  column name
+        :type       col:  { pandas.series | list | tuple }
+        :return     list: List of updated column and dict: dictionary of encoded values
+        Usage:
+        ======
+            >> Check.encoding_categorical(data['Age'])
+            >> False
+        """
+        encoded = column.astype('category').cat.codes
+        encoded_col = list(encoded)
+        describe_encoding = pd.Series(column, index=encoded_col).to_dict()
+        return encoded_col, describe_encoding
