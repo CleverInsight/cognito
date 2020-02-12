@@ -4,6 +4,7 @@ Data checking module
 from __future__ import print_function
 import os
 import sys
+import math
 import pandas as pd
 import numpy as np
 
@@ -15,7 +16,6 @@ class Check():
     """
     def __ini__(self):
         pass
-
 
     @staticmethod
     def is_working(column="Cognito!"):
@@ -83,7 +83,12 @@ class Check():
             >> Check.is_discrete(data['Age'])
             >> True
         """
+        try:
+            return bool(True) if column.dtypes == 'int64' else bool(False)
 
+        except AttributeError:
+
+            print("Method only supported pandas.cores.series")
 
     @staticmethod
     def is_identifier(column):
@@ -100,30 +105,29 @@ class Check():
             >> True
 
         """
+        return bool(True) if column.nunique() == column.shape[0] else bool(False)
 
 
     @staticmethod
-    def is_missing(column):
+    def ignore_identifier(dataframe):
         """
-        Determines whether the specified column is having missing.
+        Drops the table if the column is an identifier.
 
         :param      column:  The column
         :type       column:  { pandas.series | list | tuple }
-        :return     boolean: True | False
+        :return     DataFrame:Updated DataFrame
 
         Usage:
         ======
-            >> Check.is_missing(data['Price'])
-            >> False
-
+            >> Check.ignore_identifier(data)
+            >> Updated Dataframe
         """
-        try:
-            return bool(True) if column.isnull().values.any() == bool(True) else bool(False)
-
-        except AttributeError:
-
-            print("Method only supported pandas.cores.series")
-
+        col = list(dataframe)
+        for i in col:
+            if Check.is_identifier(dataframe[i]):
+                dataframe.drop([i], axis=1, inplace=True)
+        return dataframe
+        
 
     @staticmethod
     def is_outlier(column, threshold=3):
@@ -173,7 +177,7 @@ class Check():
             missing_dict.update({i:perc})
         return missing_dict
 
-
+ 
     @staticmethod
     def remove_columns(dataframe):
         """
@@ -216,3 +220,22 @@ class Check():
             if missing_dict[column] >= 20.00 and missing_dict[column] < 30.00:
                 dataframe = dataframe[dataframe[column].isnull() != bool(True)]
         return dataframe
+
+    @staticmethod
+    def encoding_categorical(column):
+        """
+        Gives the encoding of a categorical column.
+
+        :param      col:  column name
+        :type       col:  { pandas.series | list | tuple }
+        :return     list: List of updated column and dict: dictionary of encoded values
+        Usage:
+        ======
+            >> Check.encoding_categorical(data['Age'])
+            >> False
+        """
+        encoded = column.astype('category').cat.codes
+        encoded_col = list(encoded)
+        describe_encoding = pd.Series(column, index=encoded_col).to_dict()
+        return encoded_col, describe_encoding
+      
