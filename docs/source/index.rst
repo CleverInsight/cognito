@@ -1,7 +1,7 @@
 Welcome to cognito's documentation!
 ===================================
 
-Cognito is an exclusive data preprocessing library which involves in transforming raw data into an machine understandable format. We at CleverInsight Open Ai Foundation took the initiative to build a better automated data preprocessing library and here it is.
+Cognito is an exclusive data preprocessing library that involves transforming raw data into a machine-understandable format. We at CleverInsight Open Ai Foundation took the initiative to build a better automated data preprocessing library and here it is.
 
 
 .. toctree::
