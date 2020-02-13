@@ -51,7 +51,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'cognito'
-copyright = u'2020, Bastin Robins .J'
+copyright = u'2020, CleverInsight OpenAi Foundation'
 author = u'Bastin Robins .J'
 
 # The version info for the project you're documenting, acts as replacement for
