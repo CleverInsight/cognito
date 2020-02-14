@@ -297,6 +297,28 @@ class Check():
 
 
     @staticmethod
+    def replace_mode(column):
+        """
+        Replaces the missing values of a column with its mode.
+
+        :param       column:  The column
+        :type        column:  { pandas.series | list | tuple }
+        :return      column:  Updated column after replacing missing values with mean
+
+        Usage:
+        ======
+        >> Check.replace_mode(data['population'])
+        >> series
+        """
+        try:
+            return column.fillna(column.mode()[0])
+
+        except AttributeError:
+
+            print("Method only supported pandas.cores.series")
+
+
+    @staticmethod
     def replace_median(column):
         """
         Replaces the missing values of a column with its median.
