@@ -1,10 +1,12 @@
 """
 Data checking module
 """
+# pylint: disable=C0301
 from __future__ import print_function
 import os
 import sys
 import math
+import re
 import pandas as pd
 import numpy as np
 
@@ -45,6 +47,7 @@ class Check():
             return bool(True) if column.dtypes == 'object' else bool(False)
 
         except AttributeError:
+
             print("Method only supported pandas.cores.series")
 
 
@@ -69,6 +72,7 @@ class Check():
 
             print("Method only supported pandas.cores.series")
 
+
     @staticmethod
     def is_discrete(column):
         """
@@ -90,6 +94,7 @@ class Check():
 
             print("Method only supported pandas.cores.series")
 
+
     @staticmethod
     def is_identifier(column):
         """
@@ -105,7 +110,35 @@ class Check():
             >> True
 
         """
-        return bool(True) if column.nunique() == column.shape[0] else bool(False)
+        try:
+            return bool(True) if column.nunique() == column.shape[0] else bool(False)
+
+        except AttributeError:
+
+            print("Method only supported pandas.cores.series")
+
+
+    @staticmethod
+    def is_missing(column):
+        """
+        Determines whether the specified column has missing values.
+
+        :param      column:  The column
+        :type       column:  { pandas.series | list | tuple }
+        :return     boolean: True | False
+
+        Usage:
+        ======
+            >> Check.is_identifier(data['population'])
+            >> True
+
+        """
+        try:
+            return bool(True) if column.isnull().values.any() == bool(True) else bool(False)
+
+        except AttributeError:
+
+            print("Method only supported pandas.cores.series")
 
 
     @staticmethod
@@ -127,7 +160,7 @@ class Check():
             if Check.is_identifier(dataframe[i]):
                 dataframe.drop([i], axis=1, inplace=True)
         return dataframe
-        
+
 
     @staticmethod
     def is_outlier(column, threshold=3):
@@ -177,7 +210,7 @@ class Check():
             missing_dict.update({i:perc})
         return missing_dict
 
- 
+
     @staticmethod
     def remove_columns(dataframe):
         """
@@ -221,6 +254,7 @@ class Check():
                 dataframe = dataframe[dataframe[column].isnull() != bool(True)]
         return dataframe
 
+
     @staticmethod
     def encoding_categorical(column):
         """
@@ -241,11 +275,55 @@ class Check():
 
 
     @staticmethod
-    def is_date(x):
+    def replace_mean(column):
+        """
+        Replaces the missing values of a column with its mean.
+
+        :param       column:  The column
+        :type        column:  { pandas.series | list | tuple }
+        :return      column:  Updated column after replacing missing values with mean
+
+        Usage:
+        ======
+        >> Check.replace_missing(data['population'])
+        >> series
+        """
+        try:
+            return column.fillna(column.mean())
+
+        except AttributeError:
+
+            print("Method only supported pandas.cores.series")
+
+
+    @staticmethod
+    def replace_median(column):
+        """
+        Replaces the missing values of a column with its median.
+
+        :param       column:  The column
+        :type        column:  { pandas.series | list | tuple }
+        :return      column:  Updated column after replacing missing values with median
+
+        Usage:
+        ======
+        >> Check.replace_missing(data['population'])
+        >> series
+        """
+        try:
+            return column.fillna(column.median())
+
+        except AttributeError:
+
+            print("Method only supported pandas.cores.series")
+
+
+    @staticmethod
+    def is_date(date):
         """
         Determines whether the specified `x` is date.
-        
-        :param      x:    string of date type 
+
+        :param      x:    string of date type
         :type       x:    string
         :returns    True | False
 
@@ -254,24 +332,23 @@ class Check():
             >> Check.is_date("20-20-2020")
             >> True
         """
-        pass
+        return bool(True) if re.search(r"^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]|(?:Jan|Mar|May|Jul|Aug|Oct|Dec)))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2]|(?:Jan|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec))\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)(?:0?2|(?:Feb))\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9]|(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep))|(?:1[0-2]|(?:Oct|Nov|Dec)))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$", date) else bool(False)
 
 
     @staticmethod
-    def is_datetime(x):
+    def is_datetime(datetime):
         """
         Determines whether the specified `x` is datetime.
-        
+
         :param      x:    { parameter_description }
         :type       x:    { type_description }
         :returns    True | False
-        
+
         Usage:
         ======
             >> Check.is_datetime("2020-02-20 00:00:00")
             >> True
             >> Check.is_datetime("2020-02-01")
-            >> False 
+            >> False
 
         """
-        pass
