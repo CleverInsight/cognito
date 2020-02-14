@@ -10,6 +10,9 @@ Cognito is an exclusive data preprocessing library that involves transforming ra
    
    installation
    quickstart
+   check
+   transform
+   authors
    license
    help
 

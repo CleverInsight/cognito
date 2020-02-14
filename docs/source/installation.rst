@@ -5,7 +5,11 @@
 Installation
 ------------
 
-Install the extension with using pip.
+**Prerequisite**
+
+- Python3.
+
+Install the extension by using pip.
 
 .. code:: bash
 
