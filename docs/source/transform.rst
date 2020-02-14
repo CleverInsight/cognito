@@ -23,3 +23,13 @@ remove_records
 		
 		>> Check.remove_col(data)
         >> dataframe
+
+
+ignore_identifier
+^^^^^^^^^^^^^^^^^^
+`ignore_identifier` remove the column from the given dataframe if the row is an identifer row.
+
+.. code-block:: python
+		
+		>> Check.ignore_identifier(data)
+    	>> dataframe
