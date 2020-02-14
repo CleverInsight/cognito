@@ -34,8 +34,3 @@ is_identifier is a staticmethod which checks if a column is an identifier or not
         
     >> Check.is_identifier(data['Name'])
     >> True
-
-
-
-
-
