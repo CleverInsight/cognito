@@ -7,7 +7,7 @@ import sys
 import math
 import pandas as pd
 import numpy as np
-import datetime
+from datetime import datetime
 import datefinder
 
 
@@ -281,5 +281,12 @@ class Check():
         #return isinstance(x,datetime.datetime)
         matches = datefinder.find_dates(x)            
         for match in matches:
-            #print("match found ",match)
-            return True
+            print("match found ",match)
+            if(match.hour>0 and match.minute>0 and match.second>0):
+
+            #i=match.strftime('%Y-%m-%d')
+            #print(type(i))
+                return True
+        return False
+
+#print(Check.is_datetime('20/3/3'))
