@@ -254,7 +254,17 @@ class Check():
             >> Check.is_date("20-20-2020")
             >> True
         """
-        pass
+        import datetime
+        day,month,year = x.split("-")
+        isValidDate = True
+        try :
+            datetime.datetime(int(year),int(month),int(day))
+        except ValueError :
+            isValidDate = False
+        if(isValidDate) :
+            return True
+        else :
+            return False
 
 
     @staticmethod
@@ -275,3 +285,4 @@ class Check():
 
         """
         pass
+        print(isdate(12-15-2918))
