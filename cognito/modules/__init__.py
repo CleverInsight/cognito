@@ -92,6 +92,7 @@ class Check():
 
             print("Method only supported pandas.cores.series")
 
+
     @staticmethod
     def is_identifier(column):
         """
