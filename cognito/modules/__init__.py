@@ -100,7 +100,7 @@ class Check():
             >> False
         """
     @staticmethod
-    def is_outlier(column, threshold=3):
+    def is_outlier(column, threshold):
         """
         Returns all the outliers in the column.
 

@@ -21,7 +21,7 @@ def test_load_table():
 def test_is_outlier():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     check = Check()
-    print(check.is_outlier(df['crime']))
+    print(check.is_outlier(df['crime'],3))
 
 def test_is_outlier1():
     samples=[322,322,336,345,351,370,390,404,409,411,436,437,-7,80000000,789654123,0]
@@ -52,3 +52,4 @@ def test__no_outlier3():
     samples=[30,171,184,201,212,250,265,270,272,289,305,306,100000,8,5,2000]
     x=pd.Series(samples)
     assert Check.is_outlier(x,5) == []
+    
