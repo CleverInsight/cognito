@@ -129,7 +129,7 @@ class Check():
 
         Usage:
         ======
-            >> Check.is_identifier(data['population'])
+            >> Check.is_missing(data['population'])
             >> True
 
         """
@@ -198,7 +198,7 @@ class Check():
 
         Usage:
         ======
-        >> Check.perc_missing(data)
+        >> Check.percentage_missing(data)
         >> {Price:0.00, Age:10.00}
 
         """
@@ -222,7 +222,7 @@ class Check():
 
         Usage:
         ======
-        >>Check.remove_col(data)
+        >>Check.remove_columns(data)
         >>dataframe
 
         """
@@ -244,7 +244,7 @@ class Check():
 
         Usage:
         ======
-        >>Check.remove_col(data)
+        >>Check.remove_records(data)
         >>dataframe
 
         """
@@ -285,7 +285,7 @@ class Check():
 
         Usage:
         ======
-        >> Check.replace_missing(data['population'])
+        >> Check.replace_mean(data['population'])
         >> series
         """
         try:
@@ -307,7 +307,7 @@ class Check():
 
         Usage:
         ======
-        >> Check.replace_missing(data['population'])
+        >> Check.replace_median(data['population'])
         >> series
         """
         try:
