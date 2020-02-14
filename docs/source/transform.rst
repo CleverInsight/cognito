@@ -22,4 +22,4 @@ remove_records
 .. code-block:: python
 		
 		>> Check.remove_col(data)
-        >> dataframe
+		>> dataframe

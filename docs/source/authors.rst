@@ -8,9 +8,10 @@ Core Lead
 ----------
 * `Bastin Robins J <https://github.com/bastinrobin>`__ <robin@cleverinsight.co>
 
-Maintainers
------------
+Development Leads
+--------------------
 
+* `Anshul Saxena <https://github.com/analyticsanshul>`__ <anshul.saxena@christuniversity.in>
 * `Vandana Bhagat <https://github.com/vandana-11>`__ <vandana.bhagat@christuniversity.in>
 
 

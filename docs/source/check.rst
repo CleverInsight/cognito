@@ -1,8 +1,8 @@
 :orphan:
 
 
-Check class
-============
+Check 
+=====
 
 
 Simple Usage
