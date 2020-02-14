@@ -7,6 +7,8 @@ import sys
 import math
 import pandas as pd
 import numpy as np
+import datetime
+import datefinder
 
 
 class Check():
@@ -274,4 +276,9 @@ class Check():
             >> False 
 
         """
-        pass
+        
+        #return isinstance(x,datetime.datetime)
+        matches = datefinder.find_dates(x)            
+        for match in matches:
+            #print("match found ",match)
+            return True
