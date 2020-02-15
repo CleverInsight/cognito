@@ -54,7 +54,9 @@ pass_config = click.make_pass_decorator(Config, ensure=True)
 
 @click.group()
 @click.option('--verbose', is_flag=True)
-@click.option('--input', help='Input source file only .csv accepted')
+@click.option('--input', default=1, help='Input source file only .csv accepted')
+@click.option('--name', prompt='Your name',
+              help='The person to greet.')
 
 @pass_config
 def cli(config, verbose):
