@@ -8,7 +8,7 @@ with codecs_open('README.rst', encoding='utf-8') as f:
 
 
 install_requires = [
-  'numpy == 1.16.6',  # REQ: vector algebra operations
+  'numpy',  # REQ: vector algebra operations
   'click',            # REQ: command line interfacing
   'pandas',           # REQ: (conda) sparx.data.filter()
 
