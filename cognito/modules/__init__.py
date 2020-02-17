@@ -9,6 +9,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 import datefinder
+from os import path
 
 
 class Check():
@@ -277,16 +278,13 @@ class Check():
             >> False 
 
         """
-        
-        #return isinstance(x,datetime.datetime)
         matches = datefinder.find_dates(x)            
         for match in matches:
-            print("match found ",match)
             if(match.hour>0 and match.minute>0 and match.second>0):
-
-            #i=match.strftime('%Y-%m-%d')
-            #print(type(i))
                 return True
         return False
 
 #print(Check.is_datetime('20/3/3'))
+
+df=pd.read_csv("C:/Users/HP/Desktop/cognito/tests/data/msleep_ggplot.csv")
+Check.ignore_identifier(df).to_csv(r'C:/Users/HP/Desktop/cognito/tests/data/msleep_ignore_identifier.csv')
