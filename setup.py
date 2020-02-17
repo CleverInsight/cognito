@@ -11,7 +11,9 @@ install_requires = [
   'numpy',  # REQ: vector algebra operations
   'click',            # REQ: command line interfacing
   'pandas',           # REQ: (conda) sparx.data.filter()
-
+  'pyyaml',
+  'pyfiglet',
+  'prettytable'
 ]
 
 setup(name='cognito',

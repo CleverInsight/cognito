@@ -10,7 +10,7 @@ Simple Usage
 
 .. code-block:: python
 
-    >>> from cognito.modules import Check
+    >>> from cognito.check import Check
     >>> import congito
 
 

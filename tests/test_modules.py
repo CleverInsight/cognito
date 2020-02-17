@@ -1,5 +1,5 @@
 
-from cognito.modules import Check
+from cognito.check import Check
 from cognito.data import Table
 import os
 import pytest

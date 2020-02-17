@@ -1,1 +1,1 @@
-from cognito.modules import Check
+from cognito.check import Check
