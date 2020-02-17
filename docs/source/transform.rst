@@ -22,6 +22,7 @@ remove_records
 .. code-block:: python
 		
 		>> Check.remove_col(data)
+<<<<<<< HEAD
         >> dataframe
 
 
@@ -33,3 +34,6 @@ ignore_identifier
 		
 		>> Check.ignore_identifier(data)
     	>> dataframe
+=======
+		>> dataframe
+>>>>>>> c3e5deb5178dc7c3262dac36f2ca2ebee7777b96
