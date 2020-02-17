@@ -51,40 +51,36 @@ class Config(object):
 pass_config = click.make_pass_decorator(Config, ensure=True)
 
 
-
 @click.group()
 @click.option('--verbose', is_flag=True)
-@click.option('--input', default=1, help='Input source file only .csv accepted')
-@click.option('--name', prompt='Your name',
-              help='The person to greet.')
 
 @pass_config
 def cli(config, verbose):
-    '''  Welcome to Cognito CLI '''
+    '''  Welcome to Sparx CLI '''
     config.verbose = verbose
 
 
-@cli.command()
-@click.option('--input', '-i', is_flag=True, default=1, help='Input file only .csv accepted')
-def intake(input):
-	click.echo(input)
 
-@cli.command()
-def list():
-    ''' List of all files '''
-    files = [f for f in os.listdir('.') if os.path.isfile(f)]
-    for f in files:
-        click.echo(f)
-
+# @cli.command()
+# @click.option('--count', default=1, help='number of greetings')
+# @click.argument('name')
+# def hello(count, name):
+#     for x in range(count):
+#         click.echo('Hello %s!' % name)
 
 
 @cli.command()
-def authors():
-    ''' List of all authors ''' 
-    people = ['A', 'B', 'C']
-    for person in people:
-        click.echo(person)
+@click.option('--verbose', is_flag=True, help="Will print verbose messages.")
+@click.option('--name', '-n', multiple=True, default='', help='Who are you?')
+@click.argument('country')
+def cli(verbose, name, country):
+    """This is an example script to learn Click."""
+    if verbose:
+        click.echo("We are in the verbose mode.")
+    click.echo("Hello {0}".format(country))
+    for n in name:
+        click.echo('Bye {0}'.format(n))
+
 
 
 log("Cognito CLI", color="green", figlet=True)
-
