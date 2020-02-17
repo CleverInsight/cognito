@@ -8,6 +8,12 @@ class Table:
 		self.data = pd.read_csv(filename)
 
 
+	def data(self):
+		"""
+		Returns the actual dataframe from taken
+		form processing
+		"""
+		return self.data
 
 	def columns(self):
 		"""
