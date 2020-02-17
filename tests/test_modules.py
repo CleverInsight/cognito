@@ -161,3 +161,15 @@ def test_is_missing_5():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     check = Check()
     assert check.is_missing(df['crime']) != True
+
+def test_remove_columns():
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    df1 = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_remove_columns.csv'))
+    check = Check()
+    assert check.remove_columns(df).equals(df1) == True
+
+def test_remove_records():
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    df1 = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_remove_records.csv'))
+    check = Check()
+    assert check.remove_records(df).equals(df1) == True
