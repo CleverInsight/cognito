@@ -1,18 +1,19 @@
 import os
 import sys
+import pandas as pd
 
 class Transform:
 
 	def __init__(self):
 		pass
 
-	def __split_date(x):
+	def split_date(x):
 		"""
 		Split the given string `x` into `day,month,year`
 		
-		:param      x:    date
-		:type       x:    string
-		:return     return Dict
+		:parameter_description x:	date
+		:type_description x:	string
+		:return		return Dict
 		
 		Usage:
 		======
@@ -21,8 +22,14 @@ class Transform:
 			>> {'day': 18, 'month': 10, 'year': 2020 }
 
 		"""
-		pass
-
+		import datetime
+		li = x.split('-')
+		date = ("-").join(li)
+		d = datetime.datetime.strptime(date, "%d %b %Y")
+		list1 = [d.day,d.month,d.year]
+		list2 = ['day','month','year']
+		res = {list2[i]: list1[i] for i in range(len(list2))} 
+		return res
 
 	@staticmethod
 	def split_dates(x):
@@ -47,7 +54,7 @@ class Transform:
 		pass
 
 
-
+	@staticmethod
 	def numerical(column):
 		"""
 		Given a `pandas.core.series` consist of categorical data
@@ -65,10 +72,9 @@ class Transform:
 				'cat':  0,
 				'rat':  1,
 				'mice': 3
-			]
+				]
 		"""
-		pass
-
-
-
-
+		encoded = column.astype('category').cat.codes
+		encoded_col = list(encoded)
+		describe_encoding = pd.Series(encoded_col, index=column).to_dict()
+		return describe_encoding
