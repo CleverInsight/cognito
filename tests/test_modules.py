@@ -142,4 +142,15 @@ def test_ignore_identifier_3():
     check=Check()
     df1= pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ignore_identifier.csv'))
     assert check.ignore_identifier(df).equals(df1)==False
-    
+def test_get_categorical_1():
+    data=Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_get_categorical.csv'))
+    assert data.get_categorical().equals(data2)==False
+def test_get_categorical_2():
+    data=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
+    data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_get_categorical.csv'))
+    assert data.get_categorical().equals(data2)==False
+def test_get_categorical_3():
+    data=Table(os.path.join(os.path.dirname(__file__), 'data', 'cereal.csv'))
+    data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'cereal_get_categorical.csv'))
+    assert data.get_categorical().equals(data2)==False

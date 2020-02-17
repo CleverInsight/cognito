@@ -67,8 +67,11 @@ class Table:
 			>>> data = Table('filename.csv')
 			>>> data.get_categorical()
 		"""
-		pass
-
+		df=pd.DataFrame()
+		for i in self.data:
+			if self.data[i].dtypes=='object':
+				df[i]=pd.Series(self.data[i])
+		return df
 	def get_numerical(self):
 		"""
 		Gets the numerical columns from the given
@@ -81,7 +84,11 @@ class Table:
 			>>> data = Table('filename.csv')
 			>>> data.get_numerical()
 		"""
-		pass
+		df=pd.DataFrame()
+		for i in self.data:
+			if np.issubdtype(self.data[i].dtype, np.number):
+				df[i]=pd.Series(self.data[i])
+		return df
 
 
 	def odd_rows(self):
@@ -109,3 +116,7 @@ class Table:
 
 	def apply(self):
 		pass
+data=Table('C:/Users/HP/Desktop/cognito/tests/data/cereal.csv')
+data.get_categorical().to_csv('C:/Users/HP/Desktop/cognito/tests/data/cereal_get_categorical.csv')
+#data.get_categorical().to_csv('C:/Users/HP/Desktop/cognito/tests/data/Freedman_get_categorical.csv')
+#print(data.get_numerical())
