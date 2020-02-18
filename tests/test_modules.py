@@ -1,6 +1,6 @@
 
-from cognito.modules import Check
-from cognito.data import Table
+from cognito.check import Check
+from cognito.table import Table
 import os
 import pytest
 import pandas as pd

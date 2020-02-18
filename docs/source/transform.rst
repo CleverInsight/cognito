@@ -22,6 +22,7 @@ remove_records
 .. code-block:: python
 		
 		>> Check.remove_col(data)
+<<<<<<< HEAD
         >> dataframe
 
 
@@ -33,3 +34,6 @@ is_outlier
 
 Check.is_outlier(data['population'])
            >> [6815.0, 6860.0, 11551.0]
+=======
+		>> dataframe
+>>>>>>> c3e5deb5178dc7c3262dac36f2ca2ebee7777b96
