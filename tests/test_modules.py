@@ -1,6 +1,6 @@
 
-from cognito.modules import Check
-from cognito.data import Table
+from cognito.check import Check
+from cognito.table import Table
 import os
 import pytest
 import pandas as pd
@@ -173,3 +173,13 @@ def test_remove_records():
     df1 = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_remove_records.csv'))
     check = Check()
     assert check.remove_records(df).equals(df1) == True
+
+def test_odd_rows():
+    data = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    data1 = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_odd_rows.csv'))
+    assert len(data.odd_rows()) == len(data1)
+
+def test_even_rows():
+    data = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    data1 = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_even_rows.csv'))
+    assert len(data.even_rows()) == len(data1)
