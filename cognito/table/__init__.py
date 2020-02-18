@@ -1,111 +1,112 @@
+'''
+Importing all the libraries needed
+'''
 import pandas as pd
 import numpy as np
 
 
-class Table:
+class Table():
+    '''
+    Defining all the functions
+    '''
+    def __init__(self, filename):
+        '''
+        Reading the csv file
+        '''
+        self.data = pd.read_csv(filename)
 
-	def __init__(self, filename):
-		self.data = pd.read_csv(filename)
+    def columns(self):
+        """
+        Get all the column names from the given
+        dataframe `self.data`
+
+        Usage:
+        ======
+            >>> data = Table('filename.csv')
+            >>> data.columns()
+        """
+        columns = []
+        for column in self.data.columns:
+            columns.append(column)
+        return columns
+
+    def total_columns(self):
+        """
+        Get the count of all column in the given
+        dataframe `self.data`
+
+        Usage:
+        ======
+            >>> data = Table('filename.csv')
+            >>> data.total_columns()
+        """
+        columns = []
+        for column in self.data.columns:
+            columns.append(column)
+        return len(columns)
+
+    def total_rows(self):
+        """
+        Get total count of rows from the current
+        dataframe `self.data`.
+
+        returns: dataframe
+
+        Usage:
+        ======
+            >>> data = Table('filename.csv')
+            >>> data.total_rows()
+        """
+        return self.data.shape[0]
+
+    def get_categorical(self):
+        """
+        Gets the categorical columns from the given
+        dataframe `self.data`
+
+        returns: dataframe
+
+        Usage:
+        ======
+            >>> data = Table('filename.csv')
+            >>> data.get_categorical()
+        """
+
+    def get_numerical(self):
+        """
+        Gets the numerical columns from the given
+        dataframe `self.data`
+
+        returns: dataframe
+
+        Usage:
+        ======
+            >>> data = Table('filename.csv')
+            >>> data.get_numerical()
+        """
 
 
-	def data(self):
-		"""
-		Returns the actual dataframe from taken
-		form processing
-		"""
-		return self.data
+    def odd_rows(self):
+        """
+        Get all odd indexed counted rows from the given
+        dataframe `self.data`
+        returns: dataframe
 
-	def columns(self):
-		"""
-		Get all the column names from the given
-		dataframe `self.data`
+        Usage:
+        ======
+            >>> data = Table('filename.csv')
+            >>> data.odd_rows()
+        """
 
-		Usage:
-		======
-			>>> data = Table('filename.csv')
-			>>> data.columns()
-		"""
-		return self.data.columns
+    def even_rows(self):
+        """
+        Get all even indexed counted rows from the given
+        dataframe `self.data`
 
+        returns: dataframe
+        """
 
-	def total_columns(self):
-		"""
-		Get the count of all column in the given
-		dataframe `self.data`
-
-		Usage:
-		======
-			>>> data = Table('filename.csv')
-			>>> data.total_columns()
-		"""
-		return len(self.columns())
-
-
-	def total_rows(self):
-		"""
-		Get total count of rows from the current 
-		dataframe `self.data`.
-
-		returns: dataframe
-
-		Usage:
-		======
-			>>> data = Table('filename.csv')
-			>>> data.total_rows()
-		"""
-		pass
-
-	def get_categorical(self):
-		"""
-		Gets the categorical columns from the given
-		dataframe `self.data`
-
-		returns: dataframe
-
-		Usage:
-		======
-			>>> data = Table('filename.csv')
-			>>> data.get_categorical()
-		"""
-		pass
-
-	def get_numerical(self):
-		"""
-		Gets the numerical columns from the given
-		dataframe `self.data`
-
-		returns: dataframe
-
-		Usage:
-		======
-			>>> data = Table('filename.csv')
-			>>> data.get_numerical()
-		"""
-		pass
-
-
-	def odd_rows(self):
-		"""
-		Get all odd indexed counted rows from the given 
-		dataframe `self.data`
-		returns: dataframe
-
-		Usage:
-		======
-			>>> data = Table('filename.csv')
-			>>> data.odd_rows()
-		
-		"""
-		pass
-
-	def even_rows(self):
-		"""
-		Get all even indexed counted rows from the given
-		dataframe `self.data`
-
-		returns: dataframe
-		"""
-		pass
-
-	def apply(self):
-		pass
+    def apply(self):
+        '''
+        No description
+        '''
