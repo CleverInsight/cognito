@@ -154,3 +154,7 @@ def test_get_categorical_3():
     data=Table(os.path.join(os.path.dirname(__file__), 'data', 'cereal.csv'))
     data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'cereal_get_categorical.csv'))
     assert data.get_categorical().equals(data2)==False
+def test_table_summary():
+    df=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
+    print(df.summary())
+

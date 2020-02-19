@@ -4,13 +4,15 @@ Table module
 import pandas as pd
 import numpy as np
 
+
 class Table:
     """
-    Table class helps us to take csv files
-    as input and perform desired operations
+    Table takes a csv file as input and converts to
+    a datframe to perform specific operations.
     """
     def __init__(self, filename):
         self.data = pd.read_csv(filename)
+
 
     def columns(self):
         """
@@ -51,6 +53,7 @@ class Table:
             >>> data.total_rows()
         """
 
+
     def get_categorical(self):
         """
         Gets the categorical columns from the given
@@ -87,6 +90,7 @@ class Table:
                 dataframe[i] = pd.Series(self.data[i])
         return dataframe
 
+
     def odd_rows(self):
         """
         Get all odd indexed counted rows from the given
@@ -97,7 +101,9 @@ class Table:
         ======
             >>> data = Table('filename.csv')
             >>> data.odd_rows()
+
         """
+
 
     def even_rows(self):
         """
@@ -107,7 +113,23 @@ class Table:
         returns: dataframe
         """
 
+
     def apply(self):
         """
-        No description
+        No Description
         """
+
+
+
+    def summary(self):
+        """
+        Return the dataframe descriptive statistics
+
+        returns: dataframe summary
+
+        Usage:
+        ======
+            >>> df = Table('filename.csv')
+            >>> df.summary()
+        """
+        return self.data.describe()
