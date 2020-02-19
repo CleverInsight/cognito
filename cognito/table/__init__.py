@@ -7,7 +7,8 @@ import numpy as np
 
 class Table():
     '''
-    Defining all the functions
+    Takes a csv file as input and converts to
+    dataframe to perform specific operations
     '''
     def __init__(self, filename):
         '''
