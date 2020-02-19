@@ -122,11 +122,6 @@ def test_encoding_categorical_3():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'student.csv'))
     assert check.encoding_categorical(df['Mjob']) == ([0, 0, 0, 1, 2, 3, 2, 2], {0: 'at_home', 1: 'at_home', 2: 'at_home', 3: 'health'})
 
-def test_percentage_missing():
-    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'vgsales.csv'))
-    check = Check()
-    assert check.percentage_missing(df) == {'Rank': 0.0, 'Name': 0.0, 'Platform': 0.0, 'Year': 1.63, 'Genre': 0.0, 'Publisher': 0.35, 'NA_Sales': 0.0, 'EU_Sales': 0.0, 'JP_Sales': 0.0, 'Other_Sales': 0.0, 'Global_Sales': 0.0}
-
 def test_is_continuous_2():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     check = Check()
