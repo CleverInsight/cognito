@@ -7,11 +7,12 @@ import numpy as np
 
 class Table:
     """
-    Table class helps us to take csv files
-    as input and perform desired operations
+    Takes a csv file as input and converts to
+    dataframe to perform specific operations
     """
     def __init__(self, filename):
         self.data = pd.read_csv(filename)
+
 
     def columns(self):
         """
@@ -25,6 +26,7 @@ class Table:
         """
         return self.data.columns
 
+
     def total_columns(self):
         """
         Get the count of all column in the given
@@ -35,7 +37,8 @@ class Table:
             >>> data = Table('filename.csv')
             >>> data.total_columns()
         """
-        return len(self.columns())
+        return len(self.data.columns())
+
 
     def total_rows(self):
         """
@@ -50,6 +53,7 @@ class Table:
             >>> data.total_rows()
         """
 
+
     def get_categorical(self):
         """
         Gets the categorical columns from the given
@@ -62,6 +66,7 @@ class Table:
             >>> data = Table('filename.csv')
             >>> data.get_categorical()
         """
+
 
     def get_numerical(self):
         """
@@ -76,6 +81,7 @@ class Table:
             >>> data.get_numerical()
         """
 
+
     def odd_rows(self):
         """
         Get all odd indexed counted rows from the given
@@ -89,6 +95,7 @@ class Table:
         """
         return self.data.iloc[1::2]
 
+
     def even_rows(self):
         """
         Get all even indexed counted rows from the given
@@ -98,7 +105,22 @@ class Table:
         """
         return self.data.iloc[:-2:2]
 
+
     def apply(self):
         """
         No description
         """
+
+
+    def summary(self):
+        """
+        Return the dataframe descriptive statistics
+
+        returns: dataframe summary
+
+        Usage:
+        ======
+            >>> df = Table('filename.csv')
+            >>> df.summary()
+        """
+        return self.data.describe()

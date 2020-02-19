@@ -174,12 +174,16 @@ def test_remove_records():
     check = Check()
     assert check.remove_records(df).equals(df1) == True
 
-def test_odd_rows():
+def test_table_odd_rows():
     data = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     data1 = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_odd_rows.csv'))
     assert len(data.odd_rows()) == len(data1)
 
-def test_even_rows():
+def test_table_even_rows():
     data = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     data1 = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_even_rows.csv'))
     assert len(data.even_rows()) == len(data1)
+
+def test_table_summary():
+    df=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
+    print(df.summary())
