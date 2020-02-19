@@ -13,7 +13,8 @@ install_requires = [
   'pandas',           # REQ: (conda) sparx.data.filter()
   'pyyaml',
   'pyfiglet',
-  'prettytable'
+  'prettytable',
+  'datefinder'
 ]
 
 setup(name='cognito',
