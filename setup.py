@@ -13,7 +13,7 @@ install_requires = [
   'pandas',           # REQ: (conda) sparx.data.filter()
   'pyyaml',
   'pyfiglet',
-  'prettytable'
+  'PrettyTable'
 ]
 
 setup(name='cognito',

@@ -137,4 +137,8 @@ def test_ignore_identifier_3():
     df=pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
     check=Check()
     print(check.ignore_identifier(df))
-    
+
+
+def test_table_summary():
+    df=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
+    print(df.summary())

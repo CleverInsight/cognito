@@ -109,3 +109,17 @@ class Table:
 
 	def apply(self):
 		pass
+
+
+	def summary(self):
+		"""
+		Return the dataframe descriptive statistics
+
+		returns: dataframe summary
+
+		Usage:
+		======
+			>>> df = Table('filename.csv')
+			>>> df.summary()
+		"""
+		return self.data.describe()
