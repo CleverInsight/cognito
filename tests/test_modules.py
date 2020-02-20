@@ -137,6 +137,7 @@ def test_ignore_identifier_3():
     df=pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
     check=Check()
     print(check.ignore_identifier(df))
+<<<<<<< HEAD
   
 def test_total_rows_one():
     data = Table(os.path.join(os.path.dirname(__file__), 'data', 'cereal.csv'))
@@ -174,3 +175,10 @@ def test_total_columns_three():
     data = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     assert data.total_columns() == 5
 
+=======
+
+
+def test_table_summary():
+    df=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
+    print(df.summary())
+>>>>>>> 065e1b353830be0e5d9c35171133d4468f0673e3
