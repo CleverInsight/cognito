@@ -61,8 +61,7 @@ def test__no_outlier3():
     samples=[30,171,184,201,212,250,265,270,272,289,305,306,100000,8,5,2000]
     x=pd.Series(samples)
     assert Check.is_outlier(x,5) == []
-<<<<<<< HEAD
-=======
+
 
 def test_is_not_continuous():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
@@ -139,5 +138,8 @@ def test_ignore_identifier_3():
     df=pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
     check=Check()
     print(check.ignore_identifier(df))
->>>>>>> c3cd3d941fbdbbfeff617659fe995ee82e119521
-    
+
+
+def test_table_summary():
+    df=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
+    print(df.summary())
