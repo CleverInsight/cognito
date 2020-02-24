@@ -1,6 +1,6 @@
-"""
-Table module
-"""
+'''
+Importing all the libraries needed
+'''
 import pandas as pd
 import numpy as np
 
@@ -25,7 +25,9 @@ class Table:
             >>> data = Table('filename.csv')
             >>> data.columns()
         """
+
         return self.data.columns
+
 
 
     def total_columns(self):
@@ -55,6 +57,7 @@ class Table:
             >>> data.total_rows()
         """
 
+        return self.data.shape[0]
 
     def get_categorical(self):
         """
@@ -68,7 +71,6 @@ class Table:
             >>> data = Table('filename.csv')
             >>> data.get_categorical()
         """
-
         dataframe = pd.DataFrame()
         for i in self.data:
             if self.data[i].dtypes == 'object':
@@ -87,7 +89,6 @@ class Table:
             >>> data = Table('filename.csv')
             >>> data.get_numerical()
         """
-
         dataframe = pd.DataFrame()
         for i in self.data:
             if np.issubdtype(self.data[i].dtype, np.number):
@@ -116,8 +117,6 @@ class Table:
 
         returns: dataframe
         """
-
-        return self.data.iloc[:-2:2]
 
 
     def apply(self):

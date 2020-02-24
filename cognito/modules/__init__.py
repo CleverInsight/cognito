@@ -47,7 +47,6 @@ class Check():
             return bool(True) if column.dtypes == 'object' else bool(False)
 
         except AttributeError:
-
             print("Method only supported pandas.cores.series")
 
 
@@ -110,6 +109,7 @@ class Check():
             >> True
 
         """
+
         try:
             return bool(True) if column.nunique() == column.shape[0] else bool(False)
 
@@ -139,6 +139,7 @@ class Check():
         except AttributeError:
 
             print("Method only supported pandas.cores.series")
+
 
 
     @staticmethod
@@ -198,6 +199,7 @@ class Check():
 
         Usage:
         ======
+
         >> Check.percentage_missing(data)
         >> {Price:0.00, Age:10.00}
 
@@ -222,8 +224,8 @@ class Check():
 
         Usage:
         ======
-        >>Check.remove_columns(data)
-        >>dataframe
+        >> Check.remove_columns(data)
+        >> dataframe
 
         """
         missing_dict = Check.percentage_missing(dataframe)
@@ -244,6 +246,7 @@ class Check():
 
         Usage:
         ======
+
         >>Check.remove_records(data)
         >>dataframe
 
@@ -275,6 +278,14 @@ class Check():
 
 
     @staticmethod
+
+    def is_date(x):
+        """
+        Determines whether the specified `x` is date.
+        
+        :param      x:    string of date type 
+        """
+
     def replace_mean(column):
         """
         Replaces the missing values of a column with its mean.
@@ -346,6 +357,7 @@ class Check():
         Determines whether the specified `x` is date.
 
         :param      x:    string of date type
+
         :type       x:    string
         :returns    True | False
 
@@ -354,23 +366,25 @@ class Check():
             >> Check.is_date("20-20-2020")
             >> True
         """
-        return bool(True) if re.search(r"^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]|(?:Jan|Mar|May|Jul|Aug|Oct|Dec)))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2]|(?:Jan|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec))\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)(?:0?2|(?:Feb))\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9]|(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep))|(?:1[0-2]|(?:Oct|Nov|Dec)))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$", date) else bool(False)
+
 
 
     @staticmethod
-    def is_datetime(datetime):
+    def is_datetime(x):
         """
         Determines whether the specified `x` is datetime.
-
+        
         :param      x:    { parameter_description }
         :type       x:    { type_description }
         :returns    True | False
-
+        
         Usage:
         ======
             >> Check.is_datetime("2020-02-20 00:00:00")
             >> True
             >> Check.is_datetime("2020-02-01")
-            >> False
+
+            >> False 
 
         """
+        pass

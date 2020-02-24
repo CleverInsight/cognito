@@ -135,6 +135,42 @@ def test_ignore_identifier_3():
     df=pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
     check=Check()
     print(check.ignore_identifier(df))
+  
+def test_total_rows_one():
+    data = Table(os.path.join(os.path.dirname(__file__), 'data', 'cereal.csv'))
+    assert data.total_rows() == 6
+
+def test_total_rows_two():
+    data = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    assert data.total_rows() == 110
+
+def test_total_rows_three():
+    data = Table(os.path.join(os.path.dirname(__file__), 'data', 'student.csv'))
+    assert data.total_rows() == 8
+
+def test_columns_one():
+    data = Table(os.path.join(os.path.dirname(__file__), 'data', 'cereal.csv'))
+    assert data.columns() == ['name', 'mfr', 'sodium', 'type', 'calories', 'sugars']
+
+def test_columns_two():
+    data = Table(os.path.join(os.path.dirname(__file__), 'data', 'student.csv'))
+    assert data.columns() == ['sex', 'age', 'Mjob', 'G1']
+
+def test_columns_three():
+    data = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    assert data.columns() == ['Location', 'population', 'nonwhite', 'density', 'crime']
+
+def test_total_columns_one():
+    data = Table(os.path.join(os.path.dirname(__file__), 'data', 'cereal.csv'))
+    assert data.total_columns() == 6
+
+def test_total_columns_two():
+    data = Table(os.path.join(os.path.dirname(__file__), 'data', 'student.csv'))
+    assert data.total_columns() == 4
+
+def test_total_columns_three():
+    data = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    assert data.total_columns() == 5
 
 def test_percentage_missing():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'vgsales.csv'))
@@ -198,14 +234,17 @@ def test_get_categorical_1():
     data=Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_get_categorical.csv'))
     assert data.get_categorical().equals(data2)==False
+
 def test_get_categorical_2():
     data=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
     data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_get_categorical.csv'))
     assert data.get_categorical().equals(data2)==False
+    
 def test_get_categorical_3():
     data=Table(os.path.join(os.path.dirname(__file__), 'data', 'cereal.csv'))
     data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'cereal_get_categorical.csv'))
     assert data.get_categorical().equals(data2)==False
+    
 def test_table_summary():
     df=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
     print(df.summary())
