@@ -6,12 +6,14 @@ from __future__ import print_function
 import os
 import sys
 import math
-import re
-import datefinder
-from datetime import datetime
-from os import path
+import datetime
 import pandas as pd
 import numpy as np
+import re
+import pandas as pd
+import numpy as np
+
+
 
 class Check():
     """
@@ -49,7 +51,6 @@ class Check():
             return bool(True) if column.dtypes == 'object' else bool(False)
 
         except AttributeError:
-
             print("Method only supported pandas.cores.series")
 
 
@@ -95,6 +96,7 @@ class Check():
         except AttributeError:
 
             print("Method only supported pandas.cores.series")
+
 
     @staticmethod
     def is_identifier(column):
@@ -163,8 +165,9 @@ class Check():
         return dataframe
 
 
+
     @staticmethod
-    def is_outlier(column, threshold):
+    def is_outlier(column, threshold=3):
         """
         Returns all the outliers in the column.
 
@@ -223,8 +226,8 @@ class Check():
 
         Usage:
         ======
-        >>Check.remove_columns(data)
-        >>dataframe
+        >> Check.remove_columns(data)
+        >> dataframe
 
         """
         missing_dict = Check.percentage_missing(dataframe)
@@ -232,6 +235,7 @@ class Check():
             if missing_dict[column] >= 60.00:
                 dataframe.drop([column], axis=1, inplace=True)
         return dataframe
+
 
     @staticmethod
     def remove_records(dataframe):
@@ -244,7 +248,7 @@ class Check():
 
         Usage:
         ======
-        >>Check.remove_records(data)
+        >> Check.remove_records(data)
         >>dataframe
 
         """
@@ -273,7 +277,7 @@ class Check():
         describe_encoding = pd.Series(column, index=encoded_col).to_dict()
         return encoded_col, describe_encoding
 
-    @staticmethod
+
     def replace_mean(column):
         """
         Replaces the missing values of a column with its mean.
@@ -343,7 +347,6 @@ class Check():
     def is_date(date):
         """
         Determines whether the specified `x` is date.
-
         :param      x:    string of date type
         :type       x:    string
         :returns    True | False
@@ -351,7 +354,6 @@ class Check():
         ======
             >> Check.is_date("20-20-2020")
             >> True
-
         """
         date_patterns = ["%m-%d-%Y", "%d-%m-%Y", "%Y-%m-%d"]
         for pattern in date_patterns:
@@ -360,27 +362,26 @@ class Check():
             except ValueError:
                 return False
 
+
+
+
+
     @staticmethod
-    def is_datetime(datetime):
+    def is_datetime(x):
         """
         Determines whether the specified `x` is datetime.
-
+        
         :param      x:    { parameter_description }
         :type       x:    { type_description }
         :returns    True | False
-
+        
         Usage:
         ======
             >> Check.is_datetime("2020-02-20 00:00:00")
             >> True
             >> Check.is_datetime("2020-02-01")
-            >> False
+
+            >> False 
 
         """
-
-        matches = datefinder.find_dates(x)
-        for match in matches:
-            if(match.hour > 0 and match.minute > 0 and match.second > 0):
-                return True
-        return False
- 
+        pass

@@ -13,6 +13,7 @@ install_requires = [
   'pandas',           # REQ: (conda) sparx.data.filter()
   'PyYAML',
   'pyfiglet',
+  'datefinder',
   'PrettyTable'
 ]
 
