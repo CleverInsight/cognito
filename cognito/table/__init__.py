@@ -7,6 +7,7 @@ import numpy as np
 
 class Table:
     """
+
     Table takes a csv file as input and converts to
     a datframe to perform specific operations.
     """
@@ -37,6 +38,7 @@ class Table:
             >>> data = Table('filename.csv')
             >>> data.total_columns()
         """
+
         return len(self.columns())
 
 
@@ -66,6 +68,7 @@ class Table:
             >>> data = Table('filename.csv')
             >>> data.get_categorical()
         """
+
         dataframe = pd.DataFrame()
         for i in self.data:
             if self.data[i].dtypes == 'object':
@@ -84,6 +87,7 @@ class Table:
             >>> data = Table('filename.csv')
             >>> data.get_numerical()
         """
+
         dataframe = pd.DataFrame()
         for i in self.data:
             if np.issubdtype(self.data[i].dtype, np.number):
@@ -101,8 +105,8 @@ class Table:
         ======
             >>> data = Table('filename.csv')
             >>> data.odd_rows()
-
         """
+        return self.data.iloc[1::2]
 
 
     def even_rows(self):
@@ -113,12 +117,13 @@ class Table:
         returns: dataframe
         """
 
+        return self.data.iloc[:-2:2]
+
 
     def apply(self):
         """
-        No Description
+        No description
         """
-
 
 
     def summary(self):

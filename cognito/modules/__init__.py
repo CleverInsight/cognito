@@ -7,9 +7,6 @@ import os
 import sys
 import math
 import re
-import datefinder
-from datetime import datetime
-from os import path
 import pandas as pd
 import numpy as np
 
@@ -356,7 +353,6 @@ class Check():
         ======
             >> Check.is_date("20-20-2020")
             >> True
-
         """
         return bool(True) if re.search(r"^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]|(?:Jan|Mar|May|Jul|Aug|Oct|Dec)))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2]|(?:Jan|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec))\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)(?:0?2|(?:Feb))\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9]|(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep))|(?:1[0-2]|(?:Oct|Nov|Dec)))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$", date) else bool(False)
 
@@ -378,10 +374,3 @@ class Check():
             >> False
 
         """
-
-        matches = datefinder.find_dates(x)
-        for match in matches:
-            if(match.hour > 0 and match.minute > 0 and match.second > 0):
-                return True
-        return False
- 

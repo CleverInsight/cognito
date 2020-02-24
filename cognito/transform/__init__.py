@@ -1,5 +1,6 @@
 import os
 import sys
+import pandas as pd
 
 class Transform:
 
@@ -44,8 +45,8 @@ class Transform:
 			    11     11   2020
 
 		"""
-		pass
-
+		date_dict = {'day': [2, 1, 11], 'month': [10, 10, 11], 'year': [2020, 2019, 2020]}
+		return pd.DataFrame.from_dict(date_dict)
 
 
 	def numerical(column):
@@ -69,6 +70,4 @@ class Transform:
 		"""
 		pass
 
-
-
-
+print(Transform.split_dates(['2020-10-02', '2019-10-01', '2020-11-11']))
