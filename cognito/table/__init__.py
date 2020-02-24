@@ -11,7 +11,7 @@ class Table:
 	def data(self):
 		"""
 		Returns the actual dataframe from taken
-		form processing
+		form processing.
 		"""
 		return self.data
 
@@ -106,6 +106,16 @@ class Table:
 		returns: dataframe
 		"""
 		pass
+
+
+	def summary(self):
+		"""
+		Generate descriptive summary of the given dataframe
+		`self.data`
+
+		:returns: dataframe
+		"""
+		return self.data.describe
 
 	def apply(self):
 		pass
