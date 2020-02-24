@@ -6,9 +6,13 @@ from __future__ import print_function
 import os
 import sys
 import math
+import datetime
+import pandas as pd
+import numpy as np
 import re
 import pandas as pd
 import numpy as np
+
 
 
 class Check():
@@ -109,7 +113,6 @@ class Check():
             >> True
 
         """
-
         try:
             return bool(True) if column.nunique() == column.shape[0] else bool(False)
 
@@ -141,7 +144,6 @@ class Check():
             print("Method only supported pandas.cores.series")
 
 
-
     @staticmethod
     def ignore_identifier(dataframe):
         """
@@ -161,6 +163,7 @@ class Check():
             if Check.is_identifier(dataframe[i]):
                 dataframe.drop([i], axis=1, inplace=True)
         return dataframe
+
 
 
     @staticmethod
@@ -199,7 +202,6 @@ class Check():
 
         Usage:
         ======
-
         >> Check.percentage_missing(data)
         >> {Price:0.00, Age:10.00}
 
@@ -246,8 +248,7 @@ class Check():
 
         Usage:
         ======
-
-        >>Check.remove_records(data)
+        >> Check.remove_records(data)
         >>dataframe
 
         """
@@ -276,15 +277,6 @@ class Check():
         describe_encoding = pd.Series(column, index=encoded_col).to_dict()
         return encoded_col, describe_encoding
 
-
-    @staticmethod
-
-    def is_date(x):
-        """
-        Determines whether the specified `x` is date.
-        
-        :param      x:    string of date type 
-        """
 
     def replace_mean(column):
         """
@@ -355,17 +347,22 @@ class Check():
     def is_date(date):
         """
         Determines whether the specified `x` is date.
-
         :param      x:    string of date type
-
         :type       x:    string
         :returns    True | False
-
         Usage:
         ======
             >> Check.is_date("20-20-2020")
             >> True
         """
+        date_patterns = ["%m-%d-%Y", "%d-%m-%Y", "%Y-%m-%d"]
+        for pattern in date_patterns:
+            try:
+                return datetime.datetime.strptime(date, pattern).date()
+            except ValueError:
+                return False
+
+
 
 
 

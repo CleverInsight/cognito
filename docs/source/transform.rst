@@ -20,8 +20,6 @@ remove_records
 remove_records removes the missing data from the given dataframe row wise.
 
 .. code-block:: python
-		
-
 		>> Check.remove_records(data)
     >> dataframe
 
@@ -79,4 +77,3 @@ ignore_identifier
 		
 		>> Check.ignore_identifier(data)
 		>> dataframe
-
