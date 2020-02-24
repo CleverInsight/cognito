@@ -19,10 +19,12 @@ is_categorical
 ~~~~~~~~~~~~~~~
 is_categorical is a staticmethod which checks if a column is categorical or not.
 
+
 .. code-block:: python
         
     >> Check.is_categorical(data['Age'])
     >> True
+
 
 
 
@@ -35,4 +37,14 @@ is_missing is a staticmethod which checks if a column has missing values or not.
     >> Check.is_missing(data['population'])
     >> True
 
+
+
+is_identifier
+~~~~~~~~~~~~~~~
+is_identifier is a staticmethod which checks if a column is an identifier or not.
+
+.. code-block:: python
+        
+    >> Check.is_identifier(data['Name'])
+    >> True
 

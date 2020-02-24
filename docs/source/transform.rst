@@ -21,9 +21,9 @@ remove_records removes the missing data from the given dataframe row wise.
 
 .. code-block:: python
 		
-<<<<<<< HEAD
+
 		>> Check.remove_records(data)
-        >> dataframe
+    >> dataframe
 
 
 
@@ -67,8 +67,16 @@ replace_median replaces the missing value by the median of the column.
 .. code-block:: python
 		
 		>> Check.replace_median(data)
-        >> series
-=======
-		>> Check.remove_col(data)
+    >> series
+
+
+
+ignore_identifier
+^^^^^^^^^^^^^^^^^^
+`ignore_identifier` remove the column from the given dataframe if the row is an identifer row.
+
+.. code-block:: python
+		
+		>> Check.ignore_identifier(data)
 		>> dataframe
->>>>>>> c3e5deb5178dc7c3262dac36f2ca2ebee7777b96
+

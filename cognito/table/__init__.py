@@ -7,8 +7,9 @@ import numpy as np
 
 class Table:
     """
-    Takes a csv file as input and converts to
-    dataframe to perform specific operations
+
+    Table takes a csv file as input and converts to
+    a datframe to perform specific operations.
     """
     def __init__(self, filename):
         self.data = pd.read_csv(filename)
@@ -37,7 +38,8 @@ class Table:
             >>> data = Table('filename.csv')
             >>> data.total_columns()
         """
-        return len(self.data.columns())
+
+        return len(self.columns())
 
 
     def total_rows(self):
@@ -67,6 +69,11 @@ class Table:
             >>> data.get_categorical()
         """
 
+        dataframe = pd.DataFrame()
+        for i in self.data:
+            if self.data[i].dtypes == 'object':
+                dataframe[i] = pd.Series(self.data[i])
+        return dataframe
 
     def get_numerical(self):
         """
@@ -80,6 +87,12 @@ class Table:
             >>> data = Table('filename.csv')
             >>> data.get_numerical()
         """
+
+        dataframe = pd.DataFrame()
+        for i in self.data:
+            if np.issubdtype(self.data[i].dtype, np.number):
+                dataframe[i] = pd.Series(self.data[i])
+        return dataframe
 
 
     def odd_rows(self):
@@ -103,6 +116,7 @@ class Table:
 
         returns: dataframe
         """
+
         return self.data.iloc[:-2:2]
 
 

@@ -5,6 +5,7 @@ import os
 import pytest
 import pandas as pd
 import numpy as np
+from os import path 
 
 
 def test_is_working():
@@ -84,13 +85,16 @@ def test_is_identifier_4():
 
 def test_ignore_identifier_1():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    df1= pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'ignore_identifier.csv'))
     check=Check()
-    print(check.ignore_identifier(df))
+    assert check.ignore_identifier(df).equals(df1)==False
 
 def test_ignore_identifier_2():
     df=pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'vgsales.csv'))
+    df1= pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'vgsales_ignore_identifier.csv'))
     check=Check()
-    print(check.ignore_identifier(df))
+    assert check.ignore_identifier(df).equals(df1)==False
+     
 
 def test_is_discrete_1():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
@@ -184,6 +188,24 @@ def test_table_even_rows():
     data1 = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_even_rows.csv'))
     assert len(data.even_rows()) == len(data1)
 
+def test_table_summary():
+    df=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
+    print(df.summary())
+    df1= pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ignore_identifier.csv'))
+    assert check.ignore_identifier(df).equals(df1)==False
+    
+def test_get_categorical_1():
+    data=Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_get_categorical.csv'))
+    assert data.get_categorical().equals(data2)==False
+def test_get_categorical_2():
+    data=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
+    data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_get_categorical.csv'))
+    assert data.get_categorical().equals(data2)==False
+def test_get_categorical_3():
+    data=Table(os.path.join(os.path.dirname(__file__), 'data', 'cereal.csv'))
+    data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'cereal_get_categorical.csv'))
+    assert data.get_categorical().equals(data2)==False
 def test_table_summary():
     df=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
     print(df.summary())
