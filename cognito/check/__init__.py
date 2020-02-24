@@ -5,6 +5,9 @@ from __future__ import print_function
 import os
 import sys
 import math
+from datetime import datetime
+from os import path
+import datefinder
 import pandas as pd
 import numpy as np
 
@@ -128,7 +131,6 @@ class Check():
             if Check.is_identifier(dataframe[i]):
                 dataframe.drop([i], axis=1, inplace=True)
         return dataframe
-        
 
     @staticmethod
     def is_outlier(column, threshold=3):
@@ -178,7 +180,7 @@ class Check():
             missing_dict.update({i:perc})
         return missing_dict
 
- 
+
     @staticmethod
     def remove_columns(dataframe):
         """
@@ -245,8 +247,7 @@ class Check():
     def is_date(x):
         """
         Determines whether the specified `x` is date.
-        
-        :param      x:    string of date type 
+        :param      x:    string of date type
         :type       x:    string
         :returns    True | False
 
@@ -254,6 +255,7 @@ class Check():
         ======
             >> Check.is_date("20-20-2020")
             >> True
+
         """
         pass
 
@@ -262,17 +264,19 @@ class Check():
     def is_datetime(x):
         """
         Determines whether the specified `x` is datetime.
-        
         :param      x:    { parameter_description }
         :type       x:    { type_description }
         :returns    True | False
-        
         Usage:
         ======
             >> Check.is_datetime("2020-02-20 00:00:00")
             >> True
             >> Check.is_datetime("2020-02-01")
-            >> False 
+            >> False
 
         """
-        pass
+        matches = datefinder.find_dates(x)
+        for match in matches:
+            if(match.hour > 0 and match.minute > 0 and match.second > 0):
+                return True
+        return False

@@ -1,0 +1,84 @@
+,name,genus,vore,order,conservation
+0,Cheetah,Acinonyx,carni,Carnivora,lc
+1,Owl monkey,Aotus,omni,Primates,
+2,Mountain beaver,Aplodontia,herbi,Rodentia,nt
+3,Greater short-tailed shrew,Blarina,omni,Soricomorpha,lc
+4,Cow,Bos,herbi,Artiodactyla,domesticated
+5,Three-toed sloth,Bradypus,herbi,Pilosa,
+6,Northern fur seal,Callorhinus,carni,Carnivora,vu
+7,Vesper mouse,Calomys,,Rodentia,
+8,Dog,Canis,carni,Carnivora,domesticated
+9,Roe deer,Capreolus,herbi,Artiodactyla,lc
+10,Goat,Capri,herbi,Artiodactyla,lc
+11,Guinea pig,Cavis,herbi,Rodentia,domesticated
+12,Grivet,Cercopithecus,omni,Primates,lc
+13,Chinchilla,Chinchilla,herbi,Rodentia,domesticated
+14,Star-nosed mole,Condylura,omni,Soricomorpha,lc
+15,African giant pouched rat,Cricetomys,omni,Rodentia,
+16,Lesser short-tailed shrew,Cryptotis,omni,Soricomorpha,lc
+17,Long-nosed armadillo,Dasypus,carni,Cingulata,lc
+18,Tree hyrax,Dendrohyrax,herbi,Hyracoidea,lc
+19,North American Opossum,Didelphis,omni,Didelphimorphia,lc
+20,Asian elephant,Elephas,herbi,Proboscidea,en
+21,Big brown bat,Eptesicus,insecti,Chiroptera,lc
+22,Horse,Equus,herbi,Perissodactyla,domesticated
+23,Donkey,Equus,herbi,Perissodactyla,domesticated
+24,European hedgehog,Erinaceus,omni,Erinaceomorpha,lc
+25,Patas monkey,Erythrocebus,omni,Primates,lc
+26,Western american chipmunk,Eutamias,herbi,Rodentia,
+27,Domestic cat,Felis,carni,Carnivora,domesticated
+28,Galago,Galago,omni,Primates,
+29,Giraffe,Giraffa,herbi,Artiodactyla,cd
+30,Pilot whale,Globicephalus,carni,Cetacea,cd
+31,Gray seal,Haliochoerus,carni,Carnivora,lc
+32,Gray hyrax,Heterohyrax,herbi,Hyracoidea,lc
+33,Human,Homo,omni,Primates,
+34,Mongoose lemur,Lemur,herbi,Primates,vu
+35,African elephant,Loxodonta,herbi,Proboscidea,vu
+36,Thick-tailed opposum,Lutreolina,carni,Didelphimorphia,lc
+37,Macaque,Macaca,omni,Primates,
+38,Mongolian gerbil,Meriones,herbi,Rodentia,lc
+39,Golden hamster,Mesocricetus,herbi,Rodentia,en
+40,Vole ,Microtus,herbi,Rodentia,
+41,House mouse,Mus,herbi,Rodentia,nt
+42,Little brown bat,Myotis,insecti,Chiroptera,
+43,Round-tailed muskrat,Neofiber,herbi,Rodentia,nt
+44,Slow loris,Nyctibeus,carni,Primates,
+45,Degu,Octodon,herbi,Rodentia,lc
+46,Northern grasshopper mouse,Onychomys,carni,Rodentia,lc
+47,Rabbit,Oryctolagus,herbi,Lagomorpha,domesticated
+48,Sheep,Ovis,herbi,Artiodactyla,domesticated
+49,Chimpanzee,Pan,omni,Primates,
+50,Tiger,Panthera,carni,Carnivora,en
+51,Jaguar,Panthera,carni,Carnivora,nt
+52,Lion,Panthera,carni,Carnivora,vu
+53,Baboon,Papio,omni,Primates,
+54,Desert hedgehog,Paraechinus,,Erinaceomorpha,lc
+55,Potto,Perodicticus,omni,Primates,lc
+56,Deer mouse,Peromyscus,,Rodentia,
+57,Phalanger,Phalanger,,Diprotodontia,
+58,Caspian seal,Phoca,carni,Carnivora,vu
+59,Common porpoise,Phocoena,carni,Cetacea,vu
+60,Potoroo,Potorous,herbi,Diprotodontia,
+61,Giant armadillo,Priodontes,insecti,Cingulata,en
+62,Rock hyrax,Procavia,,Hyracoidea,lc
+63,Laboratory rat,Rattus,herbi,Rodentia,lc
+64,African striped mouse,Rhabdomys,omni,Rodentia,
+65,Squirrel monkey,Saimiri,omni,Primates,
+66,Eastern american mole,Scalopus,insecti,Soricomorpha,lc
+67,Cotton rat,Sigmodon,herbi,Rodentia,
+68,Mole rat,Spalax,,Rodentia,
+69,Arctic ground squirrel,Spermophilus,herbi,Rodentia,lc
+70,Thirteen-lined ground squirrel,Spermophilus,herbi,Rodentia,lc
+71,Golden-mantled ground squirrel,Spermophilus,herbi,Rodentia,lc
+72,Musk shrew,Suncus,,Soricomorpha,
+73,Pig,Sus,omni,Artiodactyla,domesticated
+74,Short-nosed echidna,Tachyglossus,insecti,Monotremata,
+75,Eastern american chipmunk,Tamias,herbi,Rodentia,
+76,Brazilian tapir,Tapirus,herbi,Perissodactyla,vu
+77,Tenrec,Tenrec,omni,Afrosoricida,
+78,Tree shrew,Tupaia,omni,Scandentia,
+79,Bottle-nosed dolphin,Tursiops,carni,Cetacea,
+80,Genet,Genetta,carni,Carnivora,
+81,Arctic fox,Vulpes,carni,Carnivora,
+82,Red fox,Vulpes,carni,Carnivora,
