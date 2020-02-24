@@ -4,16 +4,16 @@ Importing all the libraries needed
 import pandas as pd
 import numpy as np
 
-class Table():
-    '''
-    Takes a csv file as input and converts to
-    dataframe to perform specific operations
-    '''
+
+class Table:
+    """
+
+    Table takes a csv file as input and converts to
+    a datframe to perform specific operations.
+    """
     def __init__(self, filename):
-        '''
-        Reading the csv file
-        '''
         self.data = pd.read_csv(filename)
+
 
     def columns(self):
         """
@@ -25,10 +25,10 @@ class Table():
             >>> data = Table('filename.csv')
             >>> data.columns()
         """
-        columns = []
-        for column in self.data.columns:
-            columns.append(column)
-        return columns
+
+        return self.data.columns
+
+
 
     def total_columns(self):
         """
@@ -40,10 +40,9 @@ class Table():
             >>> data = Table('filename.csv')
             >>> data.total_columns()
         """
-        columns = []
-        for column in self.data.columns:
-            columns.append(column)
-        return len(columns)
+
+        return len(self.columns())
+
 
     def total_rows(self):
         """
@@ -57,6 +56,7 @@ class Table():
             >>> data = Table('filename.csv')
             >>> data.total_rows()
         """
+
         return self.data.shape[0]
 
     def get_categorical(self):
@@ -71,6 +71,11 @@ class Table():
             >>> data = Table('filename.csv')
             >>> data.get_categorical()
         """
+        dataframe = pd.DataFrame()
+        for i in self.data:
+            if self.data[i].dtypes == 'object':
+                dataframe[i] = pd.Series(self.data[i])
+        return dataframe
 
     def get_numerical(self):
         """
@@ -84,6 +89,11 @@ class Table():
             >>> data = Table('filename.csv')
             >>> data.get_numerical()
         """
+        dataframe = pd.DataFrame()
+        for i in self.data:
+            if np.issubdtype(self.data[i].dtype, np.number):
+                dataframe[i] = pd.Series(self.data[i])
+        return dataframe
 
 
     def odd_rows(self):
@@ -97,6 +107,8 @@ class Table():
             >>> data = Table('filename.csv')
             >>> data.odd_rows()
         """
+        return self.data.iloc[1::2]
+
 
     def even_rows(self):
         """
@@ -106,8 +118,22 @@ class Table():
         returns: dataframe
         """
 
+
     def apply(self):
-        '''
+        """
         No description
-        '''
-        
+        """
+
+
+    def summary(self):
+        """
+        Return the dataframe descriptive statistics
+
+        returns: dataframe summary
+
+        Usage:
+        ======
+            >>> df = Table('filename.csv')
+            >>> df.summary()
+        """
+        return self.data.describe()

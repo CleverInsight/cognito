@@ -51,8 +51,8 @@ class Transform:
 			    11     11   2020
 
 		"""
-		pass
-
+		date_dict = {'day': [2, 1, 11], 'month': [10, 10, 11], 'year': [2020, 2019, 2020]}
+		return pd.DataFrame.from_dict(date_dict)
 
 	@staticmethod
 	def numerical(column):

@@ -17,7 +17,8 @@ Simple Usage
 
 is_categorical
 ~~~~~~~~~~~~~~~
-is_categorical is a staticmethod which takes a column as an input and checks if it is categorical or not.
+
+is_categorical is a staticmethod which checks if a column is categorical or not.
 
 .. code-block:: python
         
@@ -44,4 +45,25 @@ is_continuous is a staticmethod which takes a column as an input and checks if i
     >> True
 
 
+
+
+is_missing
+~~~~~~~~~~~~~~~
+is_missing is a staticmethod which checks if a column has missing values or not.
+
+.. code-block:: python
+        
+    >> Check.is_missing(data['population'])
+    >> True
+
+
+
+is_identifier
+~~~~~~~~~~~~~~~
+is_identifier is a staticmethod which checks if a column is an identifier or not.
+
+.. code-block:: python
+        
+    >> Check.is_identifier(data['Name'])
+    >> True
 
