@@ -1,6 +1,7 @@
 """
 Data checking module
 """
+# pylint: disable=C0301
 from __future__ import print_function
 import os
 import sys
@@ -8,6 +9,11 @@ import math
 import datetime
 import pandas as pd
 import numpy as np
+import re
+import pandas as pd
+import numpy as np
+
+
 
 class Check():
     """
@@ -69,6 +75,7 @@ class Check():
 
             print("Method only supported pandas.cores.series")
 
+
     @staticmethod
     def is_discrete(column):
         """
@@ -106,7 +113,35 @@ class Check():
             >> True
 
         """
-        return bool(True) if column.nunique() == column.shape[0] else bool(False)
+        try:
+            return bool(True) if column.nunique() == column.shape[0] else bool(False)
+
+        except AttributeError:
+
+            print("Method only supported pandas.cores.series")
+
+
+    @staticmethod
+    def is_missing(column):
+        """
+        Determines whether the specified column has missing values.
+
+        :param      column:  The column
+        :type       column:  { pandas.series | list | tuple }
+        :return     boolean: True | False
+
+        Usage:
+        ======
+            >> Check.is_missing(data['population'])
+            >> True
+
+        """
+        try:
+            return bool(True) if column.isnull().values.any() == bool(True) else bool(False)
+
+        except AttributeError:
+
+            print("Method only supported pandas.cores.series")
 
 
     @staticmethod
@@ -129,8 +164,10 @@ class Check():
                 dataframe.drop([i], axis=1, inplace=True)
         return dataframe
 
+
+
     @staticmethod
-    def is_outlier(column, threshold):
+    def is_outlier(column, threshold=3):
         """
         Returns all the outliers in the column.
 
@@ -165,7 +202,7 @@ class Check():
 
         Usage:
         ======
-        >> Check.perc_missing(data)
+        >> Check.percentage_missing(data)
         >> {Price:0.00, Age:10.00}
 
         """
@@ -176,6 +213,7 @@ class Check():
             perc = round(missing[i] / row_size * 100.0, 2)
             missing_dict.update({i:perc})
         return missing_dict
+
 
     @staticmethod
     def remove_columns(dataframe):
@@ -188,8 +226,8 @@ class Check():
 
         Usage:
         ======
-        >>Check.remove_col(data)
-        >>dataframe
+        >> Check.remove_columns(data)
+        >> dataframe
 
         """
         missing_dict = Check.percentage_missing(dataframe)
@@ -197,6 +235,7 @@ class Check():
             if missing_dict[column] >= 60.00:
                 dataframe.drop([column], axis=1, inplace=True)
         return dataframe
+
 
     @staticmethod
     def remove_records(dataframe):
@@ -209,7 +248,7 @@ class Check():
 
         Usage:
         ======
-        >>Check.remove_col(data)
+        >> Check.remove_records(data)
         >>dataframe
 
         """
@@ -218,6 +257,7 @@ class Check():
             if missing_dict[column] >= 20.00 and missing_dict[column] < 30.00:
                 dataframe = dataframe[dataframe[column].isnull() != bool(True)]
         return dataframe
+
 
     @staticmethod
     def encoding_categorical(column):
@@ -236,6 +276,72 @@ class Check():
         encoded_col = list(encoded)
         describe_encoding = pd.Series(column, index=encoded_col).to_dict()
         return encoded_col, describe_encoding
+
+
+    def replace_mean(column):
+        """
+        Replaces the missing values of a column with its mean.
+
+        :param       column:  The column
+        :type        column:  { pandas.series | list | tuple }
+        :return      column:  Updated column after replacing missing values with mean
+
+        Usage:
+        ======
+        >> Check.replace_mean(data['population'])
+        >> series
+        """
+        try:
+            return column.fillna(column.mean())
+
+        except AttributeError:
+
+            print("Method only supported pandas.cores.series")
+
+
+    @staticmethod
+    def replace_mode(column):
+        """
+        Replaces the missing values of a column with its mode.
+
+        :param       column:  The column
+        :type        column:  { pandas.series | list | tuple }
+        :return      column:  Updated column after replacing missing values with mean
+
+        Usage:
+        ======
+        >> Check.replace_mode(data['population'])
+        >> series
+        """
+        try:
+            return column.fillna(column.mode()[0])
+
+        except AttributeError:
+
+            print("Method only supported pandas.cores.series")
+
+
+    @staticmethod
+    def replace_median(column):
+        """
+        Replaces the missing values of a column with its median.
+
+        :param       column:  The column
+        :type        column:  { pandas.series | list | tuple }
+        :return      column:  Updated column after replacing missing values with median
+
+        Usage:
+        ======
+        >> Check.replace_median(data['population'])
+        >> series
+        """
+        try:
+            return column.fillna(column.median())
+
+        except AttributeError:
+
+            print("Method only supported pandas.cores.series")
+
 
     @staticmethod
     def is_date(date):
@@ -256,4 +362,26 @@ class Check():
             except ValueError:
                 return False
 
-print(Check.is_date("22-01-1998"))
+
+
+
+
+    @staticmethod
+    def is_datetime(x):
+        """
+        Determines whether the specified `x` is datetime.
+        
+        :param      x:    { parameter_description }
+        :type       x:    { type_description }
+        :returns    True | False
+        
+        Usage:
+        ======
+            >> Check.is_datetime("2020-02-20 00:00:00")
+            >> True
+            >> Check.is_datetime("2020-02-01")
+
+            >> False 
+
+        """
+        pass

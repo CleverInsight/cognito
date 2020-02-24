@@ -4,7 +4,7 @@ import pandas as pd
 
 class Transform:
 
-	def __init__(self):
+    def __init__(self):
 		pass
 
 	def split_date(x):
@@ -51,8 +51,8 @@ class Transform:
 			    11     11   2020
 
 		"""
-		date_dict = {'day': [2, 1, 11], 'month': [10, 10, 11], 'year': [2020, 2019, 2020]}
-		return pd.DataFrame.from_dict(date_dict)
+		pass
+
 
 	@staticmethod
 	def numerical(column):
