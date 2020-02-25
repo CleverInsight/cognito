@@ -21,6 +21,7 @@ class Table:
         form processing.
         """
         return self.data
+    
 
 
     def columns(self):
@@ -144,3 +145,48 @@ class Table:
             >>> df.summary()
         """
         return self.data.describe()
+
+
+    def correlation(self, mode="pearson"):
+        """
+        Return the pairwise correlation of the given 
+        dataframe `self.data` and return dataframe with
+        respective dataframe.
+
+        Ref: http://www.real-statistics.com/statistics-tables/pearsons-correlation-table/
+
+        
+        :param      mode:  `Pearson`, `Kendall`, `Spearman`, `Point-Biserial`
+        :type       mode:  string
+        
+        :returns:   correlation matrix
+        :rtype:     dataframe
+
+        Usage:
+        ======
+            >>> df = Table('filename.csv')
+            >>> df.correlation()
+        
+        """
+        pass
+
+    def covariance(self):
+        """
+        Return the covariance of the given 
+        dataframe `self.data` and return dataframe with
+        respective dataframe.
+
+        Ref: https://www.theanalysisfactor.com/covariance-matrices/
+
+        returns :  dataframe 
+
+        Usage:
+        ======
+            >>> df = Table('filename.csv')
+            >>> df.correlation(
+        """
+
+        pass
+
+
+

@@ -68,7 +68,6 @@ def cli(config, verbose):
 @click.option('--out', '-o')
 def mode(mode, inp, out):
     ''' Set any mode such as `prepare`, `autoML`, `clean` ''' 
-    table = PrettyTable(['Cognito v-0.0.1'])
 
     if not mode:
         click.echo("Missing")
@@ -79,11 +78,7 @@ def mode(mode, inp, out):
         click.echo('-i Missing')
     else:
         _input = inp
-    
-    if not out:
-        click.echo('-o Missing')
-    else:
-        _output = out
+
 
     if _mode == 'prepare':
         df = Table(_input)
@@ -91,7 +86,16 @@ def mode(mode, inp, out):
 
     if _mode == 'autoML':
         df = Table(_input)
-        print(df.total_columns())        
+        print(df.total_columns())  
+
+    if _mode == 'report':
+        df = Table(_input)
+        
+        table = PrettyTable(['Features', 'Feature Type', 'Outliers', '% of outliers', 'Missing', '%of missing'])
+
+        for col in df.columns():
+            table.add_row([col, '', '', '', '', ''])
+        print(table)   
 
 
 def main():
