@@ -147,6 +147,33 @@ class Table:
         return self.data.describe()
 
 
+    def hot_encoder_categorical(self, column):
+        """
+        Returns the pandas.series with hashtable in Dict structures
+
+        returns: pandas.series, dict
+
+        Usage:
+        ======
+            >>> self.hot_encoder_categorical(col_name)
+        """
+        pass
+
+
+    def convert_to_bin(self, column):
+        """
+        Returns the columns with more than 50% threshold to 
+        newly created bin pandas.series
+
+        returns: pandas.series 
+        descriptions: list of newly created bin values
+
+        Usage:
+        ======
+            >>> self.convert_to_bin(col_name)
+        """
+        pass
+
     def correlation(self, mode="pearson"):
         """
         Return the pairwise correlation of the given 
@@ -187,6 +214,3 @@ class Table:
         """
 
         pass
-
-
-
