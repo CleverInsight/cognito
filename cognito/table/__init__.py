@@ -15,6 +15,15 @@ class Table:
         self.data = pd.read_csv(filename)
 
 
+    def data(self):
+        """
+        Returns the actual dataframe from taken
+        form processing.
+        """
+        return self.data
+    
+
+
     def columns(self):
         """
         Get all the column names from the given
@@ -27,7 +36,6 @@ class Table:
         """
 
         return self.data.columns
-
 
 
     def total_columns(self):
@@ -164,4 +172,45 @@ class Table:
         ======
             >>> self.convert_to_bin(col_name)
         """
+        pass
+
+    def correlation(self, mode="pearson"):
+        """
+        Return the pairwise correlation of the given 
+        dataframe `self.data` and return dataframe with
+        respective dataframe.
+
+        Ref: http://www.real-statistics.com/statistics-tables/pearsons-correlation-table/
+
+        
+        :param      mode:  `Pearson`, `Kendall`, `Spearman`, `Point-Biserial`
+        :type       mode:  string
+        
+        :returns:   correlation matrix
+        :rtype:     dataframe
+
+        Usage:
+        ======
+            >>> df = Table('filename.csv')
+            >>> df.correlation()
+        
+        """
+        pass
+
+    def covariance(self):
+        """
+        Return the covariance of the given 
+        dataframe `self.data` and return dataframe with
+        respective dataframe.
+
+        Ref: https://www.theanalysisfactor.com/covariance-matrices/
+
+        returns :  dataframe 
+
+        Usage:
+        ======
+            >>> df = Table('filename.csv')
+            >>> df.correlation(
+        """
+
         pass

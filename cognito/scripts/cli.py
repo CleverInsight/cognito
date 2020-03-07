@@ -1,13 +1,13 @@
-# Cognito Command Line Utility 
-
 import os
 import six
+import shutil
 import yaml
 import click
-import shutil
-import cognito
 from pyfiglet import figlet_format
 from prettytable import PrettyTable
+from cognito.table import Table
+
+
 
 try:
     import colorama
@@ -51,36 +51,56 @@ class Config(object):
 pass_config = click.make_pass_decorator(Config, ensure=True)
 
 
+
 @click.group()
 @click.option('--verbose', is_flag=True)
 
 @pass_config
 def cli(config, verbose):
-    '''  Welcome to Sparx CLI '''
+    '''  Welcome to Cognito CLI '''
     config.verbose = verbose
 
 
 
-# @cli.command()
-# @click.option('--count', default=1, help='number of greetings')
-# @click.argument('name')
-# def hello(count, name):
-#     for x in range(count):
-#         click.echo('Hello %s!' % name)
-
-
 @cli.command()
-@click.option('--verbose', is_flag=True, help="Will print verbose messages.")
-@click.option('--name', '-n', multiple=True, default='', help='Who are you?')
-@click.argument('country')
-def cli(verbose, name, country):
-    """This is an example script to learn Click."""
-    if verbose:
-        click.echo("We are in the verbose mode.")
-    click.echo("Hello {0}".format(country))
-    for n in name:
-        click.echo('Bye {0}'.format(n))
+@click.argument('mode')
+@click.option('--inp', '-i')
+@click.option('--out', '-o')
+def mode(mode, inp, out):
+    ''' Set any mode such as `prepare`, `autoML`, `clean` ''' 
+
+    if not mode:
+        click.echo("Missing")
+    else:
+        _mode = mode
+
+    if not inp:
+        click.echo('-i Missing')
+    else:
+        _input = inp
 
 
+    if _mode == 'prepare':
+        df = Table(_input)
+        print(df.summary())
 
-log("Cognito CLI", color="green", figlet=True)
+    if _mode == 'autoML':
+        df = Table(_input)
+        print(df.total_columns())  
+
+    if _mode == 'report':
+        df = Table(_input)
+        
+        table = PrettyTable(['Features', 'Feature Type', 'Outliers', '% of outliers', 'Missing', '%of missing'])
+
+        for col in df.columns():
+            table.add_row([col, '', '', '', '', ''])
+        print(table)   
+
+
+def main():
+    log("Cognito CLI", color="blue", figlet=True)
+
+
+if __name__ == "cognito":
+    main()
