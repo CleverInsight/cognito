@@ -314,22 +314,25 @@ class Table:
         pass
 
 
-    def fix_outlier(self, column):
+    def fix_outlier(self, column, mode):
         """
         Take the column from `self.data` and check for outlier 
-        fix the outlier using std deviation, percentile, drop and cap
+        fix the outlier using mode : std deviation, percentile, drop and cap
 
         Ref: https://towardsdatascience.com/feature-engineering-for-machine-learning-3a5e293a5114
         
-        :param      column:  The column
+        :param      column:  The column 
         :type       column:  { column name as string }
         
+        :param      mode:  mode like std deviation, percentile, drop and cap
+        :type       column:  { string}
+
         returns: dataframe without outlier
 
         Usage:
         ======
             >>> df = Table('filename.csv')
-            >>> df.fix_outlier('age')
+            >>> df.fix_outlier('age', 'drop')
 
         """
 
