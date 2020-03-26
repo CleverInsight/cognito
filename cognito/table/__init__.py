@@ -21,7 +21,6 @@ class Table:
         form processing.
         """
         return self.data
-    
 
 
     def columns(self):
@@ -34,7 +33,6 @@ class Table:
             >>> data = Table('filename.csv')
             >>> data.columns()
         """
-
         return self.data.columns
 
 
@@ -48,7 +46,6 @@ class Table:
             >>> data = Table('filename.csv')
             >>> data.total_columns()
         """
-
         return len(self.columns())
 
 
@@ -64,8 +61,8 @@ class Table:
             >>> data = Table('filename.csv')
             >>> data.total_rows()
         """
-
         return self.data.shape[0]
+
 
     def get_categorical(self):
         """
@@ -84,6 +81,7 @@ class Table:
             if self.data[i].dtypes == 'object':
                 dataframe[i] = pd.Series(self.data[i])
         return dataframe
+
 
     def get_numerical(self):
         """
@@ -125,6 +123,7 @@ class Table:
 
         returns: dataframe
         """
+        return self.data.iloc[:-2:2]
 
 
     def apply(self):
@@ -187,6 +186,3 @@ class Table:
         """
 
         pass
-
-
-
