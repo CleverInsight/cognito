@@ -425,13 +425,7 @@ class Table:
         """
 
         # TODO:
-
-        pass
-
-
-
-    def scale(self):
         
-        # TODO
-
         pass
+
+
