@@ -429,3 +429,12 @@ class Table:
         pass
 
 
+
+
+    def scale(self):
+        
+        # TODO
+
+        # IMPORTANT function to be discussed
+
+        pass
