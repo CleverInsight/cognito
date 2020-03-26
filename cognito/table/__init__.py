@@ -361,20 +361,22 @@ class Table:
         pass
 
 
-    def imputer(self, column):
+    def imputer(self, column, value):
         """
         Take the columns from `self.data` and fill the missing NA
-        values based on the type of column
+        values with given value parameter based on the type of column
         
         :param      column:  The column
         :type       column:  { column name }
-        
+
+        :param      value:  The value by which NA will be replaced
+        :type       value:  { string, number, boolean}
         returns: dataframe | pandas.core.series
 
         Usage:
         ======
             >>> df = Table('filename.csv')
-            >>> df.imputer('age')
+            >>> df.imputer('age', 10)
         """
 
         # TODO:
