@@ -242,3 +242,8 @@ def test_get_categorical_3():
 def test_table_summary():
     df=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
     print(df.summary())
+
+def test_table_fix_outlier_with_std_deviation_1():
+    data = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    data3 = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_fix_outlier_with_std_deviation_1.csv'))
+    assert data.fix_outlier_with_std_deviation('crime').equals(data3['crime']) == True
