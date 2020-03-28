@@ -379,6 +379,3 @@ class Table:
 
 
     #def scale(self):
-
-df = Table(r'C:\Users\Nibir\Desktop\cognito\tests\data\cereal.csv')
-print(df.columns())
