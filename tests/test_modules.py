@@ -238,6 +238,10 @@ def test_table_summary():
     df=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
     print(df.summary())
 
+def test_correlation():
+    df=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
+    print(df.correlation())
+
 def test_hot_encoder_categorical_1():
     df=Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     assert df.hot_encoder_categorical('Location').equals(df)== False

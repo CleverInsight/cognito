@@ -4,6 +4,8 @@ Importing all the libraries needed
 '''
 import pandas as pd
 import numpy as np
+from scipy.stats.stats import kendalltau
+from scipy.stats import pointbiserialr
 
 
 class Table:
@@ -102,7 +104,6 @@ class Table:
                 dataframe[i] = pd.Series(self.data[i])
         return dataframe
 
-
     def odd_rows(self):
         """
         Get all odd indexed counted rows from the given
@@ -194,6 +195,17 @@ class Table:
             >>> df = Table('filename.csv')
             >>> df.correlation()
         """
+        if(mode == "pearson"):
+            pearsoncorr = self.data.corr(method='pearson')
+            return pearsoncorr
+        elif (mode == "kendall"):
+            pearsoncorr = self.data.corr(method='kendall')
+            return pearsoncorr
+        elif (mode == "spearman"):
+            pearsoncorr = self.data.corr(method='spearman')
+            return pearsoncorr
+        
+
         pass
 
   
@@ -395,4 +407,10 @@ class Table:
         """
 
 
-    #def scale(self):
+    def scale(self):
+        
+        # TODO
+
+        # IMPORTANT function to be discussed
+
+        pass
