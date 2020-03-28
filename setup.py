@@ -9,6 +9,8 @@ with codecs_open('README.rst', encoding='utf-8') as f:
 
 install_requires = [
   'numpy',  # REQ: vector algebra operations
+  'scipy',
+  'numpy',
   'click',            # REQ: command line interfacing
   'pandas',           # REQ: (conda) sparx.data.filter()
   'PyYAML',
