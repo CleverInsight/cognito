@@ -151,11 +151,11 @@ def test_total_rows_three():
 
 def test_columns_one():
     data = Table(os.path.join(os.path.dirname(__file__), 'data', 'cereal.csv'))
-    assert data.columns() == ['name', 'mfr', 'sodium', 'type', 'calories', 'sugars']
+    assert data.columns().tolist() == ['name', 'mfr', 'sodium', 'type', 'calories', 'sugars']
 
 def test_columns_two():
     data = Table(os.path.join(os.path.dirname(__file__), 'data', 'student.csv'))
-    assert data.columns() == ['sex', 'age', 'Mjob', 'G1']
+    assert data.columns().tolist() == ['sex', 'age', 'Mjob', 'G1']
 
 
 def test_total_columns_one():
@@ -242,3 +242,13 @@ def test_get_categorical_3():
 def test_table_summary():
     df=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
     print(df.summary())
+
+def test_table_imputer_1():
+    data = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    data1 = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_imputer1.csv'))
+    assert data.imputer('population', 1000).equals(data1['population']) == True
+
+def test_table_imputer_2():
+    data = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    data1 = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_imputer2.csv'))
+    assert data.imputer('density', 800).equals(data1['density']) == True
