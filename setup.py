@@ -19,11 +19,31 @@ install_requires = [
   'PrettyTable'
 ]
 
+
+CLASSIFIERS = [
+    'Development Status :: 0.0.1 - Beta',
+    'Environment :: Multiple',
+    'Intended Audience :: Developers',
+    'License :: OSI Approved :: MIT License',
+    'Programming Language :: Python :: 2',
+    'Programming Language :: Python :: 2.7',
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.5',
+    'Programming Language :: Python :: 3.6',
+    'Programming Language :: Python :: 3.7',
+    'Programming Language :: Python :: 3.8',
+    'Programming Language :: Python',
+    'Topic :: Internet :: WWW/HTTP',
+    'Topic :: Software Development :: Libraries :: Python Modules',
+    'Topic :: Utilities',
+]
+
+
 setup(name='cognito',
       version='0.0.1',
       description=u"Auto ML Dataset Transformer",
       long_description=long_description,
-      classifiers=[],
+      classifiers=CLASSIFIERS,
       keywords='',
       author=u"Bastin Robins .J",
       author_email='robin@cleverinsight.co',
@@ -33,11 +53,13 @@ setup(name='cognito',
       include_package_data=True,
       zip_safe=False,
       install_requires=install_requires,
+      
       extras_require={
           'test': ['pytest'],
       },
+      
       entry_points="""
       [console_scripts]
       cognito=cognito.scripts.cli:cli
       """
-      )
+)
