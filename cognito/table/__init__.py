@@ -16,7 +16,7 @@ class Table:
         self.data = pd.read_csv(filename)
 
 
-    def data(self):
+    def data(self):  # pylint: disable=E0202
         """
         Returns the actual dataframe from taken
         form processing.
@@ -154,6 +154,10 @@ class Table:
         ======
             >>> df.hot_encoder_categorical(col_name)
         """
+        one_hot = pd.get_dummies(self.data[column])
+        return one_hot
+  
+
 
 
     def convert_to_bin(self, column):
@@ -168,7 +172,8 @@ class Table:
         ======
             >>> self.convert_to_bin(col_name)
         """
-
+        pass
+<
 
     def correlation(self, mode="pearson"):
         """
@@ -189,14 +194,14 @@ class Table:
             >>> df = Table('filename.csv')
             >>> df.correlation()
         """
+        pass
 
-
+  
     def covariance(self):
         """
         Return the covariance of the given
         dataframe `self.data` and return dataframe with
         respective dataframe.
-
         Ref: https://www.theanalysisfactor.com/covariance-matrices/
 
         returns :  dataframe
@@ -204,8 +209,11 @@ class Table:
         Usage:
         ======
             >>> df = Table('filename.csv')
-            >>> df.correlation(
+            >>> df.correlation()
         """
+        pass
+
+
 
 
     def slice(self, columns):
@@ -231,6 +239,7 @@ class Table:
             ---------------
 
         """
+        pass
 
 
     def binning(self, col, bins, labels):
@@ -280,7 +289,8 @@ class Table:
             ------------------
             |  14   | low
             ------------------
-        """
+       """
+       pass
 
 
     def fix_outlier(self, column, mode):
@@ -304,7 +314,7 @@ class Table:
             >>> df.fix_outlier('age', 'drop')
 
         """
-
+        pass
 
     def fix_missing(self, column):
         """
@@ -340,8 +350,10 @@ class Table:
             >>> df = Table('filename.csv')
             >>> df.imputer('age', 10)
         """
+
         self.data[column].fillna(value, inplace=True)
         return self.data[column]
+
 
 
     def ignore_cardinal(self):
@@ -357,6 +369,11 @@ class Table:
             >>> df.ignore_cardinal()
 
         """
+        for i in self.data:
+            if len(self.data[i]) == self.data[i].nunique(dropna=True):
+                self.data.drop(i, axis=1, inplace=True)
+
+        return self.data
 
 
     def encode_column(self, column):

@@ -381,4 +381,5 @@ class Check():
         for match in matches:
             if(match.hour > 0 and match.minute > 0 and match.second > 0):
                 return True
+
         return False
