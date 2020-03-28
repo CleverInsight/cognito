@@ -1,5 +1,4 @@
-
-# pylint: disable=C0103
+#pylint: disable = E0202
 '''
 Importing all the libraries needed
 '''
@@ -35,7 +34,6 @@ class Table:
             >>> data = Table('filename.csv')
             >>> data.columns()
         """
-
         return self.data.columns
 
 
@@ -49,7 +47,6 @@ class Table:
             >>> data = Table('filename.csv')
             >>> data.total_columns()
         """
-
         return len(self.columns())
 
 
@@ -65,8 +62,8 @@ class Table:
             >>> data = Table('filename.csv')
             >>> data.total_rows()
         """
-
         return self.data.shape[0]
+
 
     def get_categorical(self):
         """
@@ -85,6 +82,7 @@ class Table:
             if self.data[i].dtypes == 'object':
                 dataframe[i] = pd.Series(self.data[i])
         return dataframe
+
 
     def get_numerical(self):
         """
@@ -121,13 +119,12 @@ class Table:
 
     def even_rows(self):
         """
-        # TODO:
-
         Get all even indexed counted rows from the given
         dataframe `self.data`
 
         returns: dataframe
         """
+        return self.data.iloc[:-2:2]
 
 
     #def apply(self):
@@ -155,10 +152,12 @@ class Table:
 
         Usage:
         ======
-            >>> self.hot_encoder_categorical(col_name)
+            >>> df.hot_encoder_categorical(col_name)
         """
         one_hot = pd.get_dummies(self.data[column])
         return one_hot
+  
+
 
 
     def convert_to_bin(self, column):
@@ -173,9 +172,11 @@ class Table:
         ======
             >>> self.convert_to_bin(col_name)
         """
+        pass
+<
+
     def correlation(self, mode="pearson"):
         """
-
         Return the pairwise correlation of the given
         dataframe `self.data` and return dataframe with
         respective dataframe.
@@ -184,6 +185,7 @@ class Table:
 
         :param      mode:  `Pearson`, `Kendall`, `Spearman`, `Point-Biserial`
         :type       mode:  string
+
         :returns:   correlation matrix
         :rtype:     dataframe
 
@@ -192,10 +194,11 @@ class Table:
             >>> df = Table('filename.csv')
             >>> df.correlation()
         """
+        pass
 
+  
     def covariance(self):
         """
-
         Return the covariance of the given
         dataframe `self.data` and return dataframe with
         respective dataframe.
@@ -208,19 +211,20 @@ class Table:
             >>> df = Table('filename.csv')
             >>> df.correlation()
         """
+        pass
+
 
 
 
     def slice(self, columns):
         """
-        # TODO:
-
         Return only the columns sliced
         from `self.data` based on given `columns` parameter
+
         :param      columns:  list or tuple
         :type       columns:  { list of column name  }
 
-        returns: dataframe of only given column names.
+        returns: dataframe of only given column names
 
         Usage:
         ======
@@ -235,13 +239,14 @@ class Table:
             ---------------
 
         """
-
+        pass
 
 
     def binning(self, col, bins, labels):
         """
         Return dataframe of select column convert into bins as given
         parameter
+
         :param      col:   The col
         :type       col:   { column name to be selected }
         :param      bins:  The bins
@@ -265,11 +270,8 @@ class Table:
                 Chile  ->  South America
                 Brazil ->  South America
 
-
         Usage:
         ======
-
-
 
             >>> df = Table('filename.csv')
             >>> df.binning('age', bins=[], labels=['low', 'med', 'high'])
@@ -287,8 +289,8 @@ class Table:
             ------------------
             |  14   | low
             ------------------
-
-        """
+       """
+       pass
 
 
     def fix_outlier(self, column, mode):
@@ -312,8 +314,7 @@ class Table:
             >>> df.fix_outlier('age', 'drop')
 
         """
-
-
+        pass
 
     def fix_missing(self, column):
         """
@@ -329,7 +330,6 @@ class Table:
         ======
             >>> df = Table('filename.csv')
             >>> df.fix_missing('age')
-
         """
 
 
@@ -337,11 +337,12 @@ class Table:
         """
         Take the columns from `self.data` and fill the missing NA
         values with given value parameter based on the type of column
+
         :param      column:  The column
         :type       column:  { column name }
 
         :param      value:  The value by which NA will be replaced
-        :type       value:  { string, number, boolean}
+        :type       value:  { string, number, boolean }
         returns: dataframe | pandas.core.series
 
         Usage:
@@ -349,6 +350,10 @@ class Table:
             >>> df = Table('filename.csv')
             >>> df.imputer('age', 10)
         """
+
+        self.data[column].fillna(value, inplace=True)
+        return self.data[column]
+
 
 
     def ignore_cardinal(self):
@@ -371,7 +376,6 @@ class Table:
         return self.data
 
 
-
     def encode_column(self, column):
         """
         Encodes a column using the numerical values and
@@ -389,5 +393,6 @@ class Table:
             >>> (dataframe, {'0': 'US', '1': 'India', '2': 'Europe'})
 
         """
+
 
     #def scale(self):

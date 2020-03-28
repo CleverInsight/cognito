@@ -7,11 +7,11 @@ import os
 import sys
 import math
 import re
-import datefinder
 from datetime import datetime
 from os import path
 import pandas as pd
 import numpy as np
+import datefinder
 
 class Check():
     """
@@ -361,7 +361,7 @@ class Check():
                 return False
 
     @staticmethod
-    def is_datetime(datetime):
+    def is_datetime(date):
         """
         Determines whether the specified `x` is datetime.
 
@@ -377,9 +377,9 @@ class Check():
             >> False
 
         """
-
-        matches = datefinder.find_dates(x)
+        matches = datefinder.find_dates(date)
         for match in matches:
             if(match.hour > 0 and match.minute > 0 and match.second > 0):
                 return True
+
         return False
