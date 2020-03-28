@@ -151,11 +151,12 @@ def test_total_rows_three():
 
 def test_columns_one():
     data = Table(os.path.join(os.path.dirname(__file__), 'data', 'cereal.csv'))
-    assert data.columns() == ['name', 'mfr', 'sodium', 'type', 'calories', 'sugars']
+
+    assert data.columns().tolist() == ['name', 'mfr', 'sodium', 'type', 'calories', 'sugars']
 
 def test_columns_two():
     data = Table(os.path.join(os.path.dirname(__file__), 'data', 'student.csv'))
-    assert data.columns() == ['sex', 'age', 'Mjob', 'G1']
+    assert data.columns().tolist() == ['sex', 'age', 'Mjob', 'G1']
 
 
 def test_total_columns_one():
@@ -213,11 +214,6 @@ def test_table_odd_rows():
     data1 = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_odd_rows.csv'))
     assert len(data.odd_rows()) == len(data1)
 
-def test_table_even_rows():
-    data = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
-    data1 = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_even_rows.csv'))
-    assert len(data.even_rows()) == len(data1)
-
 def test_table_summary():
     df=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
     print(df.summary())
@@ -242,3 +238,15 @@ def test_get_categorical_3():
 def test_table_summary():
     df=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
     print(df.summary())
+def test_hot_encoder_categorical_1():
+    df=Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    assert df.hot_encoder_categorical('Location').equals(df)== False
+def test_hot_encoder_categorical_2():
+    df=Table(os.path.join(os.path.dirname(__file__), 'data', 'cereal.csv'))
+    assert df.hot_encoder_categorical('name').equals(df)== False
+def test_ignore_cardinal_1():
+    df=Table(os.path.join(os.path.dirname(__file__), 'data', 'cereal.csv'))
+    assert df.ignore_cardinal().equals(df)== False
+def test_ignore_cardinal_2():
+    df=Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    assert df.ignore_cardinal().equals(df)== False
