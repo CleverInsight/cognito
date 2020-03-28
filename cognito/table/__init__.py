@@ -104,6 +104,7 @@ class Table:
                 dataframe[i] = pd.Series(self.data[i])
         return dataframe
 
+
     def odd_rows(self):
         """
         Get all odd indexed counted rows from the given
@@ -157,8 +158,6 @@ class Table:
         """
         one_hot = pd.get_dummies(self.data[column])
         return one_hot
-  
-
 
 
     def convert_to_bin(self, column):
@@ -173,8 +172,7 @@ class Table:
         ======
             >>> self.convert_to_bin(col_name)
         """
-        pass
-<
+
 
     def correlation(self, mode="pearson"):
         """
@@ -195,20 +193,15 @@ class Table:
             >>> df = Table('filename.csv')
             >>> df.correlation()
         """
-        if(mode == "pearson"):
+        if mode == "pearson":
             pearsoncorr = self.data.corr(method='pearson')
-            return pearsoncorr
-        elif (mode == "kendall"):
+        elif mode == "kendall":
             pearsoncorr = self.data.corr(method='kendall')
-            return pearsoncorr
-        elif (mode == "spearman"):
+        elif mode == "spearman":
             pearsoncorr = self.data.corr(method='spearman')
-            return pearsoncorr
-        
+        return pearsoncorr
 
-        pass
 
-  
     def covariance(self):
         """
         Return the covariance of the given
@@ -223,9 +216,6 @@ class Table:
             >>> df = Table('filename.csv')
             >>> df.correlation()
         """
-        pass
-
-
 
 
     def slice(self, columns):
@@ -251,7 +241,6 @@ class Table:
             ---------------
 
         """
-        pass
 
 
     def binning(self, col, bins, labels):
@@ -301,8 +290,7 @@ class Table:
             ------------------
             |  14   | low
             ------------------
-       """
-       pass
+        """
 
 
     def fix_outlier(self, column, mode):
@@ -326,7 +314,7 @@ class Table:
             >>> df.fix_outlier('age', 'drop')
 
         """
-        pass
+
 
     def fix_missing(self, column):
         """
@@ -343,6 +331,14 @@ class Table:
             >>> df = Table('filename.csv')
             >>> df.fix_missing('age')
         """
+        self.ignore_cardinal()
+        continuous = self.get_numerical().columns.tolist()
+        categorical = self.get_categorical().columns.tolist()
+        if column in continuous:
+            self.data[column].fillna(self.data[column].mean(), inplace=True)
+        elif column in categorical:
+            self.data[column].fillna(self.data[column].mode(), inplace=True)
+        return self.data[column]
 
 
     def imputer(self, column, value):
@@ -367,7 +363,6 @@ class Table:
         return self.data[column]
 
 
-
     def ignore_cardinal(self):
         """
         Take the dataframe `self.data` and remove all cardinality columns
@@ -384,7 +379,6 @@ class Table:
         for i in self.data:
             if len(self.data[i]) == self.data[i].nunique(dropna=True):
                 self.data.drop(i, axis=1, inplace=True)
-
         return self.data
 
 
@@ -407,10 +401,4 @@ class Table:
         """
 
 
-    def scale(self):
-        
-        # TODO
-
-        # IMPORTANT function to be discussed
-
-        pass
+    #def scale(self):

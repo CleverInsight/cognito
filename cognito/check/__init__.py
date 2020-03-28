@@ -18,7 +18,7 @@ class Check():
     Check class helps us to identify the types of
     variables categorical | Continuous | Discrete
     """
-    def __ini__(self):
+    def __init__(self):
         pass
 
     @staticmethod
@@ -95,6 +95,7 @@ class Check():
         except AttributeError:
 
             print("Method only supported pandas.cores.series")
+
 
     @staticmethod
     def is_identifier(column):
@@ -272,6 +273,7 @@ class Check():
         encoded_col = list(encoded)
         describe_encoding = pd.Series(column, index=encoded_col).to_dict()
         return encoded_col, describe_encoding
+
 
     @staticmethod
     def replace_mean(column):
