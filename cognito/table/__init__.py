@@ -174,7 +174,7 @@ class Table:
             >>> self.convert_to_bin(col_name)
         """
         pass
-<
+
 
     def correlation(self, mode="pearson"):
         """
@@ -301,8 +301,8 @@ class Table:
             ------------------
             |  14   | low
             ------------------
-       """
-       pass
+        """
+        pass
 
 
     def fix_outlier(self, column, mode):
