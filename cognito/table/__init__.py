@@ -3,6 +3,8 @@ Importing all the libraries needed
 '''
 import pandas as pd
 import numpy as np
+from scipy.stats.stats import kendalltau
+from scipy.stats import pointbiserialr
 
 
 class Table:
@@ -21,7 +23,6 @@ class Table:
         form processing.
         """
         return self.data
-    
 
 
     def columns(self):
@@ -102,7 +103,6 @@ class Table:
             if np.issubdtype(self.data[i].dtype, np.number):
                 dataframe[i] = pd.Series(self.data[i])
         return dataframe
-
 
     def odd_rows(self):
         """
@@ -199,6 +199,17 @@ class Table:
             >>> df.correlation()
         
         """
+        if(mode == "pearson"):
+            pearsoncorr = self.data.corr(method='pearson')
+            return pearsoncorr
+        elif (mode == "kendall"):
+            pearsoncorr = self.data.corr(method='kendall')
+            return pearsoncorr
+        elif (mode == "spearman"):
+            pearsoncorr = self.data.corr(method='spearman')
+            return pearsoncorr
+        
+
         pass
 
     def covariance(self):
@@ -438,3 +449,6 @@ class Table:
         # IMPORTANT function to be discussed
 
         pass
+
+
+

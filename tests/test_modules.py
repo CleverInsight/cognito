@@ -242,3 +242,7 @@ def test_get_categorical_3():
 def test_table_summary():
     df=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
     print(df.summary())
+def test_correlation():
+    df=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
+    print(df.correlation())
+
