@@ -5,6 +5,8 @@ Importing all the libraries needed
 '''
 import pandas as pd
 import numpy as np
+from scipy.stats.stats import kendalltau
+from scipy.stats import pointbiserialr
 
 class Table():
     """
@@ -55,6 +57,7 @@ class Table():
         """
         return self.data.shape[0]
 
+
     def get_categorical(self):
         """
         Gets the categorical columns from the given
@@ -70,6 +73,7 @@ class Table():
             if self.data[i].dtypes == 'object':
                 dataframe[i] = pd.Series(self.data[i])
         return dataframe
+
 
     def get_numerical(self):
         """
@@ -105,7 +109,9 @@ class Table():
         dataframe `self.data`
         returns: dataframe
         """
+        return self.data.iloc[:-2:2]
 
+    #def apply(self):
     def summary(self):
         """
         Return the dataframe descriptive statistics
@@ -123,8 +129,10 @@ class Table():
         returns: pandas.series, dict
         Usage:
         ======
-            >>> self.hot_encoder_categorical(col_name)
+            >>> df.hot_encoder_categorical(col_name)
         """
+        one_hot = pd.get_dummies(self.data[column])
+        return one_hot
 
     def convert_to_bin(self, column):
         """
@@ -147,12 +155,18 @@ class Table():
         :type       mode:  string
         :returns:   correlation matrix
         :rtype:     dataframe
-
         Usage:
         ======
             >>> df = Table('filename.csv')
             >>> df.correlation()
         """
+        if mode == "pearson":
+            pearsoncorr = self.data.corr(method='pearson')
+        elif mode == "kendall":
+            pearsoncorr = self.data.corr(method='kendall')
+        elif mode == "spearman":
+            pearsoncorr = self.data.corr(method='spearman')
+        return pearsoncorr
 
     def covariance(self):
         """
@@ -160,6 +174,7 @@ class Table():
         dataframe `self.data` and return dataframe with
         respective dataframe.
         Ref: https://www.theanalysisfactor.com/covariance-matrices/
+        returns :  dataframe
         returns :  dataframe
         Usage:
         ======
@@ -174,6 +189,9 @@ class Table():
         :param      columns:  list or tuple
         :type       columns:  { list of column name  }
         returns: dataframe of only given column names.
+        :param      columns:  list or tuple
+        :type       columns:  { list of column name  }
+        returns: dataframe of only given column names
         Usage:
         ======
             >>> df = Table('filename.csv')
@@ -211,7 +229,6 @@ class Table():
                 Chile  ->  South America
                 Brazil ->  South America
         Usage:
-        ======
             >>> df = Table('filename.csv')
             >>> df.binning('age', bins=[], labels=['low', 'med', 'high'])
             ------------------
@@ -228,27 +245,6 @@ class Table():
             |  14   | low
             ------------------
         """
-
-    def fix_outlier(self, column, mode):
-        """
-        Take the column from `self.data` and check for outlier
-        fix the outlier using mode : std_deviation, percentile, drop or cap
-        Ref: https://towardsdatascience.com/feature-engineering-for-machine-learning-3a5e293a5114
-        :param      column:  The column
-        :type       column:  { column name as string }
-        :param      mode:  mode like std_deviation, percentile, drop or cap
-        :type       column:  { string}
-        returns: dataframe without outlier
-        """
-        if mode == 'std_deviation':
-            Table.fix_outlier_with_std_deviation(self, column)
-        elif mode == 'percentile':
-            Table.fix_outlier_with_percentile(self, column)
-        elif mode == 'drop':
-            Table.drop_outlier(self, column)
-        elif mode == 'cap':
-            Table.fix_outlier_with_cap(self, column)
-        return self.data[column]
 
     def fix_outlier_with_std_deviation(self, column):
         """
@@ -273,91 +269,8 @@ class Table():
             if np.abs(z_score) > 3:
                 outliers.append(value)
         for i, _ in enumerate(self.data[column]):
-            if self.data[column[i]] in outliers:
-                self.data[column[i]] = std_dev
-        return self.data[column]
-
-    def fix_outlier_with_percentile(self, column):
-        """
-        Take the column from `self.data` and check for outlier
-        fix the outlier using mode : percentile
-        Ref: https://towardsdatascience.com/feature-engineering-for-machine-learning-3a5e293a5114
-        :param      column:  The column
-        :type       column:  { column name as string }
-        :param      mode:  mode like percentile
-        :type       column:  { string}
-        returns: dataframe without outlier
-        Usage:
-        ======
-            >>> df = Table('filename.csv')
-            >>> df.fix_outlier_with_percentile('age')
-        """
-        outliers = []
-        upper_limit = np.quantile(self.data[column], 0.95)
-        lower_limit = np.quantile(self.data[column], 0.05)
-        for value in self.data[column]:
-            if(value > upper_limit or value < lower_limit):
-                outliers.append(value)
-        for i, _ in enumerate(self.data[column]):
-            if self.data[column[i]] in outliers:
-                if self.data[column[i]] > upper_limit:
-                    self.data[column[i]] = upper_limit
-                else:
-                    self.data[column[i]] = lower_limit
-        return self.data[column]
-
-    def fix_outlier_with_cap(self, column):
-        """
-        Take the column from `self.data` and check for outlier
-        fix the outlier using mode : std deviation
-        Ref: https://towardsdatascience.com/feature-engineering-for-machine-learning-3a5e293a5114
-        :param      column:  The column
-        :type       column:  { column name as string }
-        :param      mode:  mode like std deviation
-        :type       column:  { string}
-        returns: dataframe without outlier
-        Usage:
-        ======
-            >>> df = Table('filename.csv')
-            >>> df.fix_outlier_with_std_deviation('age', 3)
-        """
-        outliers = []
-        mean = np.mean(self.data[column])
-        std_dev = np.std(self.data[column])
-        for value in self.data[column]:
-            z_score = (value - mean) / std_dev
-            if np.abs(z_score) > 3:
-                outliers.append(value)
-        for i, _ in enumerate(self.data[column]):
-            if self.data[column[i]] in outliers:
-                self.data[column[i]] = mean
-        return self.data[column]
-
-    def drop_outlier(self, column):
-        """
-        Take the column from `self.data` and check for outlier
-        fix the outlier using mode : drop
-        Ref: https://towardsdatascience.com/feature-engineering-for-machine-learning-3a5e293a5114
-        :param      column:  The column
-        :type       column:  { column name as string }
-        :param      mode:  mode like std deviation
-        :type       column:  { string}
-        returns: dataframe without outlier
-        Usage:
-        ======
-            >>> df = Table('filename.csv')
-            >>> df.fix_outlier_with_std_deviation('age', 3)
-        """
-        outlier = []
-        mean = np.mean(self.data[column])
-        std_dev = np.std(self.data[column])
-        for value in self.data[column]:
-            z_score = (value - mean) / std_dev
-            if np.abs(z_score) > 3:
-                outlier.append(value)
-        for i, _ in enumerate(self.data[column]):
-            if self.data[column[i]] in outlier:
-                self.data[column].remove(self.data[column[i]])
+            if i in outliers:
+                i.replace(std_dev, inplace=True)
         return self.data[column]
 
     def fix_missing(self, column):
@@ -380,13 +293,15 @@ class Table():
         :param      column:  The column
         :type       column:  { column name }
         :param      value:  The value by which NA will be replaced
-        :type       value:  { string, number, boolean}
+        :type       value:  { string, number, boolean }
         returns: dataframe | pandas.core.series
         Usage:
         ======
             >>> df = Table('filename.csv')
             >>> df.imputer('age', 10)
         """
+        self.data[column].fillna(value, inplace=True)
+        return self.data[column]
 
     def ignore_cardinal(self):
         """
@@ -398,6 +313,10 @@ class Table():
             >>> df = Table('filename.csv')
             >>> df.ignore_cardinal()
         """
+        for i in self.data:
+            if len(self.data[i]) == self.data[i].nunique(dropna=True):
+                self.data.drop(i, axis=1, inplace=True)
+        return self.data
 
     def encode_column(self, column):
         """
