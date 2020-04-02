@@ -144,6 +144,11 @@ class Table():
         ======
             >>> self.convert_to_bin(col_name)
         """
+<<<<<<< HEAD
+=======
+        pass
+
+>>>>>>> cc528505711829c4fb758e35aa4106601046fccd
 
     def correlation(self, mode="pearson"):
         """
@@ -245,6 +250,11 @@ class Table():
             |  14   | low
             ------------------
         """
+<<<<<<< HEAD
+=======
+        pass
+
+>>>>>>> cc528505711829c4fb758e35aa4106601046fccd
 
     def fix_outlier_with_std_deviation(self, column):
         """
