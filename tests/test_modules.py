@@ -170,7 +170,6 @@ def test_total_columns_three():
     data = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     assert data.total_columns() == 5
 
-
 def test_is_missing_1():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     check = Check()
@@ -238,6 +237,11 @@ def test_table_summary():
     df=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
     print(df.summary())
 
+def test_table_fix_outlier_with_std_deviation_1():
+    data = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    data3 = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_fix_outlier_with_std_deviation_1.csv'))
+    assert data.fix_outlier_with_std_deviation('crime').equals(data3['crime']) == True
+
 def test_correlation():
     df=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
     print(df.correlation())
@@ -266,6 +270,12 @@ def test_table_imputer_2():
     data1 = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_imputer2.csv'))
     assert data.imputer('density', 800).equals(data1['density']) == True
 
+
+def test_table_fix_outlier_with_std_deviation_1():
+    data = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    data1 = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_fix_outlier_with_std_deviation_1.csv'))
+    assert data.fix_outlier_with_std_deviation('crime').equals(data1['crime']) == True
+
 def test_table_fix_missing_1():
     data = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     data1 = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_fix_missing_1.csv'))
@@ -275,3 +285,4 @@ def test_table_fix_missing_2():
     data = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     data1 = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_fix_missing_2.csv'))
     assert data.fix_missing('density').equals(data1['density']) == True
+
