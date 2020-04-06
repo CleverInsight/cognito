@@ -270,7 +270,19 @@ def test_table_imputer_2():
     data1 = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_imputer2.csv'))
     assert data.imputer('density', 800).equals(data1['density']) == True
 
+
 def test_table_fix_outlier_with_std_deviation_1():
     data = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     data1 = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_fix_outlier_with_std_deviation_1.csv'))
     assert data.fix_outlier_with_std_deviation('crime').equals(data1['crime']) == True
+
+def test_table_fix_missing_1():
+    data = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    data1 = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_fix_missing_1.csv'))
+    assert data.fix_missing('population').equals(data1['population']) == True
+
+def test_table_fix_missing_2():
+    data = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    data1 = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_fix_missing_2.csv'))
+    assert data.fix_missing('density').equals(data1['density']) == True
+
