@@ -3,12 +3,16 @@
 '''
 Importing all the libraries needed
 '''
+import math
+from collections import Counter
 import pandas as pd
 import numpy as np
 from scipy.stats.stats import kendalltau
 from scipy.stats import pointbiserialr
 
-class Table():
+
+class Table:
+
     """
     Table takes a csv file as input and converts to
     a datframe to perform specific operations.
@@ -137,16 +141,36 @@ class Table():
 
 
     def convert_to_bin(self, column):
+
         """
         Returns the columns with more than 50% threshold to
         newly created bin pandas.series
         returns: pandas.series
         descriptions: list of newly created bin values
+
+
+        :param      column
+        :type       name of the column
+        
+        :returns:   list of generated bins
+        :rtype:     list
+
+
         Usage:
         ======
             >>> self.convert_to_bin(col_name)
         """
-        pass
+        length = len(self.data[column])
+        sqr = round(math.sqrt(length))
+        maximum = int(max(self.data[column]))
+        minimum = int(min(self.data[column]))
+        bin_size = round((maximum - minimum)/sqr)
+        quantity = round(maximum/bin_size)
+        
+        bins = []
+        for low in range(minimum-1, minimum + quantity * bin_size + 1, bin_size):
+            bins.append((low+1, low + bin_size))
+        print (bins)
 
 
     def correlation(self, mode="pearson"):
@@ -212,7 +236,9 @@ class Table():
         """
         pass
 
-    def binning(self, col, bins, labels):
+
+    def binning(self, column, bins):
+
         """
         Return dataframe of select column convert into bins as given
         parameter
@@ -220,15 +246,21 @@ class Table():
         :type       col:   { column name to be selected }
         :param      bins:  The bins
         :type       bins:  list of  of bins to convert
+
+
         :param      bins:  The bins
         :type       bins:  list of  of bins to convert
+
         returns: dataframe of given column as bins
         example:
             # Numerical Binning Example
-                Value      Bin
-                0-30   ->  Low
-                31-70  ->  Mid
-                71-100 ->  High
+
+                Value      Bin       
+                0-30   ->  (0-30)       
+                31-70  ->  (31-70)       
+                71-100 ->  (71-100)
+
+
             # Categorical Binning Example
                 Value      Bin
                 Spain  ->  Europe
@@ -252,7 +284,20 @@ class Table():
             |  14   | low
             ------------------
         """
-        pass
+
+        binned_weight = []
+        df= pd.DataFrame(columns = ['Value' , 'Bin'])
+
+
+        for val in self.data[column]:
+            for i in range(0,len(bins)):
+                if (bins[i][0] <= val < bins[i][1]):
+                    #print(val," in the bin", i,":", bins[i])
+                    df = df.append({'Value':val,'Bin':bins[i]}, ignore_index=True)
+                    binned_weight.append(i)
+    
+        freq = Counter(binned_weight)
+        return (df,freq)
 
 
 
@@ -303,7 +348,7 @@ class Table():
         if column in continuous:
             self.data[column].fillna(self.data[column].mean(), inplace=True)
         elif column in categorical:
-            self.data[column].fillna(self.data[column].mode(), inplace=True)
+            self.data[column].fillna(self.data[column].mode()[0], inplace=True)
         return self.data[column]
 
     def imputer(self, column, value):
@@ -339,6 +384,7 @@ class Table():
                 self.data.drop(i, axis=1, inplace=True)
         return self.data
 
+    
     def encode_column(self, column):
         """
         Encodes a column using the numerical values and
@@ -352,4 +398,17 @@ class Table():
             >>> df.encode_column('Country')
             >>> (dataframe, {'0': 'US', '1': 'India', '2': 'Europe'})
         """
+
+        pass
+
+
+
+
+    def scale(self):
+        
+        # TODO
+
+        # IMPORTANT function to be discussed
+
+        pass
 
