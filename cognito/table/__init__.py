@@ -5,7 +5,8 @@ import pandas as pd
 import numpy as np
 from scipy.stats.stats import kendalltau
 from scipy.stats import pointbiserialr
-
+import math
+from collections import Counter
 
 class Table:
     """
@@ -163,6 +164,7 @@ class Table:
 
 
     def convert_to_bin(self, column):
+
         """
         Returns the columns with more than 50% threshold to 
         newly created bin pandas.series
@@ -170,12 +172,29 @@ class Table:
         returns: pandas.series 
         descriptions: list of newly created bin values
 
+        :param      column
+        :type       name of the column
+        
+        :returns:   list of generated bins
+        :rtype:     list
+
         Usage:
         ======
             >>> self.convert_to_bin(col_name)
         """
-        pass
+        l = len(self.data[column])
+        sqr = round(math.sqrt(l))
+        maximum = int(max(self.data[column]))
+        minimum = int(min(self.data[column]))
+        bin_size = round((maximum - minimum)/sqr)
+        quantity = round(maximum/bin_size)
+        
+        bins = []
+        for low in range(minimum-1, minimum + quantity * bin_size + 1, bin_size):
+            bins.append((low+1, low + bin_size))
+        print (bins)
 
+       
     def correlation(self, mode="pearson"):
         """
         # TODO:
@@ -264,9 +283,7 @@ class Table:
 
         pass
 
-
-
-    def binning(self, col, bins, labels):
+    def binning(self, column, bins):
         """
         Return dataframe of select column convert into bins as given
         parameter
@@ -275,8 +292,7 @@ class Table:
         :type       col:   { column name to be selected }
         :param      bins:  The bins
         :type       bins:  list of  of bins to convert
-        :param      bins:  The bins
-        :type       bins:  list of  of bins to convert
+        
 
     
         returns: dataframe of given column as bins
@@ -284,9 +300,9 @@ class Table:
         example:
             # Numerical Binning Example
                 Value      Bin       
-                0-30   ->  Low       
-                31-70  ->  Mid       
-                71-100 ->  High
+                0-30   ->  (0-30)       
+                31-70  ->  (31-70)       
+                71-100 ->  (71-100)
 
             # Categorical Binning Example
                 Value      Bin       
@@ -320,11 +336,23 @@ class Table:
     
 
         """
-        # TODO:
 
-        pass
+        binned_weight = []
+        data = {}
+        df = pd.DataFrame(columns = ['Value' , 'Bin'])
 
-
+        for val in self.data[column]:
+            for i in range(0,len(bins)):
+                if (bins[i][0] <= val < bins[i][1]):
+                    #print(val," in the bin", i,":", bins[i])
+                    df = df.append({'Value':val,'Bin':bins[i]}, ignore_index=True)
+                    binned_weight.append(i)
+    
+        freq = Counter(binned_weight)
+        return (df,freq)
+    
+        
+       
     def fix_outlier(self, column, mode):
         """
         Take the column from `self.data` and check for outlier 
@@ -449,6 +477,4 @@ class Table:
         # IMPORTANT function to be discussed
 
         pass
-
-
 
