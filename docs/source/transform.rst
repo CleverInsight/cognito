@@ -20,8 +20,9 @@ remove_records
 remove_records removes the missing data from the given dataframe row wise.
 
 .. code-block:: python
+
 		>> Check.remove_records(data)
-    >> dataframe
+    	>> dataframe
 
 
 
@@ -32,7 +33,7 @@ remove_columns removes the missing data from the given dataframe column wise.
 .. code-block:: python
 		
 		>> Check.remove_columns(data)
-        >> dataframe
+    	>> dataframe
 
 
 
@@ -43,7 +44,7 @@ percentage_missing returns a dictionary containing percentage of missing data in
 .. code-block:: python
 		
 		>> Check.percentage_missing(data)
-        >> dictionary
+    	>> dictionary
 
 
 
@@ -54,7 +55,7 @@ replace_mean replaces the missing value by the mean of the column.
 .. code-block:: python
 		
 		>> Check.replace_mean(data)
-        >> series
+    	>> series
 
 
 
@@ -65,7 +66,7 @@ replace_median replaces the missing value by the median of the column.
 .. code-block:: python
 		
 		>> Check.replace_median(data)
-    >> series
+    	>> series
 
 
 

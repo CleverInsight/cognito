@@ -363,9 +363,6 @@ class Check():
                 return False
 
 
-
-
-
     @staticmethod
     def is_datetime(x):
         """

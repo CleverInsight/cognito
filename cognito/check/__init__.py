@@ -7,18 +7,18 @@ import os
 import sys
 import math
 import re
-import datefinder
 from datetime import datetime
 from os import path
 import pandas as pd
 import numpy as np
+import datefinder
 
 class Check():
     """
     Check class helps us to identify the types of
     variables categorical | Continuous | Discrete
     """
-    def __ini__(self):
+    def __init__(self):
         pass
 
     @staticmethod
@@ -95,6 +95,7 @@ class Check():
         except AttributeError:
 
             print("Method only supported pandas.cores.series")
+
 
     @staticmethod
     def is_identifier(column):
@@ -273,6 +274,7 @@ class Check():
         describe_encoding = pd.Series(column, index=encoded_col).to_dict()
         return encoded_col, describe_encoding
 
+
     @staticmethod
     def replace_mean(column):
         """
@@ -361,7 +363,7 @@ class Check():
                 return False
 
     @staticmethod
-    def is_datetime(datetime):
+    def is_datetime(date):
         """
         Determines whether the specified `x` is datetime.
 
@@ -377,10 +379,9 @@ class Check():
             >> False
 
         """
-
-        matches = datefinder.find_dates(x)
+        matches = datefinder.find_dates(date)
         for match in matches:
             if(match.hour > 0 and match.minute > 0 and match.second > 0):
                 return True
+
         return False
- 
