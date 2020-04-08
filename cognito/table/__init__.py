@@ -234,7 +234,8 @@ class Table:
               Jack  | 40
             ---------------
         """
-        pass
+        df = self.data[columns]
+        return df
 
 
     def binning(self, column, bins):
@@ -411,3 +412,6 @@ class Table:
         # IMPORTANT function to be discussed
 
         pass
+
+
+

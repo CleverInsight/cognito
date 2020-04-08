@@ -289,9 +289,29 @@ def test_table_fix_missing_2():
 
 '''
 def test_correlation():
-    data=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
-    assert_frame_equal(data.correlation()['population'], [])
+    data=Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_correlation.csv'))
+    assert data.correlation().equals(data2) == True
 '''
+
+def slice():
+    data=Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_slice.csv'))
+    assert data.slice(['population','density', 'crime']).equals(data2)==True
+
+def slice():
+    data=Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_slice.csv'))
+    assert data.slice(['Location','population']).equals(data2)==True
+
+def slice():
+    data=Table(os.path.join(os.path.dirname(__file__), 'data', 'student.csv'))
+    data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'student_slice.csv'))
+    assert data.slice(['Mjob','age']).equals(data2)==True
+
+
+
+
 
 
 def test_convert_to_bin():
@@ -301,18 +321,27 @@ def test_convert_to_bin():
 
 def test_convert_to_bin():
     data = Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
-    #data = Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
     assert data.convert_to_bin('bodywt') == [(0, 738), (739, 1477), (1478, 2216), (2217, 2955), (2956, 3694), (3695, 4433), (4434, 5172), (5173, 5911), (5912, 6650), (6651, 7389)]
 
 def test_convert_to_bin():
     data = Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
-    #data = Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
     assert data.convert_to_bin('sleep_total') == [(1, 2), (3, 4), (5, 6), (7, 8), (9, 10), (11, 12), (13, 14), (15, 16), (17, 18), (19, 20), (21, 22)]
 
 
-'''
+
 def binning():
     data = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
-    bins = bins = [(270, 1397), (1398, 2525), (2526, 3653), (3654, 4781), (4782, 5909), (5910, 7037), (7038, 8165), (8166, 9293), (9294, 10421), (10422, 11549), (11550, 12677)]
-    assert data.binning('population',bins) == 
-'''
+    data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_binning.csv'))
+    #bins = bins = [(270, 1397), (1398, 2525), (2526, 3653), (3654, 4781), (4782, 5909), (5910, 7037), (7038, 8165), (8166, 9293), (9294, 10421), (10422, 11549), (11550, 12677)]
+    assert data.binning(['population',bins]) == True
+
+def binning():
+    data = Table(os.path.join(os.path.dirname(__file__), 'data', 'student.csv'))
+    data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'student_binning.csv'))
+    assert data.binning(['age',bins]) == True
+
+def binning():
+    data = Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
+    data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot_binning.csv'))
+    assert data.binning(['bodywt',bins]) == True
+

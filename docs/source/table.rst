@@ -33,3 +33,12 @@ binning
 		>> table.binningn('column_name', bins)
 		>> dataframe
 
+
+slice
+^^^^^^
+
+.. code-block:: python
+
+		>> table = Table('filename.csv')
+		>> table.slice([column_names])
+		>> dataframe
