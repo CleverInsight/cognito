@@ -6,7 +6,6 @@ import pytest
 import pandas as pd
 import numpy as np
 from os import path 
-from pandas._testing import assert_frame_equal
 
 
 def test_is_working():
