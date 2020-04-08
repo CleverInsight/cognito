@@ -170,7 +170,7 @@ class Table:
         bins = []
         for low in range(minimum-1, minimum + quantity * bin_size + 1, bin_size):
             bins.append((low+1, low + bin_size))
-        print (bins)
+        return bins
 
 
     def correlation(self, mode="pearson"):
@@ -411,4 +411,3 @@ class Table:
         # IMPORTANT function to be discussed
 
         pass
-
