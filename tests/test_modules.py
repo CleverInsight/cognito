@@ -310,22 +310,14 @@ def slice():
 
 
 
-
-
-
 def test_convert_to_bin():
     data = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     assert data.convert_to_bin('population') == [(270, 1397), (1398, 2525), (2526, 3653), (3654, 4781), (4782, 5909), (5910, 7037), (7038, 8165), (8166, 9293), (9294, 10421), (10422, 11549), (11550, 12677)]
 
 
-def test_convert_to_bin():
+def test_convert_to_bin_1():
     data = Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
     assert data.convert_to_bin('bodywt') == [(0, 738), (739, 1477), (1478, 2216), (2217, 2955), (2956, 3694), (3695, 4433), (4434, 5172), (5173, 5911), (5912, 6650), (6651, 7389)]
-
-def test_convert_to_bin():
-    data = Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
-    assert data.convert_to_bin('sleep_total') == [(1, 2), (3, 4), (5, 6), (7, 8), (9, 10), (11, 12), (13, 14), (15, 16), (17, 18), (19, 20), (21, 22)]
-
 
 
 def binning():
