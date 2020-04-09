@@ -1,6 +1,8 @@
 cognito
 ======
-..image:: cognito.png
+.. image:: nstatic/logo.png
+    :target: http://cognito.readthedocs.org
+
 
 .. image:: https://travis-ci.org/CleverInsight/cognito.svg
    :target: https://travis-ci.org/CleverInsight/cognito
