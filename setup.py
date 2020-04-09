@@ -20,7 +20,8 @@ REQUIRES = [
     'PyYAML',
     'pyfiglet',
     'datefinder',
-    'PrettyTable'
+    'PrettyTable',
+    'scikit-learn'
 ]
 
 
