@@ -1,6 +1,6 @@
 cognito
 ======
-.. image:: ystatic/logo.png
+.. image:: https://cognito.readthedocs.io/en/latest/_images/logo.png
     :target: http://cognito.readthedocs.org
 
 
