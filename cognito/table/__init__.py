@@ -1,5 +1,8 @@
 #pylint: disable = E0202
 #pylint: disable = R0904
+#pylint: disable = C0200
+#pylint: disable = E0602
+#pylint: disable = C0103
 '''
 Importing all the libraries needed
 '''
@@ -8,18 +11,14 @@ import math
 from collections import Counter
 import pandas as pd
 import numpy as np
-#from cognito import *
 from scipy.stats.stats import kendalltau
 from scipy.stats import pointbiserialr
-
+from sklearn.preprocessing import LabelEncoder
 from sklearn import preprocessing
-from sklearn.preprocessing import LabelEncoder 
 from tqdm import tqdm
 
 
-
 class Table:
-
     """
     Table takes a csv file as input and converts to
     a datframe to perform specific operations.
@@ -27,12 +26,14 @@ class Table:
     def __init__(self, filename):
         self.data = pd.read_csv(filename)
 
+
     def data(self):
         """
         Returns the actual dataframe from taken
         form processing.
         """
         return self.data
+
 
     def columns(self):
         """
@@ -45,6 +46,7 @@ class Table:
         """
         return self.data.columns
 
+
     def total_columns(self):
         """
         Get the count of all column in the given
@@ -55,6 +57,7 @@ class Table:
             >>> data.total_columns()
         """
         return len(self.columns())
+
 
     def total_rows(self):
         """
@@ -115,6 +118,7 @@ class Table:
         """
         return self.data.iloc[1::2]
 
+
     def even_rows(self):
         """
         Get all even indexed counted rows from the given
@@ -123,7 +127,10 @@ class Table:
         """
         return self.data.iloc[:-2:2]
 
+
     #def apply(self):
+
+
     def summary(self):
         """
         Return the dataframe descriptive statistics
@@ -134,6 +141,7 @@ class Table:
             >>> df.summary()
         """
         return self.data.describe()
+
 
     def hot_encoder_categorical(self, column):
         """
@@ -148,21 +156,15 @@ class Table:
 
 
     def convert_to_bin(self, column):
-
         """
         Returns the columns with more than 50% threshold to
         newly created bin pandas.series
         returns: pandas.series
         descriptions: list of newly created bin values
-
-
         :param      column
         :type       name of the column
-        
         :returns:   list of generated bins
         :rtype:     list
-
-
         Usage:
         ======
             >>> self.convert_to_bin(col_name)
@@ -173,7 +175,6 @@ class Table:
         minimum = int(min(self.data[column]))
         bin_size = round((maximum - minimum)/sqr)
         quantity = round(maximum/bin_size)
-        
         bins = []
         for low in range(minimum-1, minimum + quantity * bin_size + 1, bin_size):
             bins.append((low+1, low + bin_size))
@@ -185,7 +186,6 @@ class Table:
         Return the pairwise correlation of the given
         dataframe `self.data` and return dataframe with
         respective dataframe.
-        
         :param      mode:  `Pearson`, `Kendall`, `Spearman`, `Point-Biserial`
         :type       mode:  string
         :returns:   correlation matrix
@@ -210,9 +210,7 @@ class Table:
         dataframe `self.data` and return dataframe with
         respective dataframe.
         Ref: https://www.theanalysisfactor.com/covariance-matrices/
-        
         returns :  dataframe
-       
         Usage:
         ======
             >>> df = Table('filename.csv')
@@ -220,6 +218,7 @@ class Table:
         """
         result = self.data.cov()
         return result
+
 
     def slice(self, columns):
         """
@@ -241,12 +240,10 @@ class Table:
               Jack  | 40
             ---------------
         """
-        df = self.data[columns]
-        return df
+        return self.data[columns]
 
 
     def binning(self, column, bins):
-
         """
         Return dataframe of select column convert into bins as given
         parameter
@@ -254,14 +251,15 @@ class Table:
         :type       col:   { column name to be selected }
         :param      bins:  The bins
         :type       bins:  list of  of bins to convert
-
+        :param      bins:  The bins
+        :type       bins:  list of  of bins to convert
         returns: dataframe of given column as bins
         example:
             # Numerical Binning Example
 
-                Value      Bin       
-                0-30   ->  (0-30)       
-                31-70  ->  (31-70)       
+                Value      Bin
+                0-30   ->  (0-30)
+                31-70  ->  (31-70)
                 71-100 ->  (71-100)
 
 
@@ -288,21 +286,15 @@ class Table:
             |  14   | low
             ------------------
         """
-
         binned_weight = []
-        df= pd.DataFrame(columns = ['Value' , 'Bin'])
-
-
+        data = pd.DataFrame(columns=['Value', 'Bin'])
         for val in self.data[column]:
-            for i in range(0,len(bins)):
-                if (bins[i][0] <= val < bins[i][1]):
-                    #print(val," in the bin", i,":", bins[i])
-                    df = df.append({'Value':val,'Bin':bins[i]}, ignore_index=True)
+            for i in range(0, len(bins)):
+                if bins[i][0] <= val < bins[i][1]:
+                    data = data.append({'Value':val, 'Bin':bins[i]}, ignore_index=True)
                     binned_weight.append(i)
-    
         freq = Counter(binned_weight)
-        return (df,freq)
-
+        return (data, freq)
 
 
     def fix_outlier_with_std_deviation(self, column):
@@ -313,7 +305,7 @@ class Table:
         :param      column:  The column
         :type       column:  { column name as string }
         :param      mode:  mode like std deviation
-        :type       column:  { string}
+        :type       column:  { string }
         returns: dataframe without outlier
         Usage:
         ======
@@ -354,6 +346,7 @@ class Table:
         elif column in categorical:
             self.data[column].fillna(self.data[column].mode()[0], inplace=True)
         return self.data[column]
+
 
     def imputer(self, column, value):
         """
@@ -403,16 +396,15 @@ class Table:
             >>> df.encode_column('Country')
             >>> (dataframe, {'0': 'US', '1': 'India', '2': 'Europe'})
         """
-        le = LabelEncoder() 
-        data = le.fit_transform(self.data[column])
-        return data, le 
+        encode = LabelEncoder()
+        data = encode.fit_transform(self.data[column])
+        return data, encode
 
 
     def list_cardinal(self):
         """
         Return the list of all cardinality columns from the given
         `self.data`
-        
         :returns:   { list of all cardinality values }
         :rtype:     { List }
         """
@@ -420,7 +412,9 @@ class Table:
 
 
     def generate(self):
-
+        """
+        No docstring for the time being
+        """
         cardinal_col = self.list_cardinal()
         categorical_col = list_diff(self.get_categorical().columns, cardinal_col)
         numerical_col = list_diff(self.get_numerical().columns, cardinal_col)
@@ -443,18 +437,13 @@ class Table:
 
 
     def scale(self, columns, mode='minmax'):
-
-
         """
-
-        Take a dataframe self.data and list of columns, scales the feature with distribution value 
+        Take a dataframe self.data and list of columns, scales the feature with distribution value
         between 0 and 1
-
         :param      column:  columns
         :type       column:  [list of colums to be scaled]
         :param      column:  mode
         :type       column:  mode for scaling  MinMax/std_dist
-
         returns: dataframe of columns after scaling
         Usage:
         ======
@@ -466,9 +455,7 @@ class Table:
         if mode == 'minmax':
             scaler = preprocessing.MinMaxScaler(feature_range=(0, 1))
             transformed_data = scaler.fit_transform(original_data)
-            return transformed_data
         elif mode == 'std_dist':
             scaler = preprocessing.StandardScaler()
             transformed_data = scaler.fit_transform(original_data)
-            return transformed_data
-
+        return transformed_data

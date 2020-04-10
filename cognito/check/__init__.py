@@ -35,7 +35,6 @@ class Check():
     def is_categorical(column):
         """
         Determines whether the specified col is categorical.
-
         :param      col:  column name
         :type       col:  { pandas.series | list | tuple }
         :return     boolean: True | False
@@ -49,9 +48,7 @@ class Check():
         """
         try:
             return bool(True) if column.dtypes == 'object' else bool(False)
-
         except AttributeError:
-
             print("Method only supported pandas.cores.series")
 
 
@@ -59,7 +56,6 @@ class Check():
     def is_continuous(column):
         """
         Determines whether the specified col is continuous.
-
         :param      col:  column name
         :type       col:  { pandas.series | list | tuple }
         :return     boolean: True | False
@@ -73,9 +69,7 @@ class Check():
         """
         try:
             return bool(True) if column.dtypes == 'float64' else bool(False)
-
         except AttributeError:
-
             print("Method only supported pandas.cores.series")
 
 
@@ -83,7 +77,6 @@ class Check():
     def is_discrete(column):
         """
         Determines whether the specified column is discrete.
-
         :param      column:  column name
         :type       column:  { pandas.series | list | tuple }
         :return     boolean: True | False
@@ -97,9 +90,7 @@ class Check():
         """
         try:
             return bool(True) if column.dtypes == 'int64' else bool(False)
-
         except AttributeError:
-
             print("Method only supported pandas.cores.series")
 
 
@@ -117,13 +108,10 @@ class Check():
         ======
             >> Check.is_identifier(data['Age'])
             >> True
-
         """
         try:
             return bool(True) if column.nunique() == column.shape[0] else bool(False)
-
         except AttributeError:
-
             print("Method only supported pandas.cores.series")
 
 
@@ -131,6 +119,7 @@ class Check():
     def is_missing(column):
         """
         Determines whether the specified column has missing values.
+
       
         :param      column:  The column
         :type       column:  { pandas.series | list | tuple }
@@ -142,13 +131,10 @@ class Check():
         ======
             >> Check.is_missing(data['population'])
             >> True
-
         """
         try:
             return bool(True) if column.isnull().values.any() == bool(True) else bool(False)
-
         except AttributeError:
-
             print("Method only supported pandas.cores.series")
 
 
@@ -156,7 +142,6 @@ class Check():
     def ignore_identifier(dataframe):
         """
         Drops the table if the column is an identifier.
-
         :param      column:  The column
         :type       column:  { pandas.series | list | tuple }
         :return     DataFrame:Updated DataFrame
@@ -302,10 +287,10 @@ class Check():
     def replace_mean(column):
         """
         Replaces the missing values of a column with its mean.
-
         :param       column:  The column
         :type        column:  { pandas.series | list | tuple }
         :return      column:  Updated column after replacing missing values with mean
+
 
         Weblink:https://towardsdatascience.com/how-to-handle-missing-data-8646b18db0d4
 
@@ -316,9 +301,7 @@ class Check():
         """
         try:
             return column.fillna(column.mean())
-
         except AttributeError:
-
             print("Method only supported pandas.cores.series")
 
 
@@ -326,7 +309,6 @@ class Check():
     def replace_mode(column):
         """
         Replaces the missing values of a column with its mode.
-
         :param       column:  The column
         :type        column:  { pandas.series | list | tuple }
         :return      column:  Updated column after replacing missing values with mean
@@ -340,9 +322,7 @@ class Check():
         """
         try:
             return column.fillna(column.mode()[0])
-
         except AttributeError:
-
             print("Method only supported pandas.cores.series")
 
 
@@ -350,7 +330,6 @@ class Check():
     def replace_median(column):
         """
         Replaces the missing values of a column with its median.
-
         :param       column:  The column
         :type        column:  { pandas.series | list | tuple }
         :return      column:  Updated column after replacing missing values with median
@@ -364,9 +343,7 @@ class Check():
         """
         try:
             return column.fillna(column.median())
-
         except AttributeError:
-
             print("Method only supported pandas.cores.series")
 
 
