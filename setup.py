@@ -12,9 +12,10 @@ with codecs_open('README.rst', encoding='utf-8') as f:
 
 REQUIRES = [
     'tqdm',
-    'numpy',  # REQ: vector algebra operations
+    'numpy',            # REQ: vector algebra operations
     'scipy',
     'numpy',
+    'sparx', 
     'click',            # REQ: command line interfacing
     'pandas',           # REQ: (conda) sparx.data.filter()
     'PyYAML',
@@ -26,7 +27,7 @@ REQUIRES = [
 
 
 CLASSIFIERS = [
-    'Development Status :: 0.0.1 - Beta',
+    'Development Status :: 0.0.1-alpha',
     'Environment :: Multiple',
     'Intended Audience :: Developers',
     'License :: OSI Approved :: MIT License',
@@ -45,11 +46,11 @@ CLASSIFIERS = [
 
 
 setup(name='cognito',
-      version='0.0.1',
+      version='0.0.1-alpha',
       description=u"Auto ML Dataset Transformer",
       long_description=LONG_DESCRIPTION,
       classifiers=CLASSIFIERS,
-      keywords='',
+      keywords=['Data Wrangler', 'Data Preprocessing', 'Machine Learning', 'Hot Encoder', 'Outlier Detection'],
       author=u"Bastin Robins .J",
       author_email='robin@cleverinsight.co',
       url='https://github.com/cleverinsight',

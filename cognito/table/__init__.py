@@ -15,6 +15,20 @@ from sklearn.preprocessing import LabelEncoder
 from tqdm import tqdm
 
 
+def list_diff(l1, l2):
+    """
+    Get the difference between two list `l1` and `l2`
+    
+    :param      l1:   The l 1
+    :type       l1:   { type_description }
+    :param      l2:   The l 2
+    :type       l2:   { type_description }
+    
+    :returns:   { description_of_the_return_value }
+    :rtype:     { return_type_description }
+    """
+    return (list(set(l1) - set(l2))) 
+
 class Table:
 
     """

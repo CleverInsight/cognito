@@ -23,4 +23,3 @@ Data Science Team
 * `Nibir Paul <https://github.com/nibir-paul>`__ <nibirpaul491@gmail.com>
 * `Rishika Kotta <https://github.com/RishikaKotta>`__ <rishikakotta21@gmail.com>
 * `Tanvi Rath <https://github.com/tanvirath>`__ <rath.t98@gmail.com>
-

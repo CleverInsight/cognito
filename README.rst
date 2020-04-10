@@ -1,7 +1,10 @@
-cognito
-======
 .. image:: https://cognito.readthedocs.io/en/latest/_images/logo.png
     :target: http://cognito.readthedocs.org
+
+cognito : powerful data wrangling toolkit
+==========================================
+
+
 
 
 .. image:: https://travis-ci.org/CleverInsight/cognito.svg
@@ -10,7 +13,7 @@ cognito
 .. image:: https://coveralls.io/repos/CleverInsight/cognito/badge.png
    :target: https://coveralls.io/r/CleverInsight/cognito
 
-Cognito is an exclusive data preprocessing library that involves transforming raw data into a machine-understandable format. We at CleverInsight Open Ai Foundation took the initiative to build a better automated data preprocessing library and here it is.
+Cognito is an exclusive python data preprocessing library and command line utility that helps any developer to transform raw data into a machine-learning format. We at CleverInsight Open Ai Foundation took the initiative to build a better automated data preprocessing library and here it is.
   
 
 Installation
