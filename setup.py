@@ -11,6 +11,7 @@ with codecs_open('README.rst', encoding='utf-8') as f:
 
 
 REQUIRES = [
+    'tqdm',
     'numpy',  # REQ: vector algebra operations
     'scipy',
     'numpy',
@@ -19,7 +20,8 @@ REQUIRES = [
     'PyYAML',
     'pyfiglet',
     'datefinder',
-    'PrettyTable'
+    'PrettyTable',
+    'scikit-learn'
 ]
 
 

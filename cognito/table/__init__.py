@@ -3,13 +3,19 @@
 '''
 Importing all the libraries needed
 '''
+import pickle
 import math
 from collections import Counter
 import pandas as pd
 import numpy as np
+#from cognito import *
 from scipy.stats.stats import kendalltau
 from scipy.stats import pointbiserialr
+
 from sklearn import preprocessing
+from sklearn.preprocessing import LabelEncoder 
+from tqdm import tqdm
+
 
 
 class Table:
@@ -204,14 +210,16 @@ class Table:
         dataframe `self.data` and return dataframe with
         respective dataframe.
         Ref: https://www.theanalysisfactor.com/covariance-matrices/
+        
         returns :  dataframe
        
         Usage:
         ======
             >>> df = Table('filename.csv')
-            >>> df.correlation()
+            >>> df.covariance()
         """
-        pass
+        result = self.data.cov()
+        return result
 
     def slice(self, columns):
         """
@@ -375,12 +383,13 @@ class Table:
             >>> df = Table('filename.csv')
             >>> df.ignore_cardinal()
         """
-        for i in self.data:
-            if len(self.data[i]) == self.data[i].nunique(dropna=True):
-                self.data.drop(i, axis=1, inplace=True)
-        return self.data
+        data = self.data.copy()
+        for i in data:
+            if len(data[i]) == data[i].nunique(dropna=True):
+                data.drop(i, axis=1, inplace=True)
+        return data
 
-    
+
     def encode_column(self, column):
         """
         Encodes a column using the numerical values and
@@ -394,13 +403,47 @@ class Table:
             >>> df.encode_column('Country')
             >>> (dataframe, {'0': 'US', '1': 'India', '2': 'Europe'})
         """
+        le = LabelEncoder() 
+        data = le.fit_transform(self.data[column])
+        return data, le 
 
-        pass
+
+    def list_cardinal(self):
+        """
+        Return the list of all cardinality columns from the given
+        `self.data`
+        
+        :returns:   { list of all cardinality values }
+        :rtype:     { List }
+        """
+        return [col for col in self.data if len(self.data[col]) == self.data[col].nunique()]
 
 
+    def generate(self):
+
+        cardinal_col = self.list_cardinal()
+        categorical_col = list_diff(self.get_categorical().columns, cardinal_col)
+        numerical_col = list_diff(self.get_numerical().columns, cardinal_col)
+
+        # Fix categorical and numerical columns
+        for col in tqdm(categorical_col + numerical_col, ascii=True, desc="Imputing missing : "):
+            self.fix_missing(col)
+
+        data = self.data.drop(cardinal_col, axis=1)
+
+        # Encode categorical variables
+        encoders = {}
+
+        for col in tqdm(categorical_col, ascii=True, desc="Encoding : "):
+            x, y = self.encode_column(col)
+            data[col] = x
+            encoders[col] = y
+
+        return data, encoders
 
 
     def scale(self, columns, mode='minmax'):
+
 
         """
 
@@ -428,3 +471,4 @@ class Table:
             scaler = preprocessing.StandardScaler()
             transformed_data = scaler.fit_transform(original_data)
             return transformed_data
+
