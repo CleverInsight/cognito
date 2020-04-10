@@ -35,11 +35,12 @@ class Check():
     def is_categorical(column):
         """
         Determines whether the specified col is categorical.
-
         :param      col:  column name
         :type       col:  { pandas.series | list | tuple }
         :return     boolean: True | False
-
+        
+        weblink:https://www.statisticshowto.com/probability-and-statistics/types-of-variables/
+        
         Usage:
         ======
             >> Check.is_categorical(data['Age'])
@@ -47,9 +48,7 @@ class Check():
         """
         try:
             return bool(True) if column.dtypes == 'object' else bool(False)
-
         except AttributeError:
-
             print("Method only supported pandas.cores.series")
 
 
@@ -57,11 +56,12 @@ class Check():
     def is_continuous(column):
         """
         Determines whether the specified col is continuous.
-
         :param      col:  column name
         :type       col:  { pandas.series | list | tuple }
         :return     boolean: True | False
-
+        
+        weblink:https://www.statisticshowto.com/probability-and-statistics/types-of-variables/
+        
         Usage:
         ======
             >> Check.is_continuous(data['Age'])
@@ -69,9 +69,7 @@ class Check():
         """
         try:
             return bool(True) if column.dtypes == 'float64' else bool(False)
-
         except AttributeError:
-
             print("Method only supported pandas.cores.series")
 
 
@@ -79,11 +77,12 @@ class Check():
     def is_discrete(column):
         """
         Determines whether the specified column is discrete.
-
         :param      column:  column name
         :type       column:  { pandas.series | list | tuple }
         :return     boolean: True | False
-
+        
+        weblink:https://www.statisticshowto.com/probability-and-statistics/types-of-variables/
+        
         Usage:
         ======
             >> Check.is_discrete(data['Age'])
@@ -91,9 +90,7 @@ class Check():
         """
         try:
             return bool(True) if column.dtypes == 'int64' else bool(False)
-
         except AttributeError:
-
             print("Method only supported pandas.cores.series")
 
 
@@ -101,22 +98,20 @@ class Check():
     def is_identifier(column):
         """
         Determines whether the specified column is identifier.
-
         :param      column:  The column
         :type       column:  { pandas.series | list | tuple }
         :return     boolean: True | False
+        
+        weblink:https://www.statisticshowto.com/probability-and-statistics/types-of-variables/
 
         Usage:
         ======
             >> Check.is_identifier(data['Age'])
             >> True
-
         """
         try:
             return bool(True) if column.nunique() == column.shape[0] else bool(False)
-
         except AttributeError:
-
             print("Method only supported pandas.cores.series")
 
 
@@ -125,21 +120,21 @@ class Check():
         """
         Determines whether the specified column has missing values.
 
+      
         :param      column:  The column
         :type       column:  { pandas.series | list | tuple }
         :return     boolean: True | False
-
+        
+        weblink:https://towardsdatascience.com/how-to-handle-missing-data-8646b18db0d4
+        
         Usage:
         ======
             >> Check.is_missing(data['population'])
             >> True
-
         """
         try:
             return bool(True) if column.isnull().values.any() == bool(True) else bool(False)
-
         except AttributeError:
-
             print("Method only supported pandas.cores.series")
 
 
@@ -147,11 +142,12 @@ class Check():
     def ignore_identifier(dataframe):
         """
         Drops the table if the column is an identifier.
-
         :param      column:  The column
         :type       column:  { pandas.series | list | tuple }
         :return     DataFrame:Updated DataFrame
-
+       
+        Weblink:https://towardsdatascience.com/how-to-handle-missing-data-8646b18db0d4
+       
         Usage:
         ======
             >> Check.ignore_identifier(data)
@@ -172,7 +168,9 @@ class Check():
         :param      column:   The column
         :type       column:   {pandas.series | list | tuple}
         :return     list:     List of all the ouliers in the column
-
+       
+        Weblink: https://towardsdatascience.com/how-to-handle-missing-data-8646b18db0d4
+       
         Usage:
         =====
            >> Check.is_outlier(data['population'])
@@ -197,7 +195,9 @@ class Check():
         :param       dataframe:  The dataframe
         :type        dataframe:  { pandas.dataframe }
         :return      dictionary:  Dictionary of column name with percentage of missing values
-
+       
+        Weblink: https://towardsdatascience.com/how-to-handle-missing-data-8646b18db0d4
+       
         Usage:
         ======
         >> Check.percentage_missing(data)
@@ -221,7 +221,9 @@ class Check():
         :param      dataframe:  The dataframe
         :type       dataframe:  { pandas.dataframe }
         :return     dataframe:  Dataframe with the columns dropped
-
+        
+        Weblink:https://towardsdatascience.com/how-to-handle-missing-data-8646b18db0d4
+        
         Usage:
         ======
         >>Check.remove_columns(data)
@@ -242,6 +244,8 @@ class Check():
         :param      dataframe:  The dataframe
         :type       dataframe:  { pandas.dataframe }
         :return     dataframe:  Dataframe with the rows dropped
+        
+        Weblink:https://towardsdatascience.com/how-to-handle-missing-data-8646b18db0d4
 
         Usage:
         ======
@@ -264,6 +268,10 @@ class Check():
         :param      col:  column name
         :type       col:  { pandas.series | list | tuple }
         :return     list: List of updated column and dict: dictionary of encoded values
+
+        web:https://towardsdatascience.com/how-to-handle-missing-data-8646b18db0d4
+
+
         Usage:
         ======
             >> Check.encoding_categorical(data['Age'])
@@ -279,10 +287,12 @@ class Check():
     def replace_mean(column):
         """
         Replaces the missing values of a column with its mean.
-
         :param       column:  The column
         :type        column:  { pandas.series | list | tuple }
         :return      column:  Updated column after replacing missing values with mean
+
+
+        Weblink:https://towardsdatascience.com/how-to-handle-missing-data-8646b18db0d4
 
         Usage:
         ======
@@ -291,9 +301,7 @@ class Check():
         """
         try:
             return column.fillna(column.mean())
-
         except AttributeError:
-
             print("Method only supported pandas.cores.series")
 
 
@@ -301,10 +309,11 @@ class Check():
     def replace_mode(column):
         """
         Replaces the missing values of a column with its mode.
-
         :param       column:  The column
         :type        column:  { pandas.series | list | tuple }
         :return      column:  Updated column after replacing missing values with mean
+
+        weblink:https://www.statisticshowto.com/probability-and-statistics/types-of-variables/
 
         Usage:
         ======
@@ -313,9 +322,7 @@ class Check():
         """
         try:
             return column.fillna(column.mode()[0])
-
         except AttributeError:
-
             print("Method only supported pandas.cores.series")
 
 
@@ -323,11 +330,12 @@ class Check():
     def replace_median(column):
         """
         Replaces the missing values of a column with its median.
-
         :param       column:  The column
         :type        column:  { pandas.series | list | tuple }
         :return      column:  Updated column after replacing missing values with median
 
+        weblink:https://www.statisticshowto.com/probability-and-statistics/types-of-variables/
+         
         Usage:
         ======
         >> Check.replace_median(data['population'])
@@ -335,9 +343,7 @@ class Check():
         """
         try:
             return column.fillna(column.median())
-
         except AttributeError:
-
             print("Method only supported pandas.cores.series")
 
 
@@ -349,6 +355,9 @@ class Check():
         :param      x:    string of date type
         :type       x:    string
         :returns    True | False
+
+        weblink:https://www.statisticshowto.com/probability-and-statistics/types-of-variables/
+        Weblink:
         Usage:
         ======
             >> Check.is_date("20-20-2020")
@@ -370,6 +379,8 @@ class Check():
         :param      x:    { parameter_description }
         :type       x:    { type_description }
         :returns    True | False
+
+        weblink:https://www.statisticshowto.com/probability-and-statistics/types-of-variables/
 
         Usage:
         ======
