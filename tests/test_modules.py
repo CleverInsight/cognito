@@ -336,3 +336,12 @@ def binning():
     data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot_binning.csv'))
     assert data.binning(['bodywt',bins]) == True
 
+def test_covariance():
+    data = Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
+    data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_covariance.csv'))
+    assert data.covariance() == True
+
+def test_covariance():
+    data = Table(os.path.join(os.path.dirname(__file__), 'data', 'student.csv'))
+    data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'student_covariance.csv'))
+    assert data.covariance() == True

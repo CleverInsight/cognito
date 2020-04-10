@@ -8,7 +8,7 @@ import math
 from collections import Counter
 import pandas as pd
 import numpy as np
-from cognito import *
+#from cognito import *
 from scipy.stats.stats import kendalltau
 from scipy.stats import pointbiserialr
 from sklearn.preprocessing import LabelEncoder 
@@ -207,14 +207,16 @@ class Table:
         dataframe `self.data` and return dataframe with
         respective dataframe.
         Ref: https://www.theanalysisfactor.com/covariance-matrices/
+        
         returns :  dataframe
         returns :  dataframe
         Usage:
         ======
             >>> df = Table('filename.csv')
-            >>> df.correlation()
+            >>> df.covariance()
         """
-        pass
+        result = self.data.cov()
+        return result
 
     def slice(self, columns):
         """
@@ -390,7 +392,7 @@ class Table:
                 data.drop(i, axis=1, inplace=True)
         return data
 
-    
+
     def encode_column(self, column):
         """
         Encodes a column using the numerical values and
@@ -418,7 +420,6 @@ class Table:
         :rtype:     { List }
         """
         return [col for col in self.data if len(self.data[col]) == self.data[col].nunique()]
-            
 
 
     def generate(self):
@@ -442,8 +443,6 @@ class Table:
             encoders[col] = y
 
         return data, encoders
-
-
 
 
     def scale(self):
