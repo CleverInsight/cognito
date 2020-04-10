@@ -38,6 +38,9 @@ class Check():
         :param      col:  column name
         :type       col:  { pandas.series | list | tuple }
         :return     boolean: True | False
+        
+        weblink:https://www.statisticshowto.com/probability-and-statistics/types-of-variables/
+        
         Usage:
         ======
             >> Check.is_categorical(data['Age'])
@@ -56,6 +59,9 @@ class Check():
         :param      col:  column name
         :type       col:  { pandas.series | list | tuple }
         :return     boolean: True | False
+        
+        weblink:https://www.statisticshowto.com/probability-and-statistics/types-of-variables/
+        
         Usage:
         ======
             >> Check.is_continuous(data['Age'])
@@ -74,6 +80,9 @@ class Check():
         :param      column:  column name
         :type       column:  { pandas.series | list | tuple }
         :return     boolean: True | False
+        
+        weblink:https://www.statisticshowto.com/probability-and-statistics/types-of-variables/
+        
         Usage:
         ======
             >> Check.is_discrete(data['Age'])
@@ -92,6 +101,9 @@ class Check():
         :param      column:  The column
         :type       column:  { pandas.series | list | tuple }
         :return     boolean: True | False
+        
+        weblink:https://www.statisticshowto.com/probability-and-statistics/types-of-variables/
+
         Usage:
         ======
             >> Check.is_identifier(data['Age'])
@@ -107,9 +119,14 @@ class Check():
     def is_missing(column):
         """
         Determines whether the specified column has missing values.
+
+      
         :param      column:  The column
         :type       column:  { pandas.series | list | tuple }
         :return     boolean: True | False
+        
+        weblink:https://towardsdatascience.com/how-to-handle-missing-data-8646b18db0d4
+        
         Usage:
         ======
             >> Check.is_missing(data['population'])
@@ -128,6 +145,9 @@ class Check():
         :param      column:  The column
         :type       column:  { pandas.series | list | tuple }
         :return     DataFrame:Updated DataFrame
+       
+        Weblink:https://towardsdatascience.com/how-to-handle-missing-data-8646b18db0d4
+       
         Usage:
         ======
             >> Check.ignore_identifier(data)
@@ -148,7 +168,9 @@ class Check():
         :param      column:   The column
         :type       column:   {pandas.series | list | tuple}
         :return     list:     List of all the ouliers in the column
-
+       
+        Weblink: https://towardsdatascience.com/how-to-handle-missing-data-8646b18db0d4
+       
         Usage:
         =====
            >> Check.is_outlier(data['population'])
@@ -173,7 +195,9 @@ class Check():
         :param       dataframe:  The dataframe
         :type        dataframe:  { pandas.dataframe }
         :return      dictionary:  Dictionary of column name with percentage of missing values
-
+       
+        Weblink: https://towardsdatascience.com/how-to-handle-missing-data-8646b18db0d4
+       
         Usage:
         ======
         >> Check.percentage_missing(data)
@@ -197,7 +221,9 @@ class Check():
         :param      dataframe:  The dataframe
         :type       dataframe:  { pandas.dataframe }
         :return     dataframe:  Dataframe with the columns dropped
-
+        
+        Weblink:https://towardsdatascience.com/how-to-handle-missing-data-8646b18db0d4
+        
         Usage:
         ======
         >>Check.remove_columns(data)
@@ -218,6 +244,8 @@ class Check():
         :param      dataframe:  The dataframe
         :type       dataframe:  { pandas.dataframe }
         :return     dataframe:  Dataframe with the rows dropped
+        
+        Weblink:https://towardsdatascience.com/how-to-handle-missing-data-8646b18db0d4
 
         Usage:
         ======
@@ -240,6 +268,10 @@ class Check():
         :param      col:  column name
         :type       col:  { pandas.series | list | tuple }
         :return     list: List of updated column and dict: dictionary of encoded values
+
+        web:https://towardsdatascience.com/how-to-handle-missing-data-8646b18db0d4
+
+
         Usage:
         ======
             >> Check.encoding_categorical(data['Age'])
@@ -258,6 +290,10 @@ class Check():
         :param       column:  The column
         :type        column:  { pandas.series | list | tuple }
         :return      column:  Updated column after replacing missing values with mean
+
+
+        Weblink:https://towardsdatascience.com/how-to-handle-missing-data-8646b18db0d4
+
         Usage:
         ======
         >> Check.replace_mean(data['population'])
@@ -276,6 +312,9 @@ class Check():
         :param       column:  The column
         :type        column:  { pandas.series | list | tuple }
         :return      column:  Updated column after replacing missing values with mean
+
+        weblink:https://www.statisticshowto.com/probability-and-statistics/types-of-variables/
+
         Usage:
         ======
         >> Check.replace_mode(data['population'])
@@ -294,6 +333,9 @@ class Check():
         :param       column:  The column
         :type        column:  { pandas.series | list | tuple }
         :return      column:  Updated column after replacing missing values with median
+
+        weblink:https://www.statisticshowto.com/probability-and-statistics/types-of-variables/
+         
         Usage:
         ======
         >> Check.replace_median(data['population'])
@@ -313,6 +355,9 @@ class Check():
         :param      x:    string of date type
         :type       x:    string
         :returns    True | False
+
+        weblink:https://www.statisticshowto.com/probability-and-statistics/types-of-variables/
+        Weblink:
         Usage:
         ======
             >> Check.is_date("20-20-2020")
@@ -334,6 +379,8 @@ class Check():
         :param      x:    { parameter_description }
         :type       x:    { type_description }
         :returns    True | False
+
+        weblink:https://www.statisticshowto.com/probability-and-statistics/types-of-variables/
 
         Usage:
         ======
