@@ -6,6 +6,7 @@ import pytest
 import pandas as pd
 import numpy as np
 from os import path 
+from sklearn import preprocessing
 
 
 def test_is_working():
@@ -166,8 +167,6 @@ def test_encoding_categorical_3():
     check = Check()
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'student.csv'))
     assert check.encoding_categorical(df['Mjob']) == ([0, 0, 0, 1, 2, 3, 2, 2], {0: 'at_home', 1: 'at_home', 2: 'at_home', 3: 'health'})
-
-
 
 def test_load_table():
     table = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
