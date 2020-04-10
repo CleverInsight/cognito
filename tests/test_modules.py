@@ -6,6 +6,7 @@ import pytest
 import pandas as pd
 import numpy as np
 from os import path 
+from sklearn import preprocessing
 
 
 def test_is_working():
@@ -293,17 +294,17 @@ def test_correlation():
     assert data.correlation().equals(data2) == True
 '''
 
-def slice():
+def test_slice_1():
     data=Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_slice.csv'))
     assert data.slice(['population','density', 'crime']).equals(data2)==True
 
-def slice():
+def test_slice_2():
     data=Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_slice.csv'))
     assert data.slice(['Location','population']).equals(data2)==True
 
-def slice():
+def test_slice_3():
     data=Table(os.path.join(os.path.dirname(__file__), 'data', 'student.csv'))
     data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'student_slice.csv'))
     assert data.slice(['Mjob','age']).equals(data2)==True
@@ -320,28 +321,42 @@ def slice():
 #     assert data.convert_to_bin('bodywt') == [(0, 738), (739, 1477), (1478, 2216), (2217, 2955), (2956, 3694), (3695, 4433), (4434, 5172), (5173, 5911), (5912, 6650), (6651, 7389)]
 
 
-def binning():
+def test_binning_1():
     data = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_binning.csv'))
-    #bins = bins = [(270, 1397), (1398, 2525), (2526, 3653), (3654, 4781), (4782, 5909), (5910, 7037), (7038, 8165), (8166, 9293), (9294, 10421), (10422, 11549), (11550, 12677)]
     assert data.binning(['population',bins]) == True
 
-def binning():
+def test_binning_2():
     data = Table(os.path.join(os.path.dirname(__file__), 'data', 'student.csv'))
     data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'student_binning.csv'))
     assert data.binning(['age',bins]) == True
 
-def binning():
+def test_binning_3():
     data = Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
     data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot_binning.csv'))
     assert data.binning(['bodywt',bins]) == True
 
-def test_covariance():
+def test_scale_1():
+    data = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_scale.csv'))
+    assert data.scale(['crime'],'minmax') == True
+
+def test_scale_2():
+    data = Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
+    data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot_scale.csv'))
+    assert data.scale(['sleep_total','awake'],'std_dist') == True
+
+def test_scale_3():
+    data = Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
+    data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot_scale.csv'))
+    assert data.scale(['brainwt'],'std_dist') == True
+
+def test_covariance_1():
     data = Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
     data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_covariance.csv'))
     assert data.covariance() == True
 
-def test_covariance():
+def test_covariance_2():
     data = Table(os.path.join(os.path.dirname(__file__), 'data', 'student.csv'))
     data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'student_covariance.csv'))
     assert data.covariance() == True

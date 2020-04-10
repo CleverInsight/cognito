@@ -43,12 +43,20 @@ slice
 		>> table.slice([column_names])
 		>> dataframe
 
+
+scale
+^^^^^^
+
 covariance
 ^^^^^^^^^^^
 
 .. code-block:: python
 
 		>> table = Table('filename.csv')
+
+		>> table.scale([column_names],mode)
+		>> dataframe
+
 		>> table.covariance()
 		>> dataframe
 

@@ -11,8 +11,11 @@ import numpy as np
 #from cognito import *
 from scipy.stats.stats import kendalltau
 from scipy.stats import pointbiserialr
+
+from sklearn import preprocessing
 from sklearn.preprocessing import LabelEncoder 
 from tqdm import tqdm
+
 
 
 class Table:
@@ -182,7 +185,7 @@ class Table:
         Return the pairwise correlation of the given
         dataframe `self.data` and return dataframe with
         respective dataframe.
-        Ref: http://www.real-statistics.com/statistics-tables/pearsons-correlation-table/
+        
         :param      mode:  `Pearson`, `Kendall`, `Spearman`, `Point-Biserial`
         :type       mode:  string
         :returns:   correlation matrix
@@ -209,7 +212,7 @@ class Table:
         Ref: https://www.theanalysisfactor.com/covariance-matrices/
         
         returns :  dataframe
-        returns :  dataframe
+       
         Usage:
         ======
             >>> df = Table('filename.csv')
@@ -223,11 +226,9 @@ class Table:
         Return only the columns sliced
         from `self.data` based on given `columns` parameter
         :param      columns:  list or tuple
-        :type       columns:  { list of column name  }
+        :type       columns:  { list of columns name  }
         returns: dataframe of only given column names.
-        :param      columns:  list or tuple
-        :type       columns:  { list of column name  }
-        returns: dataframe of only given column names
+
         Usage:
         ======
             >>> df = Table('filename.csv')
@@ -249,12 +250,8 @@ class Table:
         """
         Return dataframe of select column convert into bins as given
         parameter
-        :param      col:   The col
+        :param      col:   The column
         :type       col:   { column name to be selected }
-        :param      bins:  The bins
-        :type       bins:  list of  of bins to convert
-
-
         :param      bins:  The bins
         :type       bins:  list of  of bins to convert
 
@@ -445,10 +442,33 @@ class Table:
         return data, encoders
 
 
-    def scale(self):
-        
-        # TODO
+    def scale(self, columns, mode='minmax'):
 
-        # IMPORTANT function to be discussed
 
-        pass
+        """
+
+        Take a dataframe self.data and list of columns, scales the feature with distribution value 
+        between 0 and 1
+
+        :param      column:  columns
+        :type       column:  [list of colums to be scaled]
+        :param      column:  mode
+        :type       column:  mode for scaling  MinMax/std_dist
+
+        returns: dataframe of columns after scaling
+        Usage:
+        ======
+            >>> df = Table('filename.csv')
+            >>> df.scale(columns, mode)
+            >>> dataframe
+        """
+        original_data = self.slice(columns)
+        if mode == 'minmax':
+            scaler = preprocessing.MinMaxScaler(feature_range=(0, 1))
+            transformed_data = scaler.fit_transform(original_data)
+            return transformed_data
+        elif mode == 'std_dist':
+            scaler = preprocessing.StandardScaler()
+            transformed_data = scaler.fit_transform(original_data)
+            return transformed_data
+
