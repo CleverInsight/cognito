@@ -6,6 +6,7 @@ import pytest
 import pandas as pd
 import numpy as np
 from os import path 
+from sklearn import preprocessing
 
 
 def test_is_working():
@@ -331,7 +332,6 @@ def test_convert_to_bin():
 def binning():
     data = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_binning.csv'))
-    #bins = bins = [(270, 1397), (1398, 2525), (2526, 3653), (3654, 4781), (4782, 5909), (5910, 7037), (7038, 8165), (8166, 9293), (9294, 10421), (10422, 11549), (11550, 12677)]
     assert data.binning(['population',bins]) == True
 
 def binning():
@@ -344,3 +344,17 @@ def binning():
     data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot_binning.csv'))
     assert data.binning(['bodywt',bins]) == True
 
+def scale():
+    data = Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
+    data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'Freedman_scale.csv'))
+    assert data.scale(['crime'],'minmax') == True
+
+def scale():
+    data = Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
+    data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot_scale.csv'))
+    assert data.scale(['sleep_total','awake'],'std_dist') == True
+
+def scale():
+    data = Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
+    data2=Table(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot_scale.csv'))
+    assert data.scale(['brainwt'],'std_dist') == True
