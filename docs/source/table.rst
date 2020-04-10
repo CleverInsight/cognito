@@ -51,3 +51,6 @@ covariance
 		>> table = Table('filename.csv')
 		>> table.covariance()
 		>> dataframe
+
+
+		
