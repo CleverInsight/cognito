@@ -27,9 +27,10 @@ REQUIRES = [
 
 
 CLASSIFIERS = [
-    'Development Status :: 0.0.1-alpha',
-    'Environment :: Multiple',
+    'Development Status :: 0.0.1-alpha0',
+    'Environment :: Console',
     'Intended Audience :: Developers',
+    "Operating System :: OS Independent",
     'License :: OSI Approved :: MIT License',
     'Programming Language :: Python :: 2',
     'Programming Language :: Python :: 2.7',
@@ -42,11 +43,21 @@ CLASSIFIERS = [
     'Topic :: Internet :: WWW/HTTP',
     'Topic :: Software Development :: Libraries :: Python Modules',
     'Topic :: Utilities',
+    'Topic :: Scientific/Engineering'
+
 ]
 
 
+DOWNLOAD_URL = ""
+PROJECT_URLS = {
+    "Bug Tracker": "https://github.com/Cleverinsight/congito/issues",
+    "Documentation": "https://cognito.readthedocs.io/en/latest/",
+    "Source Code": "https://github.com/Cleverinsight/congito",
+}
+
+
 setup(name='cognito',
-      version='0.0.1-alpha',
+      version='0.0.1a0',
       description=u"Auto ML Dataset Transformer",
       long_description=LONG_DESCRIPTION,
       classifiers=CLASSIFIERS,
@@ -54,8 +65,9 @@ setup(name='cognito',
       author=u"Bastin Robins .J",
       author_email='robin@cleverinsight.co',
       url='https://github.com/cleverinsight',
-      download_url='https://github.com/CleverInsight/cognito/archive/v.0.0.1-alpha.tar.gz',
-      license='MIT',
+      download_url='https://github.com/CleverInsight/cognito/archive/v.0.0.1a0.tar.gz',
+      project_urls=PROJECT_URLS,
+      license='BSD',
       packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
       include_package_data=True,
       zip_safe=False,
