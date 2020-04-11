@@ -123,35 +123,17 @@ def test_is_outlier_6():
     x=pd.Series(samples)
     assert Check.is_outlier(x,5) == []
 
-def test_percentage_missing_1():
-    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
-    check=Check()
-    assert check.percentage_missing(df) == {'Location': 0.0, 'population': 9.09, 'nonwhite': 0.0, 'density': 9.09, 'crime': 0.0}
-
-def test_percentage_missing_2():
-    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
-    check=Check()
-    assert check.percentage_missing(df) == {'name': 0.0, 'genus': 0.0, 'vore': 8.43, 'order': 0.0, 'conservation': 34.94, 'sleep_total': 0.0, 'sleep_rem': 26.51, 'sleep_cycle': 61.45, 'awake': 0.0, 'brainwt': 32.53, 'bodywt': 0.0}
 
 def test_remove_columns_1():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     check = Check()
     assert list(check.remove_columns(df).columns) == ['Location', 'population', 'nonwhite', 'density', 'crime']
 
-def test_remove_columns_2():
-    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
-    check = Check()
-    assert list(check.remove_columns(df).columns) == ['name', 'genus', 'vore', 'order', 'conservation', 'sleep_total', 'sleep_rem', 'awake', 'brainwt', 'bodywt']
-
 def test_remove_records_1():
     df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'Freedman.csv'))
     check = Check()
     assert len(check.remove_records(df)) == 110
 
-def test_remove_records_2():
-    df = pd.read_csv(os.path.join(os.path.dirname(__file__), 'data', 'msleep_ggplot.csv'))
-    check = Check()
-    assert len(check.remove_records(df)) == 61
 
 def test_encoding_categorical_1():
     check = Check()

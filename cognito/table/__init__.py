@@ -187,10 +187,10 @@ class Table:
         sqr = round(math.sqrt(length))
         maximum = int(max(self.data[column]))
         minimum = int(min(self.data[column]))
-        bin_size = round((maximum - minimum)/sqr)
+        bin_size = int(round((maximum - minimum) / sqr))
         quantity = round(maximum/bin_size)
         bins = []
-        for low in range(minimum-1, minimum + quantity * bin_size + 1, bin_size):
+        for low in range(int(minimum - 1), int(minimum + quantity * bin_size + 1), bin_size):
             bins.append((low+1, low + bin_size))
         return bins
 
