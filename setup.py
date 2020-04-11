@@ -27,7 +27,7 @@ REQUIRES = [
 
 
 CLASSIFIERS = [
-    'Development Status :: 0.0.1-alpha0',
+    'Development Status :: 3 - Alpha',
     'Environment :: Console',
     'Intended Audience :: Developers',
     "Operating System :: OS Independent",
