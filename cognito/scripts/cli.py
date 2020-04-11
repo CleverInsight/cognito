@@ -31,7 +31,7 @@ def cli(version):
         and data wrangling.        
 
         USAGE: \n
-        $ cognito transform --input filepath --out filepath 
+        $ cognito prepare -m ml --input filepath --out filepath 
 
 
     '''
