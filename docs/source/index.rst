@@ -1,12 +1,6 @@
-Cognito documentation!
-===================================
-
 .. image:: ystatic/logo.png
     :target: http://cognito.readthedocs.org
     :width: 200pt
-
-
-
 
 .. |pypi| image:: https://img.shields.io/pypi/v/cognito.svg?logo=python&logoColor=white
    :target: https://pypi.org/project/cognito/
@@ -60,7 +54,7 @@ Cognito is an exclusive data preprocessing library that involves transforming ra
 Collaborators 
 ==============
 
-.. image:: ystatic/christ_lavasa.png
+.. image:: ystatic/christ_lavasa.jpg
    :width: 150pt
    :align: left
    :target: https://lavasa.christuniversity.in/
