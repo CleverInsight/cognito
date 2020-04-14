@@ -54,3 +54,21 @@ Data Science Team
 * `Nibir Paul <https://github.com/nibir-paul>`__ <nibirpaul491@gmail.com>
 * `Rishika Kotta <https://github.com/RishikaKotta>`__ <rishikakotta21@gmail.com>
 * `Tanvi Rath <https://github.com/tanvirath>`__ <rath.t98@gmail.com>
+
+Collaborators 
+==============
+
+.. image:: https://cognito.readthedocs.io/en/latest/_images/christ_lavasa.png
+   :width: 150pt
+   :align: left
+   :target: https://lavasa.christuniversity.in/
+
+.. raw:: html
+   
+
+`CHRIST (Deemed to be University) Lavasa <https://lavasa.christuniversity.in/>`_ provides developer & mentor contribution via CleverInsight Open AI Foundation Incubation Center at Christ Univeristy Lavasa since 2019.
+   
+ 
+.. raw:: html
+
+   <hr>
