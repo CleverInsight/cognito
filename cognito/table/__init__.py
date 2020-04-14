@@ -162,6 +162,8 @@ class Table:
         :returns:   list of generated bins
         :rtype:     list
 
+        Weblink: https://www.geeksforgeeks.org/binning-in-data-mining/
+
 
         Usage:
         ======
@@ -190,6 +192,9 @@ class Table:
         :type       mode:  string
         :returns:   correlation matrix
         :rtype:     dataframe
+
+        Weblink: https://www.geeksforgeeks.org/mathematics-covariance-and-correlation/
+
         Usage:
         ======
             >>> df = Table('filename.csv')
@@ -209,7 +214,7 @@ class Table:
         Return the covariance of the given
         dataframe `self.data` and return dataframe with
         respective dataframe.
-        Ref: https://www.theanalysisfactor.com/covariance-matrices/
+        Weblink: https://www.geeksforgeeks.org/mathematics-covariance-and-correlation/
         
         returns :  dataframe
        
@@ -228,6 +233,8 @@ class Table:
         :param      columns:  list or tuple
         :type       columns:  { list of columns name  }
         returns: dataframe of only given column names.
+
+        weblink:https://www.geeksforgeeks.org/python-slice-function/
 
         Usage:
         ======
@@ -254,6 +261,8 @@ class Table:
         :type       col:   { column name to be selected }
         :param      bins:  The bins
         :type       bins:  list of  of bins to convert
+
+        weblink: https://www.geeksforgeeks.org/binning-in-data-mining/
 
         returns: dataframe of given column as bins
         example:
@@ -315,6 +324,9 @@ class Table:
         :param      mode:  mode like std deviation
         :type       column:  { string}
         returns: dataframe without outlier
+
+        Weblink: https://www.kdnuggets.com/2017/02/removing-outliers-standard-deviation-python.html
+
         Usage:
         ======
             >>> df = Table('filename.csv')
@@ -341,6 +353,9 @@ class Table:
         :param      column:  The column
         :type       column:  { column name }
         returns: dataframe | pandas.core.series
+
+        Weblink: https://www.geeksforgeeks.org/working-with-missing-data-in-pandas/
+
         Usage:
         ======
             >>> df = Table('filename.csv')
@@ -364,6 +379,9 @@ class Table:
         :param      value:  The value by which NA will be replaced
         :type       value:  { string, number, boolean }
         returns: dataframe | pandas.core.series
+
+        Weblink: https://www.geeksforgeeks.org/working-with-missing-data-in-pandas/
+
         Usage:
         ======
             >>> df = Table('filename.csv')
@@ -378,6 +396,9 @@ class Table:
         Take the dataframe `self.data` and remove all cardinality columns
         and return the dataframe
         returns: dataframe without cardinality columns
+
+        Weblink:https://www.geeksforgeeks.org/python-named-entity-recognition-ner-using-spacy/
+
         Usage:
         ======
             >>> df = Table('filename.csv')
@@ -397,6 +418,9 @@ class Table:
         :param      column:  The column
         :type       column:  { column name }
         returns: dataframe, mapper dictionary
+
+        Weblink: https://www.geeksforgeeks.org/ml-label-encoding-of-datasets-in-python/
+
         Usage:
         ======
             >>> df = Table('filename.csv')
@@ -456,6 +480,9 @@ class Table:
         :type       column:  mode for scaling  MinMax/std_dist
 
         returns: dataframe of columns after scaling
+
+        Weblink: https://www.geeksforgeeks.org/scales-of-measurement/
+
         Usage:
         ======
             >>> df = Table('filename.csv')
