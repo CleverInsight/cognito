@@ -1,14 +1,18 @@
 # cognito
 from __future__ import print_function
-import os
+import os, glob
 import sys
 import math
 import re
+import click
+import pickle
 from datetime import datetime
 from os import path
 import pandas as pd
 import numpy as np
 import datefinder
+from cognito.table import Table
+from tqdm import tqdm
 
 
 def is_working(column="Cognito!"):
@@ -373,3 +377,90 @@ def list_diff(l1, l2):
 	:rtype:     { return_type_description }
 	"""
 	return (list(set(l1) - set(l2))) 
+
+
+def get_all_files():
+    files = [f for f in os.listdir('.') if os.path.isfile(f)]
+    return files
+
+
+def save_to(path, df, encoder):
+    """
+    Save the encoded dataframe to csv file and 
+    picle file.
+    
+    :param      path:     The path
+    :type       path:     { type_description }
+    :param      df:       { parameter_description }
+    :type       df:       { type_description }
+    :param      encoder:  The encoder
+    :type       encoder:  { type_description }
+    """
+    filename = os.path.basename(path)
+
+    if '.' in filename:
+        fname, ext = filename.split('.')
+    else:
+        fname = filename
+
+    path = os.path.dirname(path)
+    save_path = os.path.join(path, fname)
+
+    # make directory
+    try:
+        os.mkdir(save_path)
+
+        #filenames
+        pkl_file = os.path.join(save_path, filename + '.pkl')
+
+        if '.csv' not in filename:
+            filename = filename + '.csv'    
+
+        df_file = os.path.join(save_path, filename)
+
+        df.to_csv(df_file, index=False)
+        f = open(pkl_file, "wb")
+        pickle.dump(encoder, f)
+        f.close()
+        return df
+
+    except Exception as e:
+
+        click.echo(
+            click.style(
+                "Abort: The {} file already exists.", fg="red"
+            ).format(os.path.join(save_path, filename)), err=True)
+
+
+
+def inverse_transform():
+
+    pickles = glob.glob("*.pkl")
+    datasets = glob.glob("*.csv")
+
+    if len(pickles) > 0 and len(datasets) > 0:
+        
+        # pick the first pickle 
+        first_pickle = pickles.pop(0)
+
+        # Get the file related the given pickle
+        fname, ext = first_pickle.split('.')
+
+        # Grab the encoder from pickle
+        encoder = pickle.load(open(first_pickle, 'rb'))
+
+        # # Load the given dataset into memory
+        df = Table(fname + '.csv')
+
+        columns = encoder.keys()
+
+        for col in tqdm(columns, ascii=True, desc="Decoding all : "):
+
+            # Pick the encoder
+            le = encoder[col]
+            df.data[col] = le.inverse_transform(df.data[col])
+
+        df.data.to_csv(fname + str(datetime.now()) + '.csv', index=False)
+            
+    else:
+        click.echo('No cognito decoded files found')
