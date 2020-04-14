@@ -3,6 +3,7 @@ Cognito documentation!
 
 .. image:: ystatic/logo.png
     :target: http://cognito.readthedocs.org
+    :width: 200pt
 
 
 

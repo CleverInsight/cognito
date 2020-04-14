@@ -1,5 +1,6 @@
 .. image:: https://cognito.readthedocs.io/en/latest/_images/logo.png
     :target: http://cognito.readthedocs.org
+    :width: 200pt
 
 cognito : powerful data wrangling toolkit
 ==========================================
