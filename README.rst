@@ -104,7 +104,7 @@ Data Science Team
 Collaborators 
 ==============
 
-.. image:: https://cognito.readthedocs.io/en/latest/_images/christ_lavasa.png
+.. image:: https://github.com/CleverInsight/cognito/raw/master/docs/source/ystatic/christ_lavasa.jpg
    :width: 150pt
    :align: left
    :target: https://lavasa.christuniversity.in/
