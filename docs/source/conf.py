@@ -24,6 +24,7 @@ import sphinx_rtd_theme
 
 extensions = [
     "sphinx_rtd_theme",
+    "sphinx_gallery.gen_gallery"
 ]
 
 # -- General configuration ------------------------------------------------
