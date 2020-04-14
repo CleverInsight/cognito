@@ -6,13 +6,58 @@ cognito : powerful data wrangling toolkit
 ==========================================
 
 
-
-
 .. image:: https://travis-ci.org/CleverInsight/cognito.svg
    :target: https://travis-ci.org/CleverInsight/cognito
 
 .. image:: https://coveralls.io/repos/CleverInsight/cognito/badge.png
    :target: https://coveralls.io/r/CleverInsight/cognito
+
+
+
+.. |pypi| image:: https://img.shields.io/pypi/v/cognito.svg?logo=python&logoColor=white
+  :target: https://pypi.org/project/cognito/
+
+.. |conda| image:: https://img.shields.io/conda/vn/bastinrobin/cognito.svg?logo=conda-forge&logoColor=white
+  :target: https://anaconda.org/bastinrobin/cognito
+
+.. |travis| image:: https://travis-ci.org/CleverInsight/cognito.svg
+  :target: https://travis-ci.org/CleverInsight/cognito
+
+.. |coverall| image:: https://coveralls.io/repos/CleverInsight/cognito/badge.png
+  :target: https://coveralls.io/r/CleverInsight/cognito
+
+.. |contributors| image:: https://img.shields.io/github/contributors/Cleverinsight/cognito.svg?logo=github&logoColor=white
+  :target: https://github.com/Cleverinsight/cognito/graphs/contributors/
+
+.. |stars| image:: https://img.shields.io/github/stars/Cleverinsight/cognito.svg?style=social&label=Stars
+  :target: https://github.com/Cleverinsight/cognito
+  :alt: GitHub
+
+.. |BSD| image:: https://img.shields.io/badge/License-BSD-yellow.svg
+  :target: https://github.com/CleverInsight/cognito/blob/master/LICENSE
+
+.. |IEEE| image:: https://img.shields.io/badge/License-BSD-yellow.svg
+  :target: https://ieeexplore.ieee.org/document/9033938
+
+
+.. |gitter| image:: https://img.shields.io/gitter/room/cognito-dev/community?color=darkviolet
+  :target: https://gitter.im/cognito-dev/community
+
+
++----------------------+------------------------+
+| Deployment           | |pypi| |conda|         |
++----------------------+------------------------+
+| Build Status         | |travis|               |
++----------------------+------------------------+
+| Metrics              | |coverall|             |
++----------------------+------------------------+
+| GitHub               | |contributors| |stars| |
++----------------------+------------------------+
+| License              | |BSD|                  |
++----------------------+------------------------+
+| Community            | |gitter|               |
++----------------------+------------------------+
+
 
 Cognito is an exclusive python data preprocessing library and command line utility that helps any developer to transform raw data into a machine-learning format. We at CleverInsight Open Ai Foundation took the initiative to build a better automated data preprocessing library and here it is.
   

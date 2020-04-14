@@ -11,8 +11,8 @@ Cognito documentation!
 .. |pypi| image:: https://img.shields.io/pypi/v/cognito.svg?logo=python&logoColor=white
    :target: https://pypi.org/project/cognito/
 
-.. |conda| image:: https://img.shields.io/conda/vn/conda-forge/cognito.svg?logo=conda-forge&logoColor=white
-   :target: https://anaconda.org/conda-forge/cognito
+.. |conda| image:: https://img.shields.io/conda/vn/bastinrobin/cognito.svg?logo=conda-forge&logoColor=white
+   :target: https://anaconda.org/bastinrobin/cognito
 
 .. |travis| image:: https://travis-ci.org/CleverInsight/cognito.svg
    :target: https://travis-ci.org/CleverInsight/cognito
