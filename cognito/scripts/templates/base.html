@@ -1,0 +1,68 @@
+
+{% from datetime import datetime %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cognito Report | {{ datetime.now().strftime("%d-%B-%Y-%H:%M:%s") }}</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <!-- Bulma Version 0.8.x-->
+    <link rel="stylesheet" href="https://unpkg.com/bulma@0.8.0/css/bulma.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bulma-tooltip@3.0.2/dist/css/bulma-tooltip.min.css">
+</head>
+
+<body>
+  <div id="app">
+    <nav class="navbar has-shadow">
+        <div class="container">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="https://cognito.readthedocs.io/en/latest/">
+                    <img src="https://cognito.readthedocs.io/en/latest/_images/logo.png" alt="Cognito - Toolkit for Data Scientists">
+                </a>
+
+                <div class="navbar-burger burger" data-target="navMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+    			  <div class="navbar-end">
+            <button class="button is-success is-small rounded" onclick="window.print()">
+               Generate PDF
+            </button>
+           
+           </div>
+    	  </div>
+    </div>   
+   </div>
+    </nav>
+    <div class="columns" style="margin-top: 30px;">
+      <div class="column">
+    
+          {% block content %}
+          {% end %}
+      </div>
+    </div>
+    {% block extra %}{% end %}
+    <footer class="footer">
+        <div class="container">
+            <div class="content has-text-centered">
+                <p>
+                    <strong>Generated</strong> by <a href="http://cognito.readthedocs.io/"><img src="https://cognito.readthedocs.io/en/latest/_images/logo.png" width="60px" /></a>. Licensed Under
+                    <a href="https://cognito.readthedocs.io/en/latest/license.html">BSD</a>.
+                </p>
+                
+            </div>
+        </div>
+    </footer>
+  </div>
+</body>
+<script type="text/javascript" src="https://twitter.github.io/typeahead.js/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="https://underscorejs.org/underscore-min.js"></script>
+<script type="text/javascript" src="https://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
+{% block script %}{% end %}
+</html>

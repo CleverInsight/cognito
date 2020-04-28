@@ -473,3 +473,13 @@ class Table:
             scaler = preprocessing.StandardScaler()
             transformed_data = scaler.fit_transform(original_data)
         return transformed_data
+
+
+    def categorical_columns(self):
+        """
+        Get only the categorical columns
+        
+        :returns:   { description_of_the_return_value }
+        :rtype:     { return_type_description }
+        """
+        return self.get_categorical().columns

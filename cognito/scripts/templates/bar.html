@@ -1,0 +1,27 @@
+{% from math import log %}
+
+<div class="bar">
+  <table>
+    <thead>
+      {% for col in story['misc'].columns %}
+        <th>{{ col }}</th>
+      {% end %}
+    </thead>
+    <tbody>
+      
+      {% for i, row in story['misc'].head(5).iterrows() %}
+        <tr>
+          <td>{{ row[story['misc'].columns[0]] }}</td>
+          {% if row[story['misc'].columns[1]] > 0 %}
+            {% set width=log(row[story['misc'].columns[1]]) * 5 %}
+          {% else %}
+            {% set width=row[story['misc'].columns[1]] %}
+          {% end %}
+          <td>
+            <div data-tooltip="{{  story['misc'].columns[1] }} : {{ round(row[story['misc'].columns[1]], 2) }}" class="first" style="width: {{ width }}px; height:20px; font-size: 12px; background-color: #ffc107 !important; margin:2px 0px; color:#000 !important">{{ round(row[story['misc'].columns[1]], 2) }}</div>
+          </td>
+        </tr>
+      {% end %}
+    </tbody>
+  </table>
+</div>

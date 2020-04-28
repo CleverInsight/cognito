@@ -15,19 +15,20 @@ REQUIRES = [
     'numpy',            # REQ: vector algebra operations
     'scipy',
     'numpy',
-    'sparx', 
     'click',            # REQ: command line interfacing
     'pandas',           # REQ: (conda) sparx.data.filter()
-    'PyYAML',
-    'pyfiglet',
-    'datefinder',
+    'tornado',          # REQ: report generation engine
+    'PyYAML',           # REQ: configuration management
+    'pyfiglet',         # REQ: better cli interface  
+    'datefinder',     
     'PrettyTable',
+    'sparklines',
     'scikit-learn'
 ]
 
 
 CLASSIFIERS = [
-    'Development Status :: 3 - Alpha',
+    'Development Status :: 3 - Beta',
     'Environment :: Console',
     'Intended Audience :: Developers',
     "Operating System :: OS Independent",
@@ -57,15 +58,16 @@ PROJECT_URLS = {
 
 
 setup(name='cognito',
-      version='0.0.1a0',
-      description=u"Auto ML Dataset Transformer",
+      version='0.0.1b',
+      description=u"Auto ML Dataset Transformer & Auto Data Storyteller",
       long_description=LONG_DESCRIPTION,
       classifiers=CLASSIFIERS,
-      keywords=['Data Wrangler', 'Data Preprocessing', 'Machine Learning', 'Hot Encoder', 'Outlier Detection'],
+      keywords=['Automated Data Storyteller', 'Data Wrangler', 'Data Preprocessing',\
+       'Machine Learning', 'Hot Encoder', 'Outlier Detection'],
       author=u"Bastin Robins .J",
       author_email='robin@cleverinsight.co',
       url='https://github.com/cleverinsight',
-      download_url='https://github.com/CleverInsight/cognito/archive/v.0.0.1a0.tar.gz',
+      download_url='https://github.com/CleverInsight/cognito/releases',
       project_urls=PROJECT_URLS,
       license='BSD',
       packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),

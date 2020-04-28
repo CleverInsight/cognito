@@ -1,0 +1,236 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style type="text/css">
+  .typeahead, .tt-query, .tt-hint {width: 396px; height: 30px; padding: 8px 12px; font-size: 24px; line-height: 30px; border: 2px solid #ccc; -webkit-border-radius: 8px; -moz-border-radius: 8px; border-radius: 8px; outline: none; } .typeahead {background-color: #fff; } .typeahead:focus {border: 2px solid #0097cf; } .tt-query {-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); } .tt-hint {color: #999 } .tt-menu {width: 600px; margin: 12px 0; padding: 8px 0; background-color: #fff; border: 1px solid #ccc; border: 1px solid rgba(0, 0, 0, 0.2); -webkit-border-radius: 8px; -moz-border-radius: 8px; border-radius: 8px; -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2); -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2); box-shadow: 0 5px 10px rgba(0,0,0,.2); } .tt-suggestion {padding: 3px 20px; font-size: 18px; line-height: 24px; } .tt-suggestion:hover {cursor: pointer; color: #fff; background-color: #0097cf; } .tt-suggestion.tt-cursor {color: #fff; background-color: #0097cf; } .tt-suggestion p {margin: 0; } 
+
+    .listen { display: none; }
+
+  @media print {
+      div.do-not-print {display: none;}
+  }
+
+</style>
+<div class="card column is-half">
+  <header class="card-header">
+    <p class="card-header-title">
+      Data Meta Summary
+    </p>
+  </header>
+  <div class="card-content">
+  {% raw description_summary %}
+  </div>
+</div>
+<div class="card">
+  <header class="card-header">
+    <p class="card-header-title">
+      Descriptive Summary
+    </p>
+   
+  </header>
+  <div class="card-content">
+  {% raw report_html %}
+  </div>
+</div>
+{% end %}
+
+{% block extra %}
+<div class="card column is-half is-offset-one-quarter do-not-print" style="margin-top: 20px;">
+  <h3>Analytical Search Engine</h3>
+  <div id="bloodhound">
+    <input class="typeahead" type="text" placeholder="Ask your question" style="width: 608px;height: 50px;">
+    <img style="position: absolute;" onclick="startDictation()" src="https://i.imgur.com/cHidSVu.gif" class="microphone" />
+    <img style="position: absolute;width: 25px;left: 670px;top: 45px;" onclick="story()" src="https://cdn.clipart.email/4b6286d7c0ed6dca7172858b098e2b6b_speaker-icon-vector-art-image-free-stock-photo-public-domain-_2081-2400.png"  />
+  </div>
+</div>
+<div class="columns is-multiline is-mobile" style="margin-top: 20px;">
+  {% for story in stories %}
+  <div class="column is-4">
+    <div class="card">
+      
+      <div class="card-content">
+        <div class="content">
+          <h5>{% raw story['question_html'] %}</h5>
+         <span class="tag is-success  is-large">{{ story['answer'] }}</span>
+         {% include 'bar.html' %}
+        </div>
+      </div>
+     
+    </div>
+  </div>
+  {% end %}
+</div>
+{% end %}
+
+{% block script %}
+<script type="text/javascript">
+
+  var stories_json = {% raw stories_json %};
+
+  var total_categorical = {% raw total_categorical %};
+  var total_continuous = {% raw total_continuous %};
+
+
+  var substringMatcher = function(strs) {
+    return function findMatches(q, cb) {
+      var matches, substringRegex;
+
+      // an array that will be populated with substring matches
+      matches = [];
+
+      // regex used to determine if a string contains the substring `q`
+      substrRegex = new RegExp(q, 'i');
+
+      // iterate through the pool of strings and for any string that
+      // contains the substring `q`, add it to the `matches` array
+      $.each(strs, function(i, str) {
+        if (substrRegex.test(str)) {
+          matches.push(str);
+        }
+      });
+
+      cb(matches);
+    };
+  };
+
+  var states = _.pluck(stories_json, 'question');
+
+  var states = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.whitespace,
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    // `states` is an array of state names defined in "The Basics"
+    local: states
+  });
+
+  $('#bloodhound .typeahead').typeahead({
+    hint: true,
+    highlight: true,
+    minLength: 1
+  },
+  {
+    name: 'states',
+    source: states
+  });
+
+  $('.typeahead').keyup(function(){
+    var txtvalue = this.value;
+    txtvalue.length ? $('div .is-4').hide().filter(function(){
+       return $(this).text().toLowerCase().indexOf(txtvalue) > 0;
+    }).show() : $('div .is-4').show();
+  });
+
+
+function speak(text) {
+  if ('speechSynthesis' in window) {
+
+    var timer = setInterval(function() {
+        var voices = speechSynthesis.getVoices();
+        if (voices.length !== 0) {
+          msg = new SpeechSynthesisUtterance();
+          msg.voice = window.speechSynthesis.getVoices()[54];
+          msg.text = text.replace('_', ' ');
+          speechSynthesis.speak(msg); 
+        }
+
+    }, 200);
+
+   
+
+  }
+  
+}
+  
+var final_transcript = '';
+var recognizing = false;
+
+if ('webkitSpeechRecognition' in window) {
+
+  var recognition = new webkitSpeechRecognition();
+
+  recognition.continuous = true;
+  recognition.interimResults = true;
+
+  recognition.onstart = function() {
+    recognizing = true;
+    
+  };
+
+  recognition.onerror = function(event) {
+    console.log(event.error);
+  };
+
+  recognition.onend = function() {
+    recognizing = false;
+  };
+
+  recognition.onresult = function(event) {
+    var interim_transcript = '';
+    for (var i = event.resultIndex; i < event.results.length; ++i) {
+      if (event.results[i].isFinal) {
+        final_transcript += event.results[i][0].transcript;
+      } else {
+        interim_transcript += event.results[i][0].transcript;
+      }
+    }
+    final_transcript = capitalize(final_transcript);
+
+    $('.typeahead').typeahead('val', interim_transcript);
+
+    interim_transcript.length ? $('div .is-4').hide().filter(function(){
+       return $(this).text().toLowerCase().indexOf(interim_transcript) > 0;
+    }).show() : $('div .is-4').show();
+
+    $('.typeahead').typeahead('val', final_transcript);
+    // speak(final_transcript);
+
+    $('.listen').hide();
+    $('.microphone').show();
+
+  };
+}
+
+var two_line = /\n\n/g;
+var one_line = /\n/g;
+function linebreak(s) {
+  return s.replace(two_line, '<p></p>').replace(one_line, '<br>');
+}
+
+function capitalize(s) {
+  return s.replace(s.substr(0,1), function(m) { return m.toUpperCase(); });
+}
+
+function startDictation(event) {
+
+  if (recognizing) {
+    recognition.stop();
+    return;
+  }
+  final_transcript = '';
+  recognition.lang = 'en-US';
+  recognition.start();
+  $('.typeahead').typeahead('val', '');
+}
+
+
+function story() {
+
+  pre = "Based on the given dataset. Here is the interesting insights found by Cognito. ";
+  pre += " There are totally 13 features, in that "+ total_categorical.length +" are categorical variable and "+ total_continuous.length+" are continuous variable."
+
+  speak(pre);
+  
+  stories_json.forEach(function(d) {
+
+    text = d.question + ' is ' + String(d.answer);
+
+    speak(text); 
+  
+  });
+
+  speechSynthesis.cancel();
+
+}
+
+</script>
+{% end %}
