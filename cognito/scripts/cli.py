@@ -6,7 +6,6 @@ import yaml
 import click
 import json
 import pickle
-import jinja2
 import logging
 import pandas as pd
 import numpy as np
@@ -22,7 +21,7 @@ from tqdm import tqdm, trange
 
 
 
-VERSION = 'version 0.0.1-alpha-0'
+VERSION = 'version 0.0.1-beta-0'
 
 
 class NpEncoder(json.JSONEncoder):
