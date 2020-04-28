@@ -5,6 +5,7 @@ from codecs import open as codecs_open
 from setuptools import setup, find_packages
 
 
+
 # Get the long description from the relevant file
 with codecs_open('README.rst', encoding='utf-8') as f:
     LONG_DESCRIPTION = f.read()
@@ -28,7 +29,7 @@ REQUIRES = [
 
 
 CLASSIFIERS = [
-    'Development Status :: 3 - Beta',
+    'Development Status :: 4 - Beta',
     'Environment :: Console',
     'Intended Audience :: Developers',
     "Operating System :: OS Independent",
