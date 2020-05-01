@@ -21,7 +21,7 @@ from tqdm import tqdm, trange
 
 
 
-VERSION = 'version 0.0.1-beta-1'
+VERSION = 'version 0.0.1-beta-2'
 
 
 class NpEncoder(json.JSONEncoder):
