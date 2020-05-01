@@ -130,6 +130,7 @@ function speak(text) {
           msg = new SpeechSynthesisUtterance();
           msg.voice = window.speechSynthesis.getVoices()[54];
           msg.text = text.replace('_', ' ');
+          msg.rate = 0.9;
           speechSynthesis.speak(msg); 
         }
 
@@ -222,10 +223,10 @@ function story() {
   
   stories_json.forEach(function(d) {
 
-    text = d.question + ' is ' + String(d.answer);
+    text = d.question + '.';
 
     speak(text); 
-  
+
   });
 
   speechSynthesis.cancel();

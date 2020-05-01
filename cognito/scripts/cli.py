@@ -126,7 +126,7 @@ def audit(inp, save):
             description.add_row(['(%) Duplicate Rows', (dups['count'].sum() - dups.shape[0]) / len(dups)])
             description.add_row(['Total Size of Memory', str(df.memory_usage().sum() / 1000) + 'KiB'])
             description.add_row(['🍋 Total Categorical', count_categorical(df)])
-            description.add_row(['🔟 Total Continuous', count_continuous(df)])
+            description.add_row(['🔟 Total Continuous', len(df_raw.get_numerical().columns)])
             description.add_row(['Started at', start_time.strftime("%d-%b-%y %H:%M:%S")])
 
             for col in tqdm(features, ascii=True, desc="Auditing.. : "):

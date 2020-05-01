@@ -78,7 +78,7 @@ def get_interesting_stories(df):
 
             # Highest %s was %s on the %s %s
             stories.append({
-                'question': "Highest %s was %s of %s %s." %(x, d[x].head(1).values[0], col, d[col].head(1).values[0]),
+                'question': "Highest %s was %s, %s %s." %(x, d[x].head(1).values[0], col, d[col].head(1).values[0]),
                 'question_html': "Highest <span class='tag is-primary is-light'>%s</span>\
                  was %s of  <span class='tag is-success is-light'>%s</span> %s." % (x, d[x].head(1).values[0], col, d[col].head(1).values[0]),
                 'answer': d[col].head(1).values[0],
@@ -87,7 +87,7 @@ def get_interesting_stories(df):
 
             # Lowest %s was %s on the %s %s
             stories.append({
-                'question': "Lowest %s was %s of %s %s." %(x, d[x].tail(1).values[0], col, d[col].tail(1).values[0]),
+                'question': "Lowest %s was %s, %s %s." %(x, d[x].tail(1).values[0], col, d[col].tail(1).values[0]),
                 'question_html': "Lowest <span class='tag is-primary is-light'>%s</span>\
                  was %s of  <span class='tag is-success is-light'>%s</span> %s." % (x, d[x].tail(1).values[0], col, d[col].tail(1).values[0]),
                 'answer': d[col].tail(1).values[0],
@@ -104,7 +104,7 @@ def get_interesting_stories(df):
 
 
             stories.append({
-                'question': "Highest %s is %s for %s %s." % (num, d[num].head(1).values[0], col, d[col].head(1).values[0]),
+                'question': "Highest %s is %s, for %s %s." % (num, d[num].head(1).values[0], col, d[col].head(1).values[0]),
                 'question_html': "Highest <span class='tag is-primary is-light'>%s</span>\
                 is %s for <span class='tag is-success is-light'>%s</span> %s." % (num, d[num].head(1).values[0], col, d[col].head(1).values[0]),
                 'answer': round(d[num].head(1).values[0]),
@@ -113,7 +113,7 @@ def get_interesting_stories(df):
 
 
             stories.append({
-                'question': "Lowest %s is %s for %s %s." % (num, d[num].tail(1).values[0], col, d[col].tail(1).values[0]),
+                'question': "Lowest %s is %s, for %s %s." % (num, d[num].tail(1).values[0], col, d[col].tail(1).values[0]),
                 'question_html': "Lowest <span class='tag is-primary is-light'>%s</span>\
                 is %s for <span class='tag is-success is-light'>%s</span> %s." % (num, d[num].tail(1).values[0], col, d[col].tail(1).values[0]),
                 'answer': round(d[num].tail(1).values[0]),
