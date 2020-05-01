@@ -21,7 +21,7 @@ from tqdm import tqdm, trange
 
 
 
-VERSION = 'version 0.0.1-beta-2'
+VERSION = 'version 0.0.1-beta-3'
 
 
 class NpEncoder(json.JSONEncoder):
@@ -127,7 +127,7 @@ def audit(inp, save):
             description.add_row(['Total Size of Memory', str(df.memory_usage().sum() / 1000) + 'KiB'])
             description.add_row(['🍋 Total Categorical', count_categorical(df)])
             description.add_row(['🔟 Total Continuous', len(df_raw.get_numerical().columns)])
-            #description.add_row(['Started at', start_time.strftime("%d-%b-%y %H:%M:%S")])
+            description.add_row(['Started at', start_time.strftime("%d-%b-%y %H:%M:%S")])
 
             for col in tqdm(features, ascii=True, desc="Auditing.. : "):
                 table.add_row([
@@ -147,7 +147,7 @@ def audit(inp, save):
                 ])
 
             end_time = datetime.now()
-            #description.add_row(['Ended at', end_time.strftime("%d-%b-%y %H:%M:%S")])
+            description.add_row(['Ended at', end_time.strftime("%d-%b-%y %H:%M:%S")])
             description.add_row(['Time Elapsed', (end_time - start_time).total_seconds()])
 
 

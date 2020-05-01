@@ -59,7 +59,7 @@ PROJECT_URLS = {
 
 
 setup(name='cognito',
-      version='0.0.1b2',
+      version='0.0.1b3',
       description=u"Auto ML Dataset Transformer & Auto Data Storyteller",
       long_description=LONG_DESCRIPTION,
       classifiers=CLASSIFIERS,
