@@ -98,7 +98,6 @@ Contributors
    :target: https://github.com/analyticsanshul
 
 
-
 Core Lead
 ----------
 * `Bastin Robins J <https://github.com/bastinrobin>`__ <robin@cleverinsight.co>
