@@ -77,9 +77,27 @@ Install the extension by using pip.
 
 
 
-=======
-Authors
-=======
+Contributors 
+==============
+
+.. image:: https://avatars3.githubusercontent.com/u/3523655?s=60&v=4
+   :target: https://github.com/BastinRobin
+.. image:: https://avatars2.githubusercontent.com/u/59742431?s=60&v=4
+   :target: https://github.com/nibir-paul
+.. image:: https://avatars0.githubusercontent.com/u/32188887?s=60&v=4
+   :target: https://github.com/tanvirath
+.. image:: https://avatars1.githubusercontent.com/u/29769264?s=60&v=4
+   :target: https://github.com/vandana-11
+.. image:: https://avatars3.githubusercontent.com/u/59745783?s=60&v=4
+   :target: https://github.com/AishikaBanik98
+.. image:: https://avatars3.githubusercontent.com/u/53107678?s=60&v=4
+   :target: https://github.com/RishikaKotta
+.. image:: https://cognito.readthedocs.io/en/latest/_images/aastik.jpg
+   :target: https://github.com/Aastik19
+.. image:: https://avatars2.githubusercontent.com/u/44425046?s=60&v=4
+   :target: https://github.com/analyticsanshul
+
+
 
 Core Lead
 ----------
