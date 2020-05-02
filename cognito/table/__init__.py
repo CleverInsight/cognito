@@ -179,13 +179,10 @@ class Table:
         :type       name of the column
         :returns:   list of generated bins
         :rtype:     list
-<<<<<<< HEAD
 
         Weblink: https://www.geeksforgeeks.org/binning-in-data-mining/
 
 
-=======
->>>>>>> a0dc96e323316a85c3b913517ea5819103ce1ed5
         Usage:
         ======
             >>> self.convert_to_bin(col_name)
@@ -233,12 +230,10 @@ class Table:
         Return the covariance of the given
         dataframe `self.data` and return dataframe with
         respective dataframe.
-<<<<<<< HEAD
         Weblink: https://www.geeksforgeeks.org/mathematics-covariance-and-correlation/
         
-=======
+
         Ref: https://www.theanalysisfactor.com/covariance-matrices/
->>>>>>> a0dc96e323316a85c3b913517ea5819103ce1ed5
         returns :  dataframe
         Usage:
         ======
@@ -282,14 +277,11 @@ class Table:
         :type       col:   { column name to be selected }
         :param      bins:  The bins
         :type       bins:  list of  of bins to convert
-<<<<<<< HEAD
 
         weblink: https://www.geeksforgeeks.org/binning-in-data-mining/
 
-=======
         :param      bins:  The bins
         :type       bins:  list of  of bins to convert
->>>>>>> a0dc96e323316a85c3b913517ea5819103ce1ed5
         returns: dataframe of given column as bins
         example:
             # Numerical Binning Example

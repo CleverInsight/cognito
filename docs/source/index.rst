@@ -51,7 +51,28 @@ Cognito is an exclusive data preprocessing library that involves transforming ra
 
 
 
-Collaborators 
+Contributors 
+==============
+
+.. image:: https://avatars3.githubusercontent.com/u/3523655?s=60&v=4
+   :target: https://github.com/BastinRobin
+.. image:: https://avatars2.githubusercontent.com/u/59742431?s=60&v=4
+   :target: https://github.com/nibir-paul
+.. image:: https://avatars0.githubusercontent.com/u/32188887?s=60&v=4
+   :target: https://github.com/tanvirath
+.. image:: https://avatars1.githubusercontent.com/u/29769264?s=60&v=4
+   :target: https://github.com/vandana-11
+.. image:: https://avatars3.githubusercontent.com/u/59745783?s=60&v=4
+   :target: https://github.com/AishikaBanik98
+.. image:: https://avatars3.githubusercontent.com/u/53107678?s=60&v=4
+   :target: https://github.com/RishikaKotta
+.. image:: ystatic/aastik.jpg
+   :target: https://github.com/Aastik19
+.. image:: https://avatars2.githubusercontent.com/u/44425046?s=60&v=4
+   :target: https://github.com/analyticsanshul
+
+
+Collaborators
 ==============
 
 .. image:: ystatic/christ_lavasa.jpg
@@ -59,8 +80,6 @@ Collaborators
    :align: left
    :target: https://lavasa.christuniversity.in/
 
-.. raw:: html
-   
 
 `CHRIST (Deemed to be University) Lavasa <https://lavasa.christuniversity.in/>`_ provides developer & mentor contribution via CleverInsight Open AI Foundation Incubation Center at Christ Univeristy Lavasa since 2019.
    

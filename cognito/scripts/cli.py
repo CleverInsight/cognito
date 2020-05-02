@@ -9,12 +9,11 @@ import pickle
 import logging
 import pandas as pd
 import numpy as np
-
 from pyfiglet import figlet_format, Figlet
 from prettytable import PrettyTable
 from cognito import *
 from cognito.table import Table
-from cognito.story import get_interesting_stories
+from cognito.story import Story
 from datetime import datetime
 from tornado import template
 from tqdm import tqdm, trange
@@ -112,7 +111,10 @@ def audit(inp, save):
             table.reversesort = True
 
             # Generate dynamic analytical stories
-            stories = get_interesting_stories(df_raw)
+            # stories = get_interesting_stories(df_raw)
+
+            story = Story(df_raw)
+            stories = story.insight()
 
 
             # Group duplicates
@@ -163,7 +165,8 @@ def audit(inp, save):
                 report_html = report_html.replace('<table>', '<table class="table is-bordered">')
 
                 
-                stories_json = [{'question': row['question'], 'answer': row['answer']} for row in stories]
+                stories_json = [{'question': row['question'], \
+                'answer': row['answer'], 'type': row['type']} for row in stories]
                 loader = template.Loader(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates'))
 
                 total_categorical = list(df_raw.get_categorical())

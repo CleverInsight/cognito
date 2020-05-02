@@ -8,8 +8,13 @@
       {% end %}
     </thead>
     <tbody>
-      
-      {% for i, row in story['misc'].head(5).iterrows() %}
+      {% if story['type'] == 'Highest' %}
+        {% set dataframe = story['misc'].head(5) %}  
+      {% else %}
+        {% set dataframe = story['misc'].tail(5) %}
+      {% end %}
+
+      {% for i, row in dataframe.iterrows() %}
         <tr>
           <td>{{ row[story['misc'].columns[0]] }}</td>
           {% if row[story['misc'].columns[1]] > 0 %}
