@@ -14,13 +14,16 @@ from prettytable import PrettyTable
 from cognito import *
 from cognito.table import Table
 from cognito.story import Story
+from cognito.connect import SQL
 from datetime import datetime
 from tornado import template
 from tqdm import tqdm, trange
+from .click_default_group import DefaultGroup
 
 
 
-VERSION = 'version 0.0.1-beta-3'
+
+VERSION = 'VERSION: 0.0.1-beta-3'
 
 
 class NpEncoder(json.JSONEncoder):
@@ -41,12 +44,11 @@ def read_yaml(filename):
 
 custom_fig = Figlet(font='slant')
 click.echo(custom_fig.renderText('cognito'))
-click.echo(VERSION)
 
 
 
-@click.group()
-@click.option('--version', is_flag=True, default=False)
+@click.group(cls=DefaultGroup, default='--help', default_if_no_args=True, invoke_without_command=True)
+@click.option('--version', '-v',  is_flag=True, default=False)
 def cli(version):
     '''  
         Generate ML consumable datasets using advanced data preprocessing
@@ -56,134 +58,39 @@ def cli(version):
         $ cognito prepare -m ml --input filepath --out filepath 
 
     '''
-    pass
 
+    if version:
+        click.echo(VERSION)
 
-@cli.command('report')
-def report():
-
-    preformat = """
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.2/css/bulma.min.css">
-        <img src="https://cognito.readthedocs.io/en/latest/_images/logo.png" width="200px"/>
-        <h3>Summary Report</h3>
-        <button class="button is-success is-rounded" onclick="window.print()">Generate PDF</button>
-    """
-
-    file_loader = FileSystemLoader(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates'))
-    env = Environment(loader=file_loader)
-    template = env.get_template('index.html')
-    print(template.render(data=preformat))
-    
 
 @cli.command('audit', short_help=": Audit the given dataset and generate report")
 @click.option('--inp', '-i', help="Input dataset file in following format .csv", required=True, metavar='<path>')
-@click.option('--save', '-o', help="Enter the filename to save html", metavar='<path>')
+@click.option('--save', '-o', default='cognito', help="Enter the filename to save html", metavar='<path>')
 def audit(inp, save):
-    
+ 
     if inp:
-        start_time = datetime.now()
-        description = PrettyTable(['Name', 'Values'])
-        description.align['Name'] = "l"
+        generate_audit_report(Table(inp), save)
         
 
-        table = PrettyTable([
-            'Features', 
-            'Type', 
-            'Value Type', 
-            'Outliers', 
-            'Missing', 
-            '(%) Missing',
-            'Distinct Count',
-            'Min',
-            'Mean',
-            'Max',
-            'Zeros',
-            '(%) Zeros',
-            'Memory Size'            
-        ])
-        try:
-            df_raw = Table(inp)
-            df = df_raw.data
-            features = df.columns
-            table.align["Features"] = "l"
-            table.align["Value Type"] = "l"
-            table.sortby = "Distinct Count"
-            table.reversesort = True
+@cli.command('connect', short_help=": Connect to different datasources")
+@click.option('--conf', '-c', help="Input configuration YAML file path", required=True, metavar='<path>')
+@click.option('--mode', '-m', type=click.Choice(['audit', 'download', 'prepare', 'inverse'], case_sensitive=False), \
+    help="Set any mode such as `prepare`, `audit`, `inverse`", required=False)
+@click.pass_context
+def connect(ctx, conf, mode):
+    
+    # Returns the SQL Class 
+    df = SQL(conf)
 
-            # Generate dynamic analytical stories
-            # stories = get_interesting_stories(df_raw)
-
-            story = Story(df_raw)
-            stories = story.insight()
+    if mode == 'audit':        
+        df.data.drop_cardinality()
+        generate_audit_report(df.data, 'makefiles')
 
 
-            # Group duplicates
-            dups = df.groupby(df.columns.tolist()).size().reset_index().rename(columns={0:'count'})
-
-            description.add_row(['Total variables', df.shape[1]])
-            description.add_row(['Total Observations', df.shape[0]])
-            description.add_row(['Missing Cells', df.isnull().sum().sum()])
-            description.add_row(['(%) Missing Cells', df.isnull().sum().sum() / len(df)])
-            description.add_row(['Duplicate Rows', dups['count'].sum() - dups.shape[0]])
-            description.add_row(['(%) Duplicate Rows', (dups['count'].sum() - dups.shape[0]) / len(dups)])
-            description.add_row(['Total Size of Memory', str(df.memory_usage().sum() / 1000) + 'KiB'])
-            description.add_row(['🍋 Total Categorical', count_categorical(df)])
-            description.add_row(['🔟 Total Continuous', len(df_raw.get_numerical().columns)])
-            description.add_row(['Started at', start_time.strftime("%d-%b-%y %H:%M:%S")])
-
-            for col in tqdm(features, ascii=True, desc="Auditing.. : "):
-                table.add_row([
-                    col.strip(),
-                    df[col].dtypes,
-                    type_of_variable(df[col]), 
-                    check_outlier(df[col]),
-                    check_missing(df[col]), 
-                    column_missing_percentage(df[col]), 
-                    distinct_count(df[col]),
-                    count_min(df[col]),
-                    count_mean(df[col]),
-                    count_max(df[col]),
-                    df[col].isin([0]).sum(),
-                    round(df[col].isin([0]).sum() / len(df.columns), 2),
-                    str(df[col].memory_usage() / 1000) + 'KiB'
-                ])
-
-            end_time = datetime.now()
-            description.add_row(['Ended at', end_time.strftime("%d-%b-%y %H:%M:%S")])
-            description.add_row(['Time Elapsed', (end_time - start_time).total_seconds()])
-
-
-
-            # Save the report into HTML
-            if save:
-                
-                desc_html = description.get_html_string()
-                description_summary = desc_html.replace('<table>', '<table class="table is-bordered">')
-
-
-                report_html = table.get_html_string()
-                report_html = report_html.replace('<table>', '<table class="table is-bordered">')
-
-                
-                stories_json = [{'question': row['question'], \
-                'answer': row['answer'], 'type': row['type']} for row in stories]
-                loader = template.Loader(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates'))
-
-                total_categorical = list(df_raw.get_categorical())
-                total_continuous = list(df_raw.get_numerical())
-
-                open(save + '.html', 'wb').write(loader.load("index.html").generate(**locals()))
-                click.echo('Report generated with name ' + save + '.html')
-
-
-            click.echo(description)
-            click.echo(table)
-
-        except FileNotFoundError as e:
-            logging.warning("Given input file doesn't exists")
-            print(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates'))
-       
-
+    elif mode == 'download':
+        df.save('makefiles.csv')
+        
+        
 
 
 @cli.command('inverse', short_help=": Inverse re-transform generated dataset")

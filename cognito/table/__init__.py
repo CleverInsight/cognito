@@ -6,9 +6,10 @@
 '''
 Importing all the libraries needed
 '''
-import pickle
 import math
+import pickle
 from collections import Counter
+from cognito.logger import logger
 import pandas as pd
 import numpy as np
 from scipy.stats.stats import kendalltau
@@ -18,27 +19,17 @@ from sklearn import preprocessing
 from tqdm import tqdm
 
 
-def list_diff(l1, l2):
-    """
-    Get the difference between two list `l1` and `l2`
-    
-    :param      l1:   The l 1
-    :type       l1:   { type_description }
-    :param      l2:   The l 2
-    :type       l2:   { type_description }
-    
-    :returns:   { description_of_the_return_value }
-    :rtype:     { return_type_description }
-    """
-    return (list(set(l1) - set(l2))) 
-
 class Table:
     """
     Table takes a csv file as input and converts to
     a datframe to perform specific operations.
     """
     def __init__(self, filename):
-        self.data = pd.read_csv(filename)
+
+        if type(filename).__name__ == 'str': 
+            self.data = pd.read_csv(filename, index_col=None)
+        else:
+            self.data = filename
 
 
     def data(self):
@@ -424,6 +415,26 @@ class Table:
         return data
 
 
+    def drop_cardinality(self):
+        """
+        Create cardinality columns
+        
+        :returns:   { description_of_the_return_value }
+        :rtype:     { return_type_description }
+        """
+        cardinal_cols = self.cardinal_columns()
+        self.data = self.data.drop(cardinal_cols, axis=1)
+
+
+    def cardinal_columns(self):
+
+        all_columns = self.data.columns
+        excluded_cardinal = self.ignore_cardinal().columns
+
+        set_difference = set(all_columns) - set(excluded_cardinal)
+        return list(set_difference)
+
+
     def encode_column(self, column):
         """
         Encodes a column using the numerical values and
@@ -459,9 +470,9 @@ class Table:
         """
         No docstring for the time being
         """
-        cardinal_col = self.list_cardinal()
-        categorical_col = list_diff(self.get_categorical().columns, cardinal_col)
-        numerical_col = list_diff(self.get_numerical().columns, cardinal_col)
+        # cardinal_col = self.list_cardinal()
+        categorical_col = self.list_diff(self.get_categorical().columns, cardinal_col)
+        numerical_col = self.list_diff(self.get_numerical().columns, cardinal_col)
 
         # Fix categorical and numerical columns
         for col in tqdm(categorical_col + numerical_col, ascii=True, desc="Imputing missing : "):
@@ -510,9 +521,43 @@ class Table:
 
     def categorical_columns(self):
         """
-        Get only the categorical columns
+        Get only the categorical columns names as a list
         
-        :returns:   { description_of_the_return_value }
-        :rtype:     { return_type_description }
+        :returns:   { list of categorical column names }
+        :rtype:     { list }
         """
-        return self.get_categorical().columns
+        return self.get_categorical().columns.to_list()
+
+
+    def numerical_columns(self):
+        """
+        Get only the numerical columns names as a list
+        
+        :returns:   { list of numerical column names }
+        :rtype:     { list }
+        """
+        return self.get_numerical().columns.to_list()
+
+
+    @staticmethod
+    def list_diff(l1, l2):
+        """
+        List of two different set of lists
+        
+        :param      l1:   The l 1
+        :type       l1:   { type_description }
+        :param      l2:   The l 2
+        :type       l2:   { type_description }
+        """
+        return (list(set(l1) - set(l2))) 
+
+
+    def save(self, filename):
+        """
+        Save memoize dataset
+        
+        :param      filename:  The filename
+        :type       filename:  { type_description }
+        """
+        self.data.to_csv(filename, index=False)
+        logger.info('created csv file as {}'.format(filename))

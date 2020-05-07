@@ -21,10 +21,10 @@ REQUIRES = [
     'tornado',          # REQ: report generation engine
     'PyYAML',           # REQ: configuration management
     'pyfiglet',         # REQ: better cli interface  
-    'datefinder',     
-    'PrettyTable',
-    'sparklines',
-    'scikit-learn'
+    'datefinder',       # REQ: date utility
+    'PrettyTable',      # REQ: CLI based table structure
+    'scikit-learn',     # REQ: simplified unity for all ML need
+    'mysql-connector'   # REQ: MySQL connection to cognito
 ]
 
 
