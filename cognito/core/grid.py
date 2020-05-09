@@ -194,3 +194,21 @@ class Grid(pd.DataFrame):
         elif mode == "spearman":
             pearsoncorr = self.corr(method='spearman')
         return pearsoncorr
+
+    def covariance(self):
+        """
+        Return the covariance of the given
+        dataframe `self.data` and return dataframe with
+        respective dataframe.
+        Weblink: https://www.geeksforgeeks.org/mathematics-covariance-and-correlation/
+        
+
+        Ref: https://www.theanalysisfactor.com/covariance-matrices/
+        returns :  dataframe
+        Usage:
+        ======
+            >>> df = Table('filename.csv')
+            >>> df.covariance()
+        """
+        result = self.cov()
+        return result
