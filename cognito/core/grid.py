@@ -39,7 +39,7 @@ class Grid(pd.DataFrame):
     def get_numerical(self):
         """
         Gets the numerical columns from the given
-        dataframe `self.data`
+        dataframe `self`
         returns: dataframe
         Usage:
         ======
@@ -72,12 +72,25 @@ class Grid(pd.DataFrame):
     def total_columns(self):
         """
         Get the count of all column in the given
-        dataframe `self.data`
+        dataframe `self`
         Usage:
         ======
             >>> data = Table('filename.csv')
             >>> data.total_columns()
         """
         return len(self.columns)
+    
+    def total_rows(self):
+        """
+        Get total count of rows from the current
+        dataframe `self`.
+        returns: dataframe
+        Usage:
+        ======
+            >>> data = Table('filename.csv')
+            >>> data.total_rows()
+        """
+        return self.shape[0]
+
     
     
