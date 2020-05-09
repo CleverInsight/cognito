@@ -369,4 +369,14 @@ class Grid(pd.DataFrame):
             self[column].fillna(self[column].mode()[0], inplace=True)
         return self[column]
 
+    def cardinal_columns(self):
+
+        all_columns = self.columns
+        excluded_cardinal = self.ignore_cardinal().columns
+
+        set_difference = set(all_columns) - set(excluded_cardinal)
+        return list(set_difference)
+
+    
+
     
