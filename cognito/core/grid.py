@@ -438,7 +438,15 @@ class Grid(pd.DataFrame):
         return self.get_categorical().columns.to_list()
 
 
-
+    def numerical_columns(self):
+        """
+        Get only the numerical columns names as a list
+        
+        :returns:   { list of numerical column names }
+        :rtype:     { list }
+        """
+        return self.get_numerical().columns.to_list()
+        
 
     def generate(self):
         """
