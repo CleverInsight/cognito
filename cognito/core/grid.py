@@ -170,4 +170,27 @@ class Grid(pd.DataFrame):
             bins.append((low+1, low + bin_size))
         return bins 
 
-    
+    def correlation(self, mode="pearson"):
+        """
+        Return the pairwise correlation of the given
+        dataframe `self.data` and return dataframe with
+        respective dataframe.
+        :param      mode:  `Pearson`, `Kendall`, `Spearman`, `Point-Biserial`
+        :type       mode:  string
+        :returns:   correlation matrix
+        :rtype:     dataframe
+
+        Weblink: https://www.geeksforgeeks.org/mathematics-covariance-and-correlation/
+
+        Usage:
+        ======
+            >>> df = Table('filename.csv')
+            >>> df.correlation()
+        """
+        if mode == "pearson":
+            pearsoncorr = self.corr(method='pearson')
+        elif mode == "kendall":
+            pearsoncorr = self.corr(method='kendall')
+        elif mode == "spearman":
+            pearsoncorr = self.corr(method='spearman')
+        return pearsoncorr
