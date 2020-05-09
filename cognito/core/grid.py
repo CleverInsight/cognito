@@ -236,3 +236,59 @@ class Grid(pd.DataFrame):
             ---------------
         """
         return self[columns]
+
+    def binning(self, column, bins):
+        """
+        Return dataframe of select column convert into bins as given
+        parameter
+        :param      col:   The column
+        :type       col:   { column name to be selected }
+        :param      bins:  The bins
+        :type       bins:  list of  of bins to convert
+
+        weblink: https://www.geeksforgeeks.org/binning-in-data-mining/
+
+        :param      bins:  The bins
+        :type       bins:  list of  of bins to convert
+        returns: dataframe of given column as bins
+        example:
+            # Numerical Binning Example
+
+                Value      Bin
+                0-30   ->  (0-30)
+                31-70  ->  (31-70)
+                71-100 ->  (71-100)
+
+
+            # Categorical Binning Example
+                Value      Bin
+                Spain  ->  Europe
+                Italy  ->  Europe
+                Chile  ->  South America
+                Brazil ->  South America
+        Usage:
+            >>> df = Table('filename.csv')
+            >>> df.binning('age', bins=[], labels=['low', 'med', 'high'])
+            ------------------
+            |  age  | age_bin
+            ------------------
+            |  14   | low
+            ------------------
+            |  90   | high
+            ------------------
+            |  14   | low
+            ------------------
+            |  40   | middle
+            ------------------
+            |  14   | low
+            ------------------
+        """
+        binned_weight = []
+        data = pd.DataFrame(columns=['Value', 'Bin'])
+        for val in self[column]:
+            for i in range(0, len(bins)):
+                if bins[i][0] <= val < bins[i][1]:
+                    data = data.append({'Value':val, 'Bin':bins[i]}, ignore_index=True)
+                    binned_weight.append(i)
+        freq = Counter(binned_weight)
+        return (data, freq)
