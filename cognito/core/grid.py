@@ -440,4 +440,26 @@ class Grid(pd.DataFrame):
 
 
 
-    
+    def generate(self):
+        """
+        No docstring for the time being
+        """
+        cardinal_col = self.list_cardinal()
+        categorical_col = self.list_diff(self.get_categorical().columns, cardinal_col)
+        numerical_col = self.list_diff(self.get_numerical().columns, cardinal_col)
+
+        # Fix categorical and numerical columns
+        for col in tqdm(categorical_col + numerical_col, ascii=True, desc="Imputing missing : "):
+            self.fix_missing(col)
+
+        data = self.drop(cardinal_col, axis=1)
+
+        # Encode categorical variables
+        encoders = {}
+
+        for col in tqdm(categorical_col, ascii=True, desc="Encoding : "):
+            x, y = self.encode_column(col)
+            data[col] = x
+            encoders[col] = y
+
+        return data, encoders
