@@ -95,13 +95,21 @@ class Grid(pd.DataFrame):
     def odd_rows(self):
         """
         Get all odd indexed counted rows from the given
-        dataframe `self.data`
+        dataframe `self`
         returns: dataframe
         Usage:
         ======
             >>> data = Table('filename.csv')
             >>> data.odd_rows()
         """
-        return self.iloc[1::2]
+        return self.loc[:, ::2]
+        #return self.iloc[1::2]
 
-    
+    def even_rows(self):
+        """
+        Get all even indexed counted rows from the given
+        dataframe `self.data`
+        returns: dataframe
+        """
+        return self.loc[:, ::-2]
+        #return self.iloc[:-2:2]
