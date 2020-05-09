@@ -212,3 +212,27 @@ class Grid(pd.DataFrame):
         """
         result = self.cov()
         return result
+
+    def slice(self, columns):
+        """
+        Return only the columns sliced
+        from `self.data` based on given `columns` parameter
+        :param      columns:  list or tuple
+        :type       columns:  { list of columns name  }
+        returns: dataframe of only given column names.
+
+        weblink:https://www.geeksforgeeks.org/python-slice-function/
+
+        Usage:
+        ======
+            >>> df = Table('filename.csv')
+            >>> df.slice(['name', 'age'])
+            ---------------
+              name  | age
+            ---------------
+              Sam   | 20
+            ---------------
+              Jack  | 40
+            ---------------
+        """
+        return self[columns]
