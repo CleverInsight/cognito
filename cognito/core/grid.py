@@ -387,5 +387,24 @@ class Grid(pd.DataFrame):
         cardinal_cols = self.cardinal_columns()
         self = self.drop(cardinal_cols, axis=1)
     
+    def encode_column(self, column):
+        """
+        Encodes a column using the numerical values and
+        return the dictionary for mapping.
+        :param      column:  The column
+        :type       column:  { column name }
+        returns: dataframe, mapper dictionary
+
+        Weblink: https://www.geeksforgeeks.org/ml-label-encoding-of-datasets-in-python/
+
+        Usage:
+        ======
+            >>> df = Table('filename.csv')
+            >>> df.encode_column('Country')
+            >>> (dataframe, {'0': 'US', '1': 'India', '2': 'Europe'})
+        """
+        encode = LabelEncoder()
+        data = encode.fit_transform(self[column])
+        return data, encode
 
     
