@@ -416,4 +416,50 @@ class Grid(pd.DataFrame):
         """
         return [col for col in self if len(self[col]) == self[col].nunique()]
 
+    @staticmethod
+    def list_diff(l1, l2):
+        """
+        List of two different set of lists
+        
+        :param      l1:   The l 1
+        :type       l1:   { type_description }
+        :param      l2:   The l 2
+        :type       l2:   { type_description }
+        """
+        return (list(set(l1) - set(l2))) 
+
+    def categorical_columns(self):
+        """
+        Get only the categorical columns names as a list
+        
+        :returns:   { list of categorical column names }
+        :rtype:     { list }
+        """
+        return self.get_categorical().columns.to_list()
+
+'''
+    def generate(self):
+        """
+        No docstring for the time being
+        """
+        # cardinal_col = self.list_cardinal()
+        categorical_col = self.list_diff(self.get_categorical().columns, cardinal_col)
+        numerical_col = self.list_diff(self.get_numerical().columns, cardinal_col)
+
+        # Fix categorical and numerical columns
+        for col in tqdm(categorical_col + numerical_col, ascii=True, desc="Imputing missing : "):
+            self.fix_missing(col)
+
+        data = self.drop(cardinal_col, axis=1)
+
+        # Encode categorical variables
+        encoders = {}
+
+        for col in tqdm(categorical_col, ascii=True, desc="Encoding : "):
+            x, y = self.encode_column(col)
+            data[col] = x
+            encoders[col] = y
+
+        return data, encoders
+'''
     
