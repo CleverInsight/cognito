@@ -463,3 +463,50 @@ class Grid(pd.DataFrame):
             encoders[col] = y
 
         return data, encoders
+
+    def imputer(self, column, value):
+        """
+        Take the columns from `self.data` and fill the missing NA
+        values with given value parameter based on the type of column
+        :param      column:  The column
+        :type       column:  { column name }
+        :param      value:  The value by which NA will be replaced
+        :type       value:  { string, number, boolean }
+        returns: dataframe | pandas.core.series
+
+        Weblink: https://www.geeksforgeeks.org/working-with-missing-data-in-pandas/
+
+        Usage:
+        ======
+            >>> df = Table('filename.csv')
+            >>> df.imputer('age', 10)
+        """
+        self[column].fillna(value, inplace=True)
+        return self[column]
+
+    def scale(self, columns, mode='minmax'):
+        """
+        Take a dataframe self.data and list of columns, scales the feature with distribution value
+        between 0 and 1
+        :param      column:  columns
+        :type       column:  [list of colums to be scaled]
+        :param      column:  mode
+        :type       column:  mode for scaling  MinMax/std_dist
+        returns: dataframe of columns after scaling
+
+        Weblink: https://www.geeksforgeeks.org/scales-of-measurement/
+
+        Usage:
+        ======
+            >>> df = Table('filename.csv')
+            >>> df.scale(columns, mode)
+            >>> dataframe
+        """
+        original_data = self.slice(columns)
+        if mode == 'minmax':
+            scaler = preprocessing.MinMaxScaler(feature_range=(0, 1))
+            transformed_data = scaler.fit_transform(original_data)
+        elif mode == 'std_dist':
+            scaler = preprocessing.StandardScaler()
+            transformed_data = scaler.fit_transform(original_data)
+        return transformed_data
