@@ -292,3 +292,35 @@ class Grid(pd.DataFrame):
                     binned_weight.append(i)
         freq = Counter(binned_weight)
         return (data, freq)
+
+
+    def fix_outlier_with_std_deviation(self, column):
+        """
+        Take the column from `self.data` and check for outlier
+        fix the outlier using mode : std deviation
+        Ref: https://towardsdatascience.com/feature-engineering-for-machine-learning-3a5e293a5114
+        :param      column:  The column
+        :type       column:  { column name as string }
+        :param      mode:  mode like std deviation
+        :type       column:  { string }
+        returns: dataframe without outlier
+
+        Weblink: https://www.kdnuggets.com/2017/02/removing-outliers-standard-deviation-python.html
+
+        Usage:
+        ======
+            >>> df = Table('filename.csv')
+
+            >>> df.fix_outlier_with_std_deviation('age', 3)
+        """
+        outliers = []
+        mean = np.mean(self[column])
+        std_dev = np.std(self[column])
+        for value in self[column]:
+            z_score = (value - mean) / std_dev
+            if np.abs(z_score) > 3:
+                outliers.append(value)
+        for i, _ in enumerate(self[column]):
+            if i in outliers:
+                i.replace(std_dev, inplace=True)
+        return self[column]
