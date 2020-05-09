@@ -1,7 +1,14 @@
 import pandas as pd
 import numpy as np 
-
-
+import math
+import pickle
+from collections import Counter
+from cognito.logger import logger
+from scipy.stats.stats import kendalltau
+from scipy.stats import pointbiserialr
+from sklearn.preprocessing import LabelEncoder
+from sklearn import preprocessing
+from tqdm import tqdm
 
 class Grid(pd.DataFrame):
 
@@ -132,4 +139,35 @@ class Grid(pd.DataFrame):
             >>> df.hot_encoder_categorical(col_name)
         """
         one_hot = pd.get_dummies(self[column])
-        return one_hot   
+        return one_hot  
+
+    def convert_to_bin(self, column):
+        """
+        Returns the columns with more than 50% threshold to
+        newly created bin pandas.series
+        returns: pandas.series
+        descriptions: list of newly created bin values
+        :param      column
+        :type       name of the column
+        :returns:   list of generated bins
+        :rtype:     list
+
+        Weblink: https://www.geeksforgeeks.org/binning-in-data-mining/
+
+
+        Usage:
+        ======
+            >>> self.convert_to_bin(col_name)
+        """
+        length = len(self[column])
+        sqr = round(math.sqrt(length))
+        maximum = int(max(self[column]))
+        minimum = int(min(self[column]))
+        bin_size = int(round((maximum - minimum) / sqr))
+        quantity = round(maximum/bin_size)
+        bins = []
+        for low in range(int(minimum - 1), int(minimum + quantity * bin_size + 1), bin_size):
+            bins.append((low+1, low + bin_size))
+        return bins 
+
+    
