@@ -446,7 +446,7 @@ class Grid(pd.DataFrame):
         :rtype:     { list }
         """
         return self.get_numerical().columns.to_list()
-        
+
 
     def generate(self):
         """
@@ -518,3 +518,13 @@ class Grid(pd.DataFrame):
             scaler = preprocessing.StandardScaler()
             transformed_data = scaler.fit_transform(original_data)
         return transformed_data
+
+    def save(self, filename):
+        """
+        Save memoize dataset
+        
+        :param      filename:  The filename
+        :type       filename:  { type_description }
+        """
+        self.to_csv(filename, index=False)
+        logger.info('created csv file as {}'.format(filename))
