@@ -67,3 +67,17 @@ class Grid(pd.DataFrame):
         :rtype:     boolean
         """
         return np.all(self[col].str.len() > threshold)
+
+
+    def total_columns(self):
+        """
+        Get the count of all column in the given
+        dataframe `self.data`
+        Usage:
+        ======
+            >>> data = Table('filename.csv')
+            >>> data.total_columns()
+        """
+        return len(self.columns)
+    
+    
