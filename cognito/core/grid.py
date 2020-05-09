@@ -344,7 +344,7 @@ class Grid(pd.DataFrame):
                 data.drop(i, axis=1, inplace=True)
         return data
 
-'''
+
     def fix_missing(self, column):
         """
         Take the column from `self.data` and fix the type of columns
@@ -368,4 +368,5 @@ class Grid(pd.DataFrame):
         elif column in categorical:
             self[column].fillna(self[column].mode()[0], inplace=True)
         return self[column]
-'''
+
+    
