@@ -103,8 +103,7 @@ class Grid(pd.DataFrame):
             >>> data.odd_rows()
         """
         return self.loc[:, ::2]
-        #return self.iloc[1::2]
-
+        
     def even_rows(self):
         """
         Get all even indexed counted rows from the given
@@ -112,4 +111,15 @@ class Grid(pd.DataFrame):
         returns: dataframe
         """
         return self.loc[:, ::-2]
-        #return self.iloc[:-2:2]
+
+    def summary(self):
+        """
+        Return the dataframe descriptive statistics
+        returns: dataframe summary
+        Usage:
+        ======
+            >>> df = Table('filename.csv')
+            >>> df.summary()
+        """
+        return self.describe()
+        
