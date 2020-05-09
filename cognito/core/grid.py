@@ -407,4 +407,13 @@ class Grid(pd.DataFrame):
         data = encode.fit_transform(self[column])
         return data, encode
 
+    def list_cardinal(self):
+        """
+        Return the list of all cardinality columns from the given
+        `self.data`
+        :returns:   { list of all cardinality values }
+        :rtype:     { List }
+        """
+        return [col for col in self if len(self[col]) == self[col].nunique()]
+
     
