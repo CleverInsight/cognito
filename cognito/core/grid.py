@@ -107,7 +107,7 @@ class Grid(pd.DataFrame):
     def even_rows(self):
         """
         Get all even indexed counted rows from the given
-        dataframe `self.data`
+        dataframe `self`
         returns: dataframe
         """
         return self.loc[:, ::-2]
@@ -122,4 +122,14 @@ class Grid(pd.DataFrame):
             >>> df.summary()
         """
         return self.describe()
-        
+    
+    def hot_encoder_categorical(self, column):
+        """
+        Returns the pandas.series with hashtable in Dict structures
+        returns: pandas.series, dict
+        Usage:
+        ======
+            >>> df.hot_encoder_categorical(col_name)
+        """
+        one_hot = pd.get_dummies(self[column])
+        return one_hot   
