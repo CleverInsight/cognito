@@ -324,3 +324,48 @@ class Grid(pd.DataFrame):
             if i in outliers:
                 i.replace(std_dev, inplace=True)
         return self[column]
+
+    def ignore_cardinal(self):
+        """
+        Take the dataframe `self.data` and remove all cardinality columns
+        and return the dataframe
+        returns: dataframe without cardinality columns
+
+        Weblink:https://www.geeksforgeeks.org/python-named-entity-recognition-ner-using-spacy/
+
+        Usage:
+        ======
+            >>> df = Table('filename.csv')
+            >>> df.ignore_cardinal()
+        """
+        data = self.copy()
+        for i in data:
+            if len(data[i]) == data[i].nunique(dropna=True):
+                data.drop(i, axis=1, inplace=True)
+        return data
+
+'''
+    def fix_missing(self, column):
+        """
+        Take the column from `self.data` and fix the type of columns
+        and clean the missing values based on categorical or numerical
+        :param      column:  The column
+        :type       column:  { column name }
+        returns: dataframe | pandas.core.series
+
+        Weblink: https://www.geeksforgeeks.org/working-with-missing-data-in-pandas/
+
+        Usage:
+        ======
+            >>> df = Table('filename.csv')
+            >>> df.fix_missing('age')
+        """
+        self.ignore_cardinal()
+        continuous = self.get_numerical().columns.tolist()
+        categorical = self.get_categorical().columns.tolist()
+        if column in continuous:
+            self[column].fillna(self[column].mean(), inplace=True)
+        elif column in categorical:
+            self[column].fillna(self[column].mode()[0], inplace=True)
+        return self[column]
+'''
