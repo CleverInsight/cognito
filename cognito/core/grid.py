@@ -377,6 +377,15 @@ class Grid(pd.DataFrame):
         set_difference = set(all_columns) - set(excluded_cardinal)
         return list(set_difference)
 
+    def drop_cardinality(self):
+        """
+        Create cardinality columns
+        
+        :returns:   { description_of_the_return_value }
+        :rtype:     { return_type_description }
+        """
+        cardinal_cols = self.cardinal_columns()
+        self = self.drop(cardinal_cols, axis=1)
     
 
     
