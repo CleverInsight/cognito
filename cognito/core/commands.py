@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import logging
 from cognito import *
 from datetime import datetime, timedelta
