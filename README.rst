@@ -1,4 +1,4 @@
-.. image:: https://cognito.readthedocs.io/en/latest/_images/logo.png
+.. image:: https://cognito.readthedocs.io/_images/logo.png
     :target: http://cognito.readthedocs.org
     :width: 200pt
 
@@ -92,7 +92,7 @@ Contributors
    :target: https://github.com/AishikaBanik98
 .. image:: https://avatars3.githubusercontent.com/u/53107678?s=60&v=4
    :target: https://github.com/RishikaKotta
-.. image:: https://cognito.readthedocs.io/en/latest/_images/aastik.jpg
+.. image:: https://cognito.readthedocs.io/_images/aastik.jpg
    :target: https://github.com/Aastik19
 .. image:: https://avatars2.githubusercontent.com/u/44425046?s=60&v=4
    :target: https://github.com/analyticsanshul
