@@ -60,7 +60,8 @@ Contributors
    :target: https://github.com/nibir-paul
 .. image:: https://avatars0.githubusercontent.com/u/32188887?s=60&v=4
    :target: https://github.com/tanvirath
-.. image:: https://avatars1.githubusercontent.com/u/29769264?s=60&v=4
+.. image:: https://cleverinsight.co/wp-content/uploads/2023/11/Vandana-1.png
+   :height: 60px
    :target: https://github.com/vandana-11
 .. image:: https://avatars3.githubusercontent.com/u/59745783?s=60&v=4
    :target: https://github.com/AishikaBanik98
