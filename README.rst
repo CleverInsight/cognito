@@ -87,7 +87,7 @@ Contributors
 .. image:: https://avatars0.githubusercontent.com/u/32188887?s=60&v=4
    :target: https://github.com/tanvirath
 .. image:: https://cleverinsight.co/wp-content/uploads/2023/11/Vandana-1.png
-   :height: 40px
+   :height: 80px
    :target: https://github.com/vandana-11
 .. image:: https://avatars3.githubusercontent.com/u/59745783?s=60&v=4
    :target: https://github.com/AishikaBanik98
