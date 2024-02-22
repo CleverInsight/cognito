@@ -127,5 +127,5 @@ Collaborators
    :align: left
    :target: https://lavasa.christuniversity.in/
 
-CHRIST (Deemed to be University) Lavasa <https://lavasa.christuniversity.in/>`_ provides developer & mentor contribution via CleverInsight Open AI Foundation Incubation Center at Christ Univeristy Lavasa since 2019.
+CHRIST (Deemed to be University) Lavasa <https://lavasa.christuniversity.in/> _ provides developer & mentor contribution via CleverInsight Incubation at Christ Univeristy Lavasa since 2019.
    
